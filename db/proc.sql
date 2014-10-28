@@ -52,3 +52,4 @@ go
 		@Cate_Id = '1'
 	go
 
+	select * from Event
