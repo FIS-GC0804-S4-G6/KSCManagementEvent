@@ -7,13 +7,12 @@
 
 /* drop statement? try your own type. I'm so lazy. F*ck */
 drop table MailingList;
-drop table Event_Category;
-drop table Category;
 drop table Cust_Event;
 drop table Event_Price;
 drop table [Session];
 drop table Event_Picture;
 drop table Event;
+drop table Category;
 drop table Customer;
 drop table University;
 drop table Role;
@@ -53,6 +52,11 @@ create table Customer(
 	constraint FK_Customer_University foreign key (Univercode) references University(Univercode)
 )
 go
+create table Category(
+	Cate_Id int identity primary key,
+	CategoryName text
+)
+go
 create table Event(
 	Event_Id int identity primary key,
 	Title text,
@@ -64,7 +68,9 @@ create table Event(
 	StartDate datetime,
 	EndDate datetime,
 	Hometag bit,
-	Status bit
+	Status bit,
+	Cate_Id int,
+	constraint FK_Event_Category foreign key (Cate_Id) references Category(Cate_Id)
 )
 go
 create table Event_Picture(
@@ -99,19 +105,6 @@ create table Cust_Event(
 	constraint FK_CustEvent_Event foreign key(Event_Id) references Event(Event_Id),
 	constraint FK_CustEvent_EventPrice foreign key(Price_Id) references Event_Price(Price_Id),
 	constraint PK_CustEvent primary key(Cust_Id, Event_Id, Price_Id)
-)
-go
-create table Category(
-	Cate_Id int identity primary key,
-	CategoryName text
-)
-go
-create table Event_Category(
-	Event_Id int,
-	Cate_Id int,
-	constraint FK_EventCategory_Event foreign key(Event_Id) references Event(Event_Id),
-	constraint FK_EventCategory_Category foreign key(Cate_Id) references Category(Cate_Id),
-	constraint PK_EventCategory primary key(Event_Id)
 )
 go
 create table MailingList(
