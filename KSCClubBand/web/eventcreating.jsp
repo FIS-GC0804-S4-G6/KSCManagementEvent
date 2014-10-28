@@ -1,4 +1,9 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%-- 
+    Document   : eventcreating
+    Created on : Oct 26, 2014, 8:12:31 PM
+    Author     : hai
+--%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -9,7 +14,7 @@
         <link rel="stylesheet" href="rome-datetime/example/example.css"/>
     </head>
     <body>
-        <form method="get" action="EventCreating">
+        <form method="get" action="/eventcreating">
             Title<input type="text" name="title"/><br/>
             Logo<input type="file" name="logo" accept="image/*"/><br/>
             Description<textarea name="description"></textarea><br/>
@@ -24,14 +29,9 @@
                 <label for='et'>Ending Time: </label>
                 <input id='et' class='input' type="text" name="endtime"/>
             </div>
-            <select name="cate_Id">
-                <c:forEach items="${listOfCategories}" var="c">
-                    <option value="${c.getCate_Id()}">${c.getCategoryName()}</option>
-                </c:forEach>
-            </select>
             <button type="submit">Submit</button>
         </form>
-
+        
         <script type="text/javascript" src="rome-datetime/dist/rome.js"></script>
         <script type="text/javascript" src="rome-datetime/example/example.js"></script>
     </body>
