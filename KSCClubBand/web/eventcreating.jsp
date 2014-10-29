@@ -143,8 +143,6 @@
         <script src="xenon/assets/js/handlebars.min.js"></script>
         <script src="xenon/assets/js/multiselect/js/jquery.multi-select.js"></script>
 
-
-
         <script src="xenon/assets/js/xenon-custom.js"></script>
     </body>
 </html>
