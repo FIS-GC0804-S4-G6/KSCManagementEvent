@@ -59,17 +59,17 @@ create table Category(
 go
 create table Event(
 	Event_Id int identity primary key,
-	Title text,
+	Title text not null,
 	Logo text,
 	Description text,
 	Speaker text,
-	Address text,
+	Address text not null,
 	Slogan text,
-	StartDate datetime,
-	EndDate datetime,
-	Hometag bit,
-	Status bit,
-	Cate_Id int,
+	StartDate datetime not null,
+	EndDate datetime not null,
+	Hometag bit default '0',
+	Status bit default '0',
+	Cate_Id int not null,
 	constraint FK_Event_Category foreign key (Cate_Id) references Category(Cate_Id)
 )
 go

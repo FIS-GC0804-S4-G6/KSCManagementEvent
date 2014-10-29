@@ -6,3 +6,5 @@ insert into Category (CategoryName) values
 (N'Paper Presentation'),
 (N'Symposium'),
 (N'Techno-Feat')
+
+select * from Event
