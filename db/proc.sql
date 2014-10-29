@@ -42,7 +42,7 @@ go
 
 	execute sp_event_creating
 		@Title = 'Magical',
-		@Logo = 'Walrus.png',
+		@Logo = null,
 		@Description = 'super fun',
 		@Speaker = 'Mr.Walrus',
 		@Address = 'Sea',

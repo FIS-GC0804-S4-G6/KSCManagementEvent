@@ -74,22 +74,13 @@
             </div>
             <div class="form-group-separator"></div>
 
-
-            <div class="form-group">
-                <label class="col-sm-2 control-label">Date Picker (popup)</label>
-                <div class="col-sm-10">
-                    <div class="input-group">
-                        <input type="text" class="form-control datepicker" data-format="D, dd MM yyyy HH mm">
-                        <div class="input-group-addon">
-                            <a href="#"><i class="linecons-calendar"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-sm-2 control-label">Starting Time</label>
                 <div class="col-sm-10">
-                    <input type="text" name="startDate" class="form-control datepicker" >
+                    <div class="date-and-time">
+                        <input type="text" name="startDate" class="form-control datepicker" data-format="yyyy-mm-dd">
+                        <input type="text" name="startTime" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-format="11:25 AM" data-show-meridian="false" data-minute-step="5" data-second-step="5">
+                    </div>
                 </div>
             </div>
             <div class="form-group-separator"></div>
@@ -97,7 +88,10 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">Ending Time</label>
                 <div class="col-sm-10">
-                    <input type="text" name="endDate" class="form-control datepicker">
+                    <div class="date-and-time">
+                        <input type="text" name="endDate" class="form-control datepicker" data-format="yyyy-mm-dd">
+                        <input type="text" name="endTime" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="11:25 AM" data-show-meridian="false" data-minute-step="5" data-second-step="5">
+                    </div>
                 </div>
             </div>
             <div class="form-group-separator"></div>
@@ -121,7 +115,7 @@
                     </select>
                 </div>
             </div>
-            <c:if test="${!empty(msgR)}" >
+            <c:if test="${!empty(msgR)}">
                 <h2 style="color:red;">${msgR}</h2>
             </c:if>
             <div class="form-group-separator"></div>
