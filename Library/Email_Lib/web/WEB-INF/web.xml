@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <servlet>
+        <servlet-name>TestEmail</servlet-name>
+        <servlet-class>TestWeb</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestEmail</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <context-param>
+        <param-name>mail.smtp.auth</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.smtp.starttls.enable</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.smtp.host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.smtp.port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+</web-app>
