@@ -95,16 +95,6 @@
                 </div>
             </div>
             <div class="form-group-separator"></div>
-
-            <!--            <div class='parent'>
-                            <label for='st'>Starting Time: </label>
-                            <input id='st' class='input' type="text" name="startDate"/>
-                        </div>
-                        <div class='parent'>
-                            <label for='et'>Ending Time: </label>
-                            <input id='et' class='input' type="text" name="endDate"/>
-                        </div>-->
-
             <div class="form-group">
                 <label class="col-sm-2 control-label">Event Type</label>
                 <div class="col-sm-10">
