@@ -41,7 +41,7 @@ go
 	END
 
 	execute sp_event_creating
-		@Title = 'Magical',
+		@Title = 'Magical Mystery tour',
 		@Logo = null,
 		@Description = 'super fun',
 		@Speaker = 'Mr.Walrus',
@@ -53,3 +53,4 @@ go
 	go
 
 	select * from Event
+	select * from Category
