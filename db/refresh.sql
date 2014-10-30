@@ -98,13 +98,11 @@ create table Event_Price(
 go
 create table Cust_Event(
 	Cust_Id int,
-	Event_Id int,
 	Price_Id int,
 	Payment int,
 	constraint FK_CustEvent_Customer foreign key(Cust_Id) references Customer(Cust_Id),
-	constraint FK_CustEvent_Event foreign key(Event_Id) references Event(Event_Id),
 	constraint FK_CustEvent_EventPrice foreign key(Price_Id) references Event_Price(Price_Id),
-	constraint PK_CustEvent primary key(Cust_Id, Event_Id, Price_Id)
+	constraint PK_CustEvent primary key(Cust_Id, Price_Id)
 )
 go
 create table MailingList(
