@@ -24,8 +24,17 @@ public class Event_Price_StorkTeam {
                 Event_Price event_Price = new Event_Price(price_Id, price, description);
                 listOfEvent_Prices.add(event_Price);
             }
+            return listOfEvent_Prices;
         } catch(SQLException se) {
-            
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn != null) {
+                    conn.close();
+                }
+            } catch(SQLException se) {
+                se.printStackTrace();
+            }
         }
         return null;
     }
