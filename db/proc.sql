@@ -71,3 +71,33 @@ go
 
 	exec sp_event_price_select_by_priceId 1
 	go
+
+	--edit EVENT_PRICE
+	drop proc sp_event_price_editing
+	go
+	create proc sp_event_price_editing
+		@Price_Id int,
+		@Price float,
+		@Description text
+	as
+	begin
+		update Event_Price set Price=@Price, Description=@Description where Price_Id = @Price_Id
+	end
+	go
+	exec sp_event_price_editing '1', '100', 'Tien To'
+	go
+	select * from Event_Price
+
+	--delete EVENT_PRICE
+	drop proc sp_event_price_deleting
+	go
+	create proc sp_event_price_deleting
+		@Price_Id int
+	as
+	begin
+		delete from Event_Price where Price_Id = @Price_Id
+	end
+	go
+	exec sp_event_price_deleting '1'
+	go
+	select * from Event_Price
