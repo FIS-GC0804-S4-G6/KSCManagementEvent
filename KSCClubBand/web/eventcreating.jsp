@@ -106,20 +106,22 @@
                 </div>
             </div>
             <div class="form-group-separator"></div>
-            <div class="col-sm-10">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox">
-                        Price
-                    </label>
+            <c:if test="${!empty(msgR)}">
+                <div class="form-group-separator"></div>
+                <h2 style="color:red;">${msgR}</h2>
+            </c:if>
+            <div class="form-group">
+                <div class="col-sm-offset-5">
+                    <div class="form-block">
+                        <button class="btn btn-success" type="submit">Submit</button>
+                        <label>
+                            <input type="checkbox">
+                            This Event has Price
+                        </label>
+
+                    </div>
                 </div>
             </div>
-            <c:if test="${!empty(msgR)}">
-                <h2 style="color:red;">${msgR}</h2>
-                <div class="form-group-separator"></div>
-            </c:if>
-            <div class="form-group-separator"></div>
-            <button class="btn btn-dark" type="submit">Submit</button>
         </form>
 
         <script type="text/javascript" src="rome-datetime/dist/rome.js"></script>

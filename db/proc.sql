@@ -65,11 +65,11 @@ go
 		@Event_Id int
 	as
 	begin
-		select Price_Id, Price, Description from Event_Price where Event_Id = @Event_Id
+		select Price_Id, Price, Description from Event_Price where Event_Id = @Event_Id and IsDelete = '0'
 	end
 	go
 
-	exec sp_event_price_select_by_eventId 2
+	exec sp_event_price_select_by_eventId 1
 	go
 
 	--edit EVENT_PRICE
@@ -81,7 +81,7 @@ go
 		@Description text
 	as
 	begin
-		update Event_Price set Price=@Price, Description=@Description where Price_Id = @Price_Id
+		update Event_Price set Price=@Price, Description=@Description where Price_Id = @Price_Id and IsDelete = '0'
 	end
 	go
 	exec sp_event_price_editing '1', '100', 'Tien To'
@@ -95,7 +95,7 @@ go
 		@Price_Id int
 	as
 	begin
-		delete from Event_Price where Price_Id = @Price_Id
+		update Event_Price set IsDelete = '1' where Price_Id = @Price_Id
 	end
 	go
 	exec sp_event_price_deleting_by_priceId '1'

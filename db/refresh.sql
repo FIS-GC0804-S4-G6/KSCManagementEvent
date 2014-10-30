@@ -93,7 +93,7 @@ create table Event_Price(
 	Event_Id int,
 	Price float,
 	Description text,
-	isDelete bit default '0',
+	IsDelete bit default '0',
 	constraint FK_EventPrice_Event foreign key(Event_Id) references Event(Event_Id)
 )
 go
