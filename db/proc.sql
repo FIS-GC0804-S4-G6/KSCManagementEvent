@@ -88,7 +88,7 @@ go
 	go
 	select * from Event_Price
 
-	--delete EVENT_PRICE
+	--delete EVENT_PRICE_by_priceId
 	drop proc sp_event_price_deleting_by_priceId
 	go
 	create proc sp_event_price_deleting_by_priceId

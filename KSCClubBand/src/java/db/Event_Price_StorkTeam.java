@@ -66,7 +66,7 @@ public class Event_Price_StorkTeam {
         return false;
     }
 
-    public boolean deleteEventPrice(Event_Price event_price) {
+    public boolean deleteEventPriceByPriceId(Event_Price event_price) {
         Connection conn = null;
         try {
             conn = ConnectionUtil.getConnection();
