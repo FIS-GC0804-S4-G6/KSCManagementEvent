@@ -22,7 +22,7 @@
         <script src="xenon/assets/js/jquery-1.11.1.min.js"></script>
     </head>
     <body>
-        <form method="get" action="EventCreating" class="form-horizontal">
+        <form method="POST" action="EventCreating" class="form-horizontal" enctype="multipart/form-data">
             <div class="form-group">
                 <label class="col-sm-2 control-label" for="field-1">Title</label>
                 <div class="col-sm-10">
@@ -96,7 +96,7 @@
             </div>
             <div class="form-group-separator"></div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Event Type</label>
+                <label class="col-sm-2 control-label">Category</label>
                 <div class="col-sm-10">
                     <select class="form-control" name="cate_Id">
                         <c:forEach items="${listOfCategories}" var="c">

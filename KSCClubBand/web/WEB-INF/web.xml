@@ -8,6 +8,7 @@
         <servlet-name>EventServlet</servlet-name>
         <url-pattern>/JSPEventCreating</url-pattern>
         <url-pattern>/EventCreating</url-pattern>
+        <url-pattern>/EventCreatingUploadLogo</url-pattern>
         <url-pattern>/EventUpdating</url-pattern>
         <url-pattern>/EventDeleting</url-pattern>
     </servlet-mapping>

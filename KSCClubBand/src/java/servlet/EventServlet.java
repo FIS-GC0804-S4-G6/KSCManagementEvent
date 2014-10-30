@@ -14,7 +14,15 @@ import model.Event;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.DateTime;
+import javax.servlet.http.Part;
+import java.io.OutputStream;
+import java.io.InputStream;
+import java.io.FileOutputStream;
+import java.io.File;
+import javax.servlet.annotation.MultipartConfig;
+import java.io.FileNotFoundException;
 
+@MultipartConfig
 public class EventServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -25,45 +33,67 @@ public class EventServlet extends HttpServlet {
             List<Category> listOfCategories = category_StorkTeam.selectAllFromCategory();
             request.setAttribute("listOfCategories", listOfCategories);
             request.getRequestDispatcher("eventcreating.jsp").forward(request, response);
-        } else if (userPath.equals("/EventCreating")) {
-            Event_StorkTeam db = new Event_StorkTeam();
-            String title = request.getParameter("title");
-            String logo = request.getParameter("logo");
-            String description = request.getParameter("description");
-            String speaker = request.getParameter("speaker");
-            String address = request.getParameter("address");
-            String slogan = request.getParameter("slogan");
-            DateTimeFormatter dtf = DateTimeFormat.forPattern("YYYY-mm-dd HH:mm");
-            DateTime starttime = dtf.parseDateTime(request.getParameter("startDate") + " " + request.getParameter("startTime"));
-            DateTime endtime = dtf.parseDateTime(request.getParameter("endDate") + " " + request.getParameter("endTime"));
-            int cate_Id = new Integer(request.getParameter("cate_Id"));
-
-            if (starttime.isAfter(endtime) || starttime.isEqual(endtime)) {
-                request.setAttribute("msgR", "Start day is after or equal to End day");
-                request.getRequestDispatcher("/JSPEventCreating").forward(request, response);
-            } else {
-                request.setAttribute("msgR", "Start day is before End day");
-                boolean result = db.addEvent(new Event(title, logo, description, speaker, address, slogan, starttime, endtime, cate_Id));
-                if (result) {
-                    response.setContentType("text/html;charset=UTF-8");
-                    PrintWriter out = response.getWriter();
-                    out.println("<!DOCTYPE html>");
-                    out.println("<html>");
-                    out.println("<head>");
-                    out.println("<title>Servlet EventServlet</title>");
-                    out.println("</head>");
-                    out.println("<body>");
-                    out.println("<h1>Create successful</h1>");
-                    out.println("</body>");
-                    out.println("</html>");
-                }
-            }
         }
-
     }
-
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        final PrintWriter writer = response.getWriter();
+        String fileName = null;
+        
+        final Part filePart = request.getPart("logo");
+        if(filePart.getSize() > 0) {
+            fileName = getFileName(filePart);
+            OutputStream out = null;
+            InputStream filecontent = null;
+
+            try {
+            out = new FileOutputStream(new File("D:/06.Drive/SVN/trunk/KSCClubBand/img" + File.separator + fileName));
+            filecontent = filePart.getInputStream();
+
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+
+            while((read = filecontent.read(bytes)) != -1) {
+                out.write(bytes, 0, read);
+            }
+            writer.println("New file" + fileName + " created at " + "D:/06.Drive/SVN/trunk/KSCClubBand/img");
+            } catch(FileNotFoundException fe) {
+                writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
+                writer.println("<br/> ERROR: " + fe.getMessage());
+            } finally {
+                if(out != null)
+                    out.close();
+                if(filecontent != null)
+                    filecontent.close();
+                if(writer != null)
+                    writer.close();
+            }
+        }
+        String title = request.getParameter("title");
+        String description = request.getParameter("description");
+        String speaker = request.getParameter("speaker");
+        String address = request.getParameter("address");
+        String slogan = request.getParameter("slogan");
+        DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-mm-dd HH:mm");
+        DateTime starttime = datetimeFormatter.parseDateTime(request.getParameter("startDate") + " " + request.getParameter("startTime"));
+        DateTime endtime = datetimeFormatter.parseDateTime(request.getParameter("endDate") + " " + request.getParameter("endTime"));
+        int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));
+        
+        Event_StorkTeam db = new Event_StorkTeam();
+        boolean result = db.addEvent(new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id));
+        writer.println("creating is " + result);
+    }
+    
+    private String getFileName(Part part) {
+        String[] partsHeader = part.getHeader("content-disposition").split(";");
+        for(String content: partsHeader) {
+            if(content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf("=")+1) .trim() .replace("\"", "");
+            }
+        }
+        return null;
     }
 }

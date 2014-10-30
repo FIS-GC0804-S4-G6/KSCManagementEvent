@@ -27,7 +27,8 @@ public class Event_StorkTeam {
             se.printStackTrace();
         } finally {
             try {
-                conn.close();
+                if(conn != null)
+                    conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
             }
