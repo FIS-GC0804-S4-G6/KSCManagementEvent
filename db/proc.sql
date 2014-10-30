@@ -89,15 +89,15 @@ go
 	select * from Event_Price
 
 	--delete EVENT_PRICE
-	drop proc sp_event_price_deleting
+	drop proc sp_event_price_deleting_by_priceId
 	go
-	create proc sp_event_price_deleting
+	create proc sp_event_price_deleting_by_priceId
 		@Price_Id int
 	as
 	begin
 		delete from Event_Price where Price_Id = @Price_Id
 	end
 	go
-	exec sp_event_price_deleting '1'
+	exec sp_event_price_deleting_by_priceId '1'
 	go
 	select * from Event_Price

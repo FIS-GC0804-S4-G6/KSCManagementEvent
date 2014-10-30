@@ -105,8 +105,18 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group-separator"></div>
+            <div class="col-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">
+                        Price
+                    </label>
+                </div>
+            </div>
             <c:if test="${!empty(msgR)}">
                 <h2 style="color:red;">${msgR}</h2>
+                <div class="form-group-separator"></div>
             </c:if>
             <div class="form-group-separator"></div>
             <button class="btn btn-dark" type="submit">Submit</button>
