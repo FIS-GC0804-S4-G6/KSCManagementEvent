@@ -58,18 +58,18 @@ go
 -- ============================ EVENT_PRICE ============================ --
 -- =============================================================== --
 go
-	drop proc sp_event_price_select_by_priceId
+	drop proc sp_event_price_select_by_eventId
 	go
 
-	create proc sp_event_price_select_by_priceId
-		@Price_Id int
+	create proc sp_event_price_select_by_eventId
+		@Event_Id int
 	as
 	begin
-		select * from Event_Price where Price_Id = @Price_Id
+		select Price_Id, Price, Description from Event_Price where Event_Id = @Event_Id
 	end
 	go
 
-	exec sp_event_price_select_by_priceId 1
+	exec sp_event_price_select_by_eventId 2
 	go
 
 	--edit EVENT_PRICE
