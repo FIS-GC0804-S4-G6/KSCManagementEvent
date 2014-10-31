@@ -12,6 +12,7 @@ drop table Event_Price;
 drop table [Session];
 drop table Event_Picture;
 drop table Event;
+drop table Payment_Option;
 drop table Category;
 drop table Customer;
 drop table University;
@@ -57,6 +58,11 @@ create table Category(
 	CategoryName text
 )
 go
+create table Payment_Option
+(
+	Payment_Id int identity primary key,
+	Payment_Type text,
+)
 create table Event(
 	Event_Id int identity primary key,
 	Title text not null,
@@ -100,10 +106,15 @@ go
 create table Cust_Event(
 	Cust_Id int,
 	Price_Id int,
-	Payment int,
+	Payment_Id int,
+	Event_Id int,
+	TicketCode varchar(20) not null,
+	Price float not null,
+	IsDelete bit,
+	constraint FK_CustEvent_PaymentOption foreign key (Payment_Id) references Payment_Option(Payment_Id),
 	constraint FK_CustEvent_Customer foreign key(Cust_Id) references Customer(Cust_Id),
-	constraint FK_CustEvent_EventPrice foreign key(Price_Id) references Event_Price(Price_Id),
-	constraint PK_CustEvent primary key(Cust_Id, Price_Id)
+	constraint FK_CustEvent_Event foreign key(Event_Id) references Event(Event_Id),
+	constraint PK_CustEvent primary key(Event_Id, TicketCode)
 )
 go
 create table MailingList(
