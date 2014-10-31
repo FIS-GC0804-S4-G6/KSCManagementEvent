@@ -58,6 +58,7 @@ go
 -- ============================ EVENT_PRICE ============================ --
 -- =============================================================== --
 go
+	--select EVENT_PRICE by Event_Id
 	drop proc sp_event_price_select_by_eventId
 	go
 
@@ -84,6 +85,7 @@ go
 		update Event_Price set Price=@Price, Description=@Description where Price_Id = @Price_Id and IsDelete = '0'
 	end
 	go
+
 	exec sp_event_price_editing '1', '100', 'Tien To'
 	go
 	select * from Event_Price
@@ -98,6 +100,23 @@ go
 		update Event_Price set IsDelete = '1' where Price_Id = @Price_Id
 	end
 	go
+
 	exec sp_event_price_deleting_by_priceId '1'
 	go
 	select * from Event_Price
+	go
+
+	--insert EVENT_PRICE
+	drop proc sp_event_price_inserting
+	go
+
+	create proc sp_event_price_inserting
+		@Event_Id int,
+		@Price float,
+		@Description text,
+		@Price_Id int out
+	as
+	begin
+		insert into Event_Price (Event_Id, Price, Description) values (@Event_Id, @Price, @Description)
+		set @Price_Id = SCOPE_iDENTITY()
+	end
