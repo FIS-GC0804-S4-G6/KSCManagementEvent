@@ -18,6 +18,8 @@
     <servlet-mapping>
         <servlet-name>Event_PriceServlet</servlet-name>
         <url-pattern>/JSPEvent_Price</url-pattern>
+        <url-pattern>/Event_PriceInserting</url-pattern>
+        <url-pattern>/AJAXEvent_PriceInserting</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,6 +41,30 @@ public class Event_Price_StorkTeam {
             }
         }
         return null;
+    }
+    
+    public void insertEvent_Price(Event_Price entity) {
+        Connection conn = null;
+        try {
+            conn = ConnectionUtil.getConnection();
+            CallableStatement cstmt = conn.prepareCall("{call sp_event_price_inserting(?, ?, ?, ?)}");
+            cstmt.registerOutParameter("Price_Id", Types.INTEGER);
+            cstmt.setInt("Event_Id", entity.getEvent_Id());
+            cstmt.setFloat("Price", entity.getPrice());
+            cstmt.setString("Description", entity.getDescription());
+            cstmt.executeUpdate();
+            int price_Id = cstmt.getInt("Price_Id");
+            entity.setPrice_Id(price_Id);
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn != null)
+                    conn.close();
+            } catch(SQLException se) {
+                se.printStackTrace();
+            }
+        }
     }
 
     public boolean editEventPrice(Event_Price event_price) {

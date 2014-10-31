@@ -1,13 +1,19 @@
 package model;
 
 public class Event_Price {
-    private int price_Id;
+    private int price_Id = -1;
     private int event_Id;
     private float price;
     private String description;
     
     public Event_Price(int price_Id, float price, String description) {
         this.price_Id = price_Id;
+        this.price = price;
+        this.description = description;
+    }
+    
+    public Event_Price(float price, String description, int event_Id){
+        this.event_Id = event_Id;
         this.price = price;
         this.description = description;
     }

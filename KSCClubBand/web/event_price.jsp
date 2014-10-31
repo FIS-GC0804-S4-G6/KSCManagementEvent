@@ -21,9 +21,39 @@
                         <td>${i.getPrice_Id()}</td>
                         <td>${i.getPrice()}</td>
                         <td>${i.getDescription()}</td>
+                        <td><button class="edit-btn">Edit</button></td>
+                        <td><button class="delete-btn">Delete</button></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
+        <div class="creating">
+            <form method="GET" action="Event_PriceInserting">
+                Price<input type="text" name="price"/><br/>
+                Description<textarea name="description"></textarea><br/>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        
+        <script type="text/javascript" src="js/jquery/jquery.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("button[type=submit]").click(function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        data: {price: $("input[name=price]").val(), description: $("textarea[name=description]").val()},
+                        url: "AJAXEvent_PriceInserting",
+                        type: "GET",
+                        dataType: "JSON",
+                        error: function(jqXHR, textStatus, erroThrown) {
+                            console.log(textStatus);
+                        },
+                        success: function(aPostData, textStatus, jqXHR) {
+                            console.log(aPostData);
+                        }
+                    });
+                });
+            });
+        </script>
     </body>
 </html>
