@@ -59,7 +59,6 @@ public class EventServlet extends HttpServlet {
             while((read = filecontent.read(bytes)) != -1) {
                 out.write(bytes, 0, read);
             }
-            writer.println("New file" + fileName + " created at " + "D:/06.Drive/SVN/trunk/KSCClubBand/img");
             } catch(FileNotFoundException fe) {
                 writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
                 writer.println("<br/> ERROR: " + fe.getMessage());
@@ -68,8 +67,6 @@ public class EventServlet extends HttpServlet {
                     out.close();
                 if(filecontent != null)
                     filecontent.close();
-                if(writer != null)
-                    writer.close();
             }
         }
         String title = request.getParameter("title");
@@ -83,8 +80,12 @@ public class EventServlet extends HttpServlet {
         int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));
         
         Event_StorkTeam db = new Event_StorkTeam();
-        boolean result = db.addEvent(new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id));
-        writer.println("creating is " + result);
+        Event entity = new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id);
+        db.addEvent(entity);
+        //check creating event successfully?
+        javax.servlet.http.HttpSession session = request.getSession(true);
+        session.setAttribute("event_Id", entity.getEvent_Id());
+        response.sendRedirect("JSPEvent_Price");
     }
     
     private String getFileName(Part part) {

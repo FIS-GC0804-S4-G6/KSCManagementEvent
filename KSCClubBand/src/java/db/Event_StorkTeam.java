@@ -5,13 +5,15 @@ import model.Event;
 import java.sql.CallableStatement;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Types;
 
 public class Event_StorkTeam {
-    public boolean addEvent(Event event) {
+    public void addEvent(Event event) {
         Connection conn = null;
         try {
             conn = ConnectionUtil.getConnection();
-            CallableStatement cstmt = conn.prepareCall("{ call sp_event_creating(?,?,?,?,?,  ?,?,?,?) }");
+            CallableStatement cstmt = conn.prepareCall("{ call sp_event_creating(?,?,?,?,?,  ?,?,?,?,?) }");
+            cstmt.registerOutParameter("Event_Id", Types.INTEGER);
             cstmt.setNString("Title", event.getTitle());
             cstmt.setString("Logo", event.getLogo());
             cstmt.setNString("Description", event.getDescription());
@@ -22,7 +24,8 @@ public class Event_StorkTeam {
             cstmt.setDate("EndDate", new Date(event.getEndDate().getMillis()) );
             cstmt.setInt("Cate_Id", event.getCate_Id());
             int result = cstmt.executeUpdate();
-            return result > 0;
+            int event_Id = cstmt.getInt("Event_Id");
+            event.setEvent_Id(event_Id);
         } catch (SQLException se) {
             se.printStackTrace();
         } finally {
@@ -33,6 +36,5 @@ public class Event_StorkTeam {
                 se.printStackTrace();
             }
         }
-        return false;
     }
 }

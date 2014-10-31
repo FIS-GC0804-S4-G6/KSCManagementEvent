@@ -40,16 +40,28 @@
             $(document).ready(function() {
                 $("button[type=submit]").click(function(e) {
                     e.preventDefault();
+                    var price = $("input[name=price]").val();
+                    var description = $("textarea[name=description]").val();
                     $.ajax({
-                        data: {price: $("input[name=price]").val(), description: $("textarea[name=description]").val()},
+                        data: {price: price, description: description},
                         url: "AJAXEvent_PriceInserting",
                         type: "GET",
                         dataType: "JSON",
                         error: function(jqXHR, textStatus, erroThrown) {
                             console.log(textStatus);
+                            
                         },
                         success: function(aPostData, textStatus, jqXHR) {
-                            console.log(aPostData);
+                            var data = "";
+                            $.each(aPostData, function(key, value) {
+                                data += "<td>" + value + "</td>";
+                            });
+                            data += "<td>" + price + "</td>" + "<td>" + description + "</td>";
+                            $('tbody tr:last-child').after('<tr>' +
+                                        data +
+                                        '<td><button class="edit-btn">Edit</button></td>' +
+                                        '<td><button class="delete-btn">Delete</button></td>' +
+                                    '</tr>');
                         }
                     });
                 });

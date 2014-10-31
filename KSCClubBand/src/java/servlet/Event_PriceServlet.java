@@ -16,14 +16,14 @@ public class Event_PriceServlet extends HttpServlet {
             throws ServletException, IOException {
         String userPath = request.getServletPath();
         PrintWriter writer = response.getWriter();
+        javax.servlet.http.HttpSession session = request.getSession(true);
+        int event_Id = (Integer)session.getAttribute("event_Id");
         if(userPath.equals("/JSPEvent_Price")) {
-            int event_Id = Integer.parseInt(request.getParameter("event_Id"));
             Event_Price_StorkTeam db = new Event_Price_StorkTeam();
             List<Event_Price> listOfEvent_Prices = db.selectEvent_PriceByEvent_Id(event_Id);
             request.setAttribute("listOfEvent_Prices", listOfEvent_Prices);
             request.getRequestDispatcher("event_price.jsp").forward(request, response);
         } else if(userPath.equals("/Event_PriceInserting")) {
-            int event_Id = 1;
             float price = Float.parseFloat(request.getParameter("price"));
             String description = request.getParameter("description");
             Event_Price_StorkTeam db = new Event_Price_StorkTeam();
@@ -35,7 +35,6 @@ public class Event_PriceServlet extends HttpServlet {
                 writer.println("<html><body><h1>Success Creating Event_Price</h1></body></html>");
             }
         } else if(userPath.equals("/AJAXEvent_PriceInserting")) {
-            int event_Id = 1;
             float price = Float.parseFloat(request.getParameter("price"));
             String description = request.getParameter("description");
             Event_Price_StorkTeam db = new Event_Price_StorkTeam();
