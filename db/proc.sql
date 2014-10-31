@@ -33,11 +33,13 @@ go
 		@Slogan text,
 		@StartDate datetime,
 		@EndDate datetime,
-		@Cate_Id int
+		@Cate_Id int,
+		@Event_Id int out
 	AS
 	BEGIN
 		INSERT INTO [Event](Title, Logo, Description, Speaker, Address, Slogan, StartDate, EndDate, Cate_Id)
 		VALUES (@Title, @Logo, @Description, @Speaker, @Address, @Slogan, @StartDate, @EndDate, @Cate_Id);
+		set @Event_Id = SCOPE_IDENTITY()
 	END
 
 	execute sp_event_creating
