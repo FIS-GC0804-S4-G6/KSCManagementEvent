@@ -54,7 +54,12 @@ go
 		@Cate_Id = '1'
 	go
 
-	select * from Event
+-- 2.Select all events
+	drop proc sp_event_select
+	go
+	create proc sp_event_select
+	as
+	select * from [Event]
 
 -- =============================================================== --
 -- ============================ EVENT_PRICE ============================ --

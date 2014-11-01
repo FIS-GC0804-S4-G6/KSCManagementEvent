@@ -74,7 +74,7 @@ create table Event(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Hometag bit default '0',
-	Status bit default '0',
+	IsDelete bit default '0',
 	Cate_Id int not null,
 	constraint FK_Event_Category foreign key (Cate_Id) references Category(Cate_Id)
 )
@@ -121,4 +121,3 @@ create table MailingList(
 	Email varchar(200) primary key,
 	Status bit
 )
-select * from Event
