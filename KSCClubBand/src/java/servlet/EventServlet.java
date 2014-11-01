@@ -32,7 +32,7 @@ public class EventServlet extends HttpServlet {
             Category_StorkTeam category_StorkTeam = new Category_StorkTeam();
             List<Category> listOfCategories = category_StorkTeam.selectAllFromCategory();
             request.setAttribute("listOfCategories", listOfCategories);
-            request.getRequestDispatcher("eventcreating.jsp").forward(request, response);
+            request.getRequestDispatcher("WEB-INF/admin/eventcreating.jsp").forward(request, response);
         }
     }
     
@@ -44,29 +44,13 @@ public class EventServlet extends HttpServlet {
         String fileName = null;
         
         final Part filePart = request.getPart("logo");
+        Event_StorkTeam db = new Event_StorkTeam();
         if(filePart.getSize() > 0) {
-            fileName = getFileName(filePart);
-            OutputStream out = null;
-            InputStream filecontent = null;
-
             try {
-            out = new FileOutputStream(new File("D:/06.Drive/SVN/trunk/KSCClubBand/img" + File.separator + fileName));
-            filecontent = filePart.getInputStream();
-
-            int read = 0;
-            final byte[] bytes = new byte[1024];
-
-            while((read = filecontent.read(bytes)) != -1) {
-                out.write(bytes, 0, read);
-            }
-            } catch(FileNotFoundException fe) {
+                db.uploadLogo(filePart, fileName);
+            } catch(FileNotFoundException fne) {
                 writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
-                writer.println("<br/> ERROR: " + fe.getMessage());
-            } finally {
-                if(out != null)
-                    out.close();
-                if(filecontent != null)
-                    filecontent.close();
+                writer.println("<br/> ERROR: " + fne.getMessage());
             }
         }
         String title = request.getParameter("title");
@@ -79,22 +63,11 @@ public class EventServlet extends HttpServlet {
         DateTime endtime = datetimeFormatter.parseDateTime(request.getParameter("endDate") + " " + request.getParameter("endTime"));
         int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));
         
-        Event_StorkTeam db = new Event_StorkTeam();
         Event entity = new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id);
         db.addEvent(entity);
         //check creating event successfully?
         javax.servlet.http.HttpSession session = request.getSession(true);
         session.setAttribute("event_Id", entity.getEvent_Id());
         response.sendRedirect("JSPEvent_Price");
-    }
-    
-    private String getFileName(Part part) {
-        String[] partsHeader = part.getHeader("content-disposition").split(";");
-        for(String content: partsHeader) {
-            if(content.trim().startsWith("filename")) {
-                return content.substring(content.indexOf("=")+1) .trim() .replace("\"", "");
-            }
-        }
-        return null;
     }
 }
