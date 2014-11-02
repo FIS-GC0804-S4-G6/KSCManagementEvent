@@ -14,6 +14,8 @@
         <url-pattern>/EventCreating</url-pattern>
         <url-pattern>/EventUpdating</url-pattern>
         <url-pattern>/EventDeleting</url-pattern>
+        <url-pattern>/JSPEventSelecting</url-pattern>
+        <url-pattern>/JSPEventDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Event_PriceServlet</servlet-name>

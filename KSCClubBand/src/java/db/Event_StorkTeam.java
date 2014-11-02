@@ -65,8 +65,8 @@ public class Event_StorkTeam {
                 int cate_Id = rs.getInt("Cate_Id");
                 Event entity = new Event(event_Id, title, startDate, endDate, logo, cate_Id);
                 mapOfEvents.put(event_Id, entity);
-                return mapOfEvents;
             }
+            return mapOfEvents;
         } catch(SQLException se) {
             se.printStackTrace();
         } finally {
@@ -90,13 +90,14 @@ public class Event_StorkTeam {
             return null;
         }
 
-    public void uploadLogo(Part filePart, String fileName) throws
+    public String uploadLogo(Part filePart, String fileName, String path) throws
             FileNotFoundException, IOException{
         fileName = getFileName(filePart);
         OutputStream out = null;
         InputStream filecontent = null;
 
-        out = new FileOutputStream(new File("D:/06.Drive/SVN/trunk/KSCClubBand/img" + File.separator + fileName));
+        
+        out = new FileOutputStream(new File(path + File.separator + fileName));
         filecontent = filePart.getInputStream();
 
         int read = 0;
@@ -109,5 +110,6 @@ public class Event_StorkTeam {
             out.close();
         if(filecontent != null)
             filecontent.close();
+        return fileName;
     }
 }

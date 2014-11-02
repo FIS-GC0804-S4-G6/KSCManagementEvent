@@ -4,7 +4,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>event</title>
+        <style>
+            img {
+                width: 110px;
+                height: 110px;
+            }
+        </style>
     </head>
     <body>
         <table>
@@ -19,14 +25,15 @@
                 </tr>
             </thead>
             <tbody>
-                <c:forEach items="" var="i">
+                <c:forEach items="${mapOfEvents}" var="i">
                     <tr>
-                        <td>${i.getEvent_Id()}</td>
-                        <td>${i.getTitle()}</td>
-                        <td>${i.getStartDate()}</td>
-                        <td>${i.getEndDate()}</td>
-                        <td><img src="${i.getLogo()}"/></td>
-                        <td>${i.getCate_Id()}</td>
+                        <td>${i.value.getEvent_Id()}</td>
+                        <td>${i.value.getTitle()}</td>
+                        <td>${i.value.getStartDate()}</td>
+                        <td>${i.value.getEndDate()}</td>
+                        <td><img src="./img/${i.value.getLogo()}"/></td>
+                        <td>${i.value.getCate_Id()}</td>
+                        <td><a href="JSPEventDetail?event_Id=${i.value.getEvent_Id()}">MORE INFO</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
