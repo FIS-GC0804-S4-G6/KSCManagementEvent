@@ -17,7 +17,7 @@ public class Event_PriceServlet extends HttpServlet {
         String userPath = request.getServletPath();
         PrintWriter writer = response.getWriter();
         javax.servlet.http.HttpSession session = request.getSession(true);
-        int event_Id = (Integer)session.getAttribute("event_Id");
+        int event_Id = 1;
         if(userPath.equals("/JSPEvent_Price")) {
             moveJSPEvent_Creating(event_Id, request, response);
         } else if(userPath.equals("/Event_PriceInserting")) {
@@ -25,12 +25,13 @@ public class Event_PriceServlet extends HttpServlet {
         } else if(userPath.equals("/AJAXEvent_PriceInserting")) {
             insertIntoEvent_PriceUsingAJAX(request, event_Id, response);
         } else if(userPath.equals("/Event_PriceDeleting")) {
-            int price_Id = Integer.parseInt(request.getParameter("Price_Id"));
+            System.out.println("handling");
+            int price_Id = Integer.parseInt(request.getParameter("price_Id"));
             Event_Price_StorkTeam db = new Event_Price_StorkTeam();
             db.deleteEventPriceByPriceId(price_Id);
             
-            java.util.Map<String, Integer> options = new java.util.LinkedHashMap<String, Integer>();
-            options.put("price_Id", 1);
+            java.util.Map<String, String> options = new java.util.LinkedHashMap<String, String>();
+            options.put("result", "The Price Type has been deleted");
             String json = new com.google.gson.Gson().toJson(options);
             
             response.setContentType("application/json");

@@ -22,7 +22,7 @@
                         <td>${i.getPrice()}</td>
                         <td>${i.getDescription()}</td>
                         <td><button class="edit-btn">Edit</button></td>
-                        <td><a class="${i.getPrice_Id()}" href="Event_PriceDeleting?Price_Id=${i.getPrice_Id()}"><button class="delete-btn">Delete</button></a></td>
+                        <td><button class="delete-btn" id="${i.getPrice_Id()}">Delete</button></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -52,29 +52,32 @@
                             
                         },
                         success: function(aPostData, textStatus, jqXHR) {
-                            var data = "";
-                            $.each(aPostData, function(key, value) {
-                                data += "<td>" + value + "</td>";
-                            });
-                            data += "<td>" + price + "</td>" + "<td>" + description + "</td>";
-                            $('tbody').append('<tr>' +
-                                        data +
-                                        '<td><button class="edit-btn">Edit</button></td>' +
-                                        '<td><button class="delete-btn">Delete</button></td>' +
-                                    '</tr>');
+                            var data = "<tr>" +
+                                            "<td>" + aPostData.price_Id + "</td>" +
+                                            "<td>" + price + "</td>" +
+                                            "<td>" + description + "</td>" +
+                                            '<td><button class="edit-btn">Edit</button></td>' +
+                                            "<td><button class='delete-btn' id='" + aPostData.price_Id + "'>Delete</button></td>" +
+                                        "</tr>";
+                            $('tbody').append(data);
                         }
                     });
                 });
                 
-                $('table tbody').on("click", "a", function(e) {
+                $('table tbody').on("click", "button", function(e) {
                     e.preventDefault();
+                    var self = $(this);
                     $.ajax({
-                        data: {price_Id: $(this).class},
-                        url: "Event_PriceDeletingg",
-                        t
-                        d
-                        e
-                        s
+                        data: {price_Id: self.attr('id')},
+                        url: "Event_PriceDeleting",
+                        type: "GET",
+                        dataType: "JSON",
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("error: ", textStatus);
+                        },
+                        success: function(data, textStatus, jqXHR) {
+                            self.closest('tr').remove();
+                        }
                     });
                 });
             });
