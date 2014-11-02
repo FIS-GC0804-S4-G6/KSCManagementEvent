@@ -60,6 +60,20 @@ go
 	create proc sp_event_select
 	as
 	select * from [Event]
+-- 3.Select event by event_Id
+	drop proc sp_event_select_by_eventId
+	go
+	create proc sp_event_select_by_eventId
+		@Event_Id int
+	as
+	begin
+		select * from Event where Event_Id = @Event_Id
+	end
+	go
+
+	execute sp_event_select_by_eventId 1
+	go
+	select * from Event
 
 -- =============================================================== --
 -- ============================ EVENT_PRICE ============================ --
