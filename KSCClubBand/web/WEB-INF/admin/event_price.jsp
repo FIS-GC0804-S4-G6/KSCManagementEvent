@@ -22,7 +22,7 @@
                         <td>${i.getPrice()}</td>
                         <td>${i.getDescription()}</td>
                         <td><button class="edit-btn">Edit</button></td>
-                        <td><button class="delete-btn">Delete</button></td>
+                        <td><a class="${i.getPrice_Id()}" href="Event_PriceDeleting?Price_Id=${i.getPrice_Id()}"><button class="delete-btn">Delete</button></a></td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -57,12 +57,24 @@
                                 data += "<td>" + value + "</td>";
                             });
                             data += "<td>" + price + "</td>" + "<td>" + description + "</td>";
-                            $('tbody tr:last-child').after('<tr>' +
+                            $('tbody').append('<tr>' +
                                         data +
                                         '<td><button class="edit-btn">Edit</button></td>' +
                                         '<td><button class="delete-btn">Delete</button></td>' +
                                     '</tr>');
                         }
+                    });
+                });
+                
+                $('table tbody').on("click", "a", function(e) {
+                    e.preventDefault();
+                    $.ajax({
+                        data: {price_Id: $(this).class},
+                        url: "Event_PriceDeletingg",
+                        t
+                        d
+                        e
+                        s
                     });
                 });
             });

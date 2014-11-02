@@ -91,12 +91,12 @@ public class Event_Price_StorkTeam {
         return false;
     }
 
-    public boolean deleteEventPriceByPriceId(Event_Price event_price) {
+    public boolean deleteEventPriceByPriceId(int price_Id) {
         Connection conn = null;
         try {
             conn = ConnectionUtil.getConnection();
             CallableStatement cstmt = conn.prepareCall("{call sp_event_price_deleting_by_priceId(?)}");
-            cstmt.setInt("Price_Id", event_price.getPrice_Id());
+            cstmt.setInt("Price_Id", price_Id);
             int result = cstmt.executeUpdate();
             return result > 0;
         } catch (SQLException ex) {
@@ -111,5 +111,11 @@ public class Event_Price_StorkTeam {
             }
         }
         return false;
+    }
+    
+    public static void main(String[] args) {
+        Event_Price_StorkTeam db = new Event_Price_StorkTeam();
+        db.deleteEventPriceByPriceId(4);
+        
     }
 }

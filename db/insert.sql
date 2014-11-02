@@ -18,4 +18,5 @@ insert into Event_Price(Event_Id, Price, Description) values
 ('1', '40', null)
 
 select * from Event_Price
+select * from Event
 go

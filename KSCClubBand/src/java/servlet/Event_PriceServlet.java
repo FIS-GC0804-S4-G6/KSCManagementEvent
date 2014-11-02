@@ -24,6 +24,18 @@ public class Event_PriceServlet extends HttpServlet {
             insertIntoEvent_Price(request, event_Id, writer);
         } else if(userPath.equals("/AJAXEvent_PriceInserting")) {
             insertIntoEvent_PriceUsingAJAX(request, event_Id, response);
+        } else if(userPath.equals("/Event_PriceDeleting")) {
+            int price_Id = Integer.parseInt(request.getParameter("Price_Id"));
+            Event_Price_StorkTeam db = new Event_Price_StorkTeam();
+            db.deleteEventPriceByPriceId(price_Id);
+            
+            java.util.Map<String, Integer> options = new java.util.LinkedHashMap<String, Integer>();
+            options.put("price_Id", 1);
+            String json = new com.google.gson.Gson().toJson(options);
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }
     }
 
