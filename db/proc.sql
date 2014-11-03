@@ -60,6 +60,7 @@ go
 	create proc sp_event_select
 	as
 	select * from [Event]
+	go
 -- 3.Select event by event_Id
 	drop proc sp_event_select_by_eventId
 	go

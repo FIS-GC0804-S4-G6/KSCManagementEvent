@@ -42,7 +42,7 @@ public class Event_Price_StorkTeam {
         }
         return null;
     }
-    
+
     public void insertEvent_Price(Event_Price entity) {
         Connection conn = null;
         try {
@@ -55,13 +55,14 @@ public class Event_Price_StorkTeam {
             cstmt.executeUpdate();
             int price_Id = cstmt.getInt("Price_Id");
             entity.setPrice_Id(price_Id);
-        } catch(SQLException se) {
+        } catch (SQLException se) {
             se.printStackTrace();
         } finally {
             try {
-                if(conn != null)
+                if (conn != null) {
                     conn.close();
-            } catch(SQLException se) {
+                }
+            } catch (SQLException se) {
                 se.printStackTrace();
             }
         }
@@ -111,11 +112,5 @@ public class Event_Price_StorkTeam {
             }
         }
         return false;
-    }
-    
-    public static void main(String[] args) {
-        Event_Price_StorkTeam db = new Event_Price_StorkTeam();
-        db.deleteEventPriceByPriceId(4);
-        
     }
 }

@@ -23,6 +23,8 @@
         <url-pattern>/Event_PriceInserting</url-pattern>
         <url-pattern>/AJAXEvent_PriceInserting</url-pattern>
         <url-pattern>/Event_PriceDeleting</url-pattern>
+        <url-pattern>/Event_PriceUpdating</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -17,7 +17,7 @@ public class Event_PriceServlet extends HttpServlet {
         String userPath = request.getServletPath();
         PrintWriter writer = response.getWriter();
         javax.servlet.http.HttpSession session = request.getSession(true);
-        int event_Id = 1;
+        int event_Id = (Integer)session.getAttribute("event_Id");
         if(userPath.equals("/JSPEvent_Price")) {
             moveJSPEvent_Creating(event_Id, request, response);
         } else if(userPath.equals("/Event_PriceInserting")) {
@@ -37,6 +37,12 @@ public class Event_PriceServlet extends HttpServlet {
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
+        }else if (userPath.equals("/Event_PriceUpdating")) {
+            int priceId = Integer.parseInt(request.getParameter("price_Id"));
+            float price = Float.parseFloat(request.getParameter("Price"));
+            String description = request.getParameter(request.getParameter("Description"));
+            Event_Price_StorkTeam db = new Event_Price_StorkTeam();
+            db.editEventPrice(new Event_Price(priceId, price, description));
         }
     }
 

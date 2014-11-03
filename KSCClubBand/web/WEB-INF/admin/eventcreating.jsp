@@ -115,10 +115,9 @@
                     <div class="form-block">
                         <button class="btn btn-success" type="submit">Submit</button>
                         <label>
-                            <input type="checkbox">
+                            <input type="checkbox" name="checkBoxPrice" value="yes">
                             This Event has Price
                         </label>
-
                     </div>
                 </div>
             </div>

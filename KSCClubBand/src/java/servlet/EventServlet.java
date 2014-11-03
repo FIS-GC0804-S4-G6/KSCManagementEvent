@@ -21,11 +21,13 @@ import java.io.FileOutputStream;
 import java.io.File;
 import javax.servlet.annotation.MultipartConfig;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.LinkedHashMap;
 
 @MultipartConfig
 public class EventServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,31 +37,31 @@ public class EventServlet extends HttpServlet {
             List<Category> listOfCategories = category_StorkTeam.selectAllFromCategory();
             request.setAttribute("listOfCategories", listOfCategories);
             request.getRequestDispatcher("WEB-INF/admin/eventcreating.jsp").forward(request, response);
-        } else if(userPath.equals("/JSPEventSelecting")) {
+        } else if (userPath.equals("/JSPEventSelecting")) {
             Event_StorkTeam db = new Event_StorkTeam();
             Map<Integer, Event> mapOfEvents = db.selectAllFromEvent();
             request.setAttribute("mapOfEvents", mapOfEvents);
             request.getRequestDispatcher("WEB-INF/admin/event.jsp").forward(request, response);
-        } else if(userPath.equals("/JSPEventDetail")) {
+        } else if (userPath.equals("/JSPEventDetail")) {
             request.getRequestDispatcher("WEB-INF/admin/eventdetail.jsp").forward(request, response);
         }
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         final PrintWriter writer = response.getWriter();
         String fileName = null;
-        
+
         final Part filePart = request.getPart("logo");
         Event_StorkTeam db = new Event_StorkTeam();
-        if(filePart.getSize() > 0) {
+        if (filePart.getSize() > 0) {
             try {
                 String path = getServletContext().getRealPath("/");
-                fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
-//                fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
-            } catch(FileNotFoundException fne) {
+//                fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
+                fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
+            } catch (FileNotFoundException fne) {
                 writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
                 writer.println("<br/> ERROR: " + fne.getMessage());
                 return;
@@ -74,12 +76,17 @@ public class EventServlet extends HttpServlet {
         DateTime starttime = datetimeFormatter.parseDateTime(request.getParameter("startDate") + " " + request.getParameter("startTime"));
         DateTime endtime = datetimeFormatter.parseDateTime(request.getParameter("endDate") + " " + request.getParameter("endTime"));
         int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));
-        
+        String[] checkBoxPrice = request.getParameterValues("checkBoxPrice");
         Event entity = new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id);
-        db.addEvent(entity);
-        //check creating event successfully?
-        javax.servlet.http.HttpSession session = request.getSession(true);
-        session.setAttribute("event_Id", entity.getEvent_Id());
-        response.sendRedirect("JSPEvent_Price");
+
+        if (checkBoxPrice != null && checkBoxPrice[0].equals("yes") == true) {
+                db.addEvent(entity);
+                //check creating event successfully?
+                javax.servlet.http.HttpSession session = request.getSession(true);
+                session.setAttribute("event_Id", entity.getEvent_Id());
+                response.sendRedirect("JSPEvent_Price");
+        }else{
+            request.getRequestDispatcher("/JSPEventCreating").forward(request, response);
+        }
     }
 }
