@@ -22,30 +22,30 @@ go
 
 create table Role(
 	Role_Id int identity primary key,
-	Roletype text
+	Roletype nvarchar(max),
 )
 go
 create table University(
 	Univercode int identity primary key,
-	Name text,
-	Address text,
-	Email text,
-	Home text,
-	Mobile text
+	Name nvarchar(max),
+	Address nvarchar(max),
+	Email nvarchar(max),
+	Home nvarchar(max),
+	Mobile nvarchar(max)
 )
 go
 create table Customer(
 	Cust_Id int identity primary key,
-	Email text,
-	FullName text,
-	Password text,
+	Email nvarchar(max),
+	FullName nvarchar(max),
+	Password nvarchar(max),
 	Gender varchar(6),
 	DateOfBirth date,
-	Address text,
-	Mobile text,
-	Home text,
+	Address nvarchar(max),
+	Mobile nvarchar(max),
+	Home nvarchar(max),
 	IDCard varchar(14),
-	Avatar text,
+	Avatar nvarchar(max),
 	Role_Id int,
 	Univercode int,
 	Active bit,
@@ -55,22 +55,22 @@ create table Customer(
 go
 create table Category(
 	Cate_Id int identity primary key,
-	CategoryName text
+	CategoryName nvarchar(max)
 )
 go
 create table Payment_Option
 (
 	Payment_Id int identity primary key,
-	Payment_Type text,
+	Payment_Type nvarchar(max),
 )
 create table Event(
 	Event_Id int identity primary key,
-	Title text not null,
-	Logo text,
-	Description text,
-	Speaker text,
-	Address text not null,
-	Slogan text,
+	Title nvarchar(max) not null,
+	Logo nvarchar(max),
+	Description nvarchar(max),
+	Speaker nvarchar(max),
+	Address nvarchar(max) not null,
+	Slogan nvarchar(max),
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Hometag bit default '0',
@@ -82,15 +82,15 @@ go
 create table Event_Picture(
 	Eventpic_Id int identity primary key,
 	Event_Id int,
-	PicturePath text,
+	PicturePath nvarchar(max),
 	constraint FK_Event_EventPicture foreign key (Event_Id) references Event(Event_Id)
 )
 go
 create table [Session](
 	SID_Id int identity primary key,
 	Cust_Id int,
-	Device text,
-	SID_Device text,
+	Device nvarchar(max),
+	SID_Device nvarchar(max),
 	constraint FK_Session_Customer foreign key (Cust_Id) references Customer(Cust_Id)
 )
 go
@@ -98,7 +98,7 @@ create table Event_Price(
 	Price_Id int identity primary key,
 	Event_Id int,
 	Price float,
-	Description text,
+	Description nvarchar(max),
 	IsDelete bit default '0',
 	constraint FK_EventPrice_Event foreign key(Event_Id) references Event(Event_Id)
 )
