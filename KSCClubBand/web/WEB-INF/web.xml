@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
     <servlet>
-        <servlet-name>EventServlet</servlet-name>
+        <servlet-name>BapCai</servlet-name>
         <servlet-class>servlet.EventServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Event_PriceServlet</servlet-name>
+        <servlet-name>CaiBap</servlet-name>
         <servlet-class>servlet.Event_PriceServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>EventServlet</servlet-name>
+        <servlet-name>BapCai</servlet-name>
         <url-pattern>/JSPEventCreating</url-pattern>
         <url-pattern>/EventCreating</url-pattern>
         <url-pattern>/EventUpdating</url-pattern>
@@ -18,7 +18,7 @@
         <url-pattern>/JSPEventDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Event_PriceServlet</servlet-name>
+        <servlet-name>CaiBap</servlet-name>
         <url-pattern>/JSPEvent_Price</url-pattern>
         <url-pattern>/Event_PriceInserting</url-pattern>
         <url-pattern>/AJAXEvent_PriceInserting</url-pattern>
