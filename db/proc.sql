@@ -25,12 +25,12 @@ go
 	drop proc sp_event_creating
 	go
 	create procedure sp_event_creating
-		@Title text,
-		@Logo text,
-		@Description text,
-		@Speaker text,
-		@Address text,
-		@Slogan text,
+		@Title nvarchar(max),
+		@Logo nvarchar(max),
+		@Description nvarchar(max),
+		@Speaker nvarchar(max),
+		@Address nvarchar(max),
+		@Slogan nvarchar(max),
 		@StartDate datetime,
 		@EndDate datetime,
 		@Cate_Id int,
@@ -101,7 +101,7 @@ go
 	create proc sp_event_price_editing
 		@Price_Id int,
 		@Price float,
-		@Description text
+		@Description nvarchar(max)
 	as
 	begin
 		update Event_Price set Price=@Price, Description=@Description where Price_Id = @Price_Id and IsDelete = '0'
@@ -135,7 +135,7 @@ go
 	create proc sp_event_price_inserting
 		@Event_Id int,
 		@Price float,
-		@Description text,
+		@Description nvarchar(max),
 		@Price_Id int out
 	as
 	begin
