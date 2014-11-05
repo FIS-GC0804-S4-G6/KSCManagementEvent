@@ -13,6 +13,11 @@
         </style>
     </head>
     <body>
+        <form method="GET" action="FilterEvent.guitar">
+            Title<input type="text" name="title"/>
+            <button id="filter-btn">Filter</button>
+        </form>
+        
         <table>
             <thead>
                 <tr>
@@ -20,8 +25,8 @@
                     <th>Title</th>
                     <th>StartDate</th>
                     <th>EndDate</th>
-                    <th>Logo</th>
                     <th>Cate_Id</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,9 +36,12 @@
                         <td>${i.value.getTitle()}</td>
                         <td>${i.value.getStartDate()}</td>
                         <td>${i.value.getEndDate()}</td>
-                        <td><img src="./img/${i.value.getLogo()}"/></td>
                         <td>${i.value.getCate_Id()}</td>
                         <td><a href="JSPEventDetail?event_Id=${i.value.getEvent_Id()}">MORE INFO</a></td>
+                        <td>
+                            <button>Edit</button>
+                            <button>Update</button>
+                        </td>
                     </tr>
                 </c:forEach>
             </tbody>
