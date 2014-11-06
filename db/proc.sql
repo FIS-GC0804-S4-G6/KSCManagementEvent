@@ -91,19 +91,21 @@ go
 	create proc sp_event_select_by_title
 		@PageNumber int,
 		@RowsPage int,
-		@Title nvarchar(max)
+		@Title nvarchar(max),
+		@StartDate datetime,
+		@EndDate datetime
 	as
 	begin
 		select * from Event
-		where Title = @Title
+		where Title = @Title and StartDate = @StartDate and EndDate = @EndDate
 		order by Event_Id
 		offset ((@PageNumber - 1) * @RowsPage) rows
 		fetch next @RowsPage rows only
 	end
 	go
 
-	exec sp_event_select_by_title 1, 1, 'Yellow Submarine'
-
+	exec sp_event_select_by_title 1, 1, 'Yellow Submarine', '1 Oct 2014 19:30', '1 Oct 2014 23:00'
+	select * from Event
 -- =============================================================== --
 -- ============================ EVENT_PRICE ============================ --
 -- =============================================================== --
