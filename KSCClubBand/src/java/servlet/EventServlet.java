@@ -30,10 +30,20 @@ public class EventServlet extends HttpServlet {
         if (userPath.equals("/JSPEventCreating")) {
             getJSPEventCreating(request, response);
         } else if(userPath.equals("/JSPEventSelecting") || userPath.equals("/JSPEventNext") || userPath.equals("/JSPEventPrev")) {
-            getJSPEventSelecting(request, response, userPath);        } else if (userPath.equals("/JSPEventDetail")) {
+            getJSPEventSelecting(request, response, userPath);        
+        } else if (userPath.equals("/JSPEventDetail")) {
             request.getRequestDispatcher("WEB-INF/admin/eventdetail.jsp").forward(request, response);
         } else if(userPath.equals("/EventFilter.guitar")) {
-            response.getWriter().println("blue and lonely");
+            String title = request.getParameter("title");
+            DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm");
+            DateTime startDate = datetimeFormatter.parseDateTime(request.getParameter("startDate"));
+            DateTime endDate = datetimeFormatter.parseDateTime(request.getParameter("endDate"));
+            
+            Event entity = new Event(title, startDate, endDate);
+            Event_StorkTeam db = new Event_StorkTeam();
+            Map<Integer, Event> mapOfEvents = db.selectEventByTitle(1, 10, entity);
+            request.setAttribute("mapOfEvents", mapOfEvents);
+            request.getRequestDispatcher("WEB-INF/admin/event.jsp").forward(request, response);
         }
     }
 
@@ -77,8 +87,8 @@ public class EventServlet extends HttpServlet {
         if (filePart.getSize() > 0) {
             try {
                 String path = getServletContext().getRealPath("/");
-//                fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
-                fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
+                fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
+//                fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
             } catch (FileNotFoundException fne) {
                 writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
                 writer.println("<br/> ERROR: " + fne.getMessage());
@@ -90,7 +100,7 @@ public class EventServlet extends HttpServlet {
         String speaker = request.getParameter("speaker");
         String address = request.getParameter("address");
         String slogan = request.getParameter("slogan");
-        DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-mm-dd HH:mm");
+        DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm");
         DateTime starttime = datetimeFormatter.parseDateTime(request.getParameter("startDate") + " " + request.getParameter("startTime"));
         DateTime endtime = datetimeFormatter.parseDateTime(request.getParameter("endDate") + " " + request.getParameter("endTime"));
         int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));

@@ -46,6 +46,12 @@ public class Event {
         this.logo = logo;
         this.cate_Id = cate_Id;
     }
+    
+    public Event(String title, DateTime startDate, DateTime endDate) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
 
     public int getCate_Id() {
         return cate_Id;

@@ -15,6 +15,8 @@
     <body>
         <form method="GET" action="EventFilter.guitar">
             Title<input type="text" name="title"/>
+            Start Date<input type="text" name="startDate"/>
+            End Date<input type="text" name="endDate"/>
             <button id="filter-btn">Filter</button>
         </form>
         
