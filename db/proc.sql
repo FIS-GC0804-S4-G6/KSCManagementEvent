@@ -41,6 +41,7 @@ go
 		VALUES (@Title, @Logo, @Description, @Speaker, @Address, @Slogan, @StartDate, @EndDate, @Cate_Id);
 		set @Event_Id = SCOPE_IDENTITY()
 	END
+	go
 
 	execute sp_event_creating
 		@Title = 'Magical Mystery tour',
@@ -51,15 +52,24 @@ go
 		@Slogan = 'You''re gonna lose that girl',
 		@StartDate = '2014-09-01 09:11',
 		@EndDate = '2014-09-01 09:23',
-		@Cate_Id = '1'
+		@Cate_Id = '1',
+		@Event_Id = 0
 	go
 
 -- 2.Select all events
 	drop proc sp_event_select
 	go
 	create proc sp_event_select
+		@PageNumber int,
+		@RowsPage int
 	as
-	select * from [Event]
+		select * from [Event]
+		order by Event_Id
+		offset ((@PageNumber - 1) * @RowsPage) rows
+		fetch next @RowsPage rows only
+	go
+
+	exec sp_event_select 1, 10
 	go
 -- 3.Select event by event_Id
 	drop proc sp_event_select_by_eventId
@@ -74,7 +84,25 @@ go
 
 	execute sp_event_select_by_eventId 1
 	go
-	select * from Event
+
+-- 4.Select event by Title
+	drop proc sp_event_select_by_title
+	go
+	create proc sp_event_select_by_title
+		@PageNumber int,
+		@RowsPage int,
+		@Title nvarchar(max)
+	as
+	begin
+		select * from Event
+		where Title = @Title
+		order by Event_Id
+		offset ((@PageNumber - 1) * @RowsPage) rows
+		fetch next @RowsPage rows only
+	end
+	go
+
+	exec sp_event_select_by_title 1, 1, 'Yellow Submarine'
 
 -- =============================================================== --
 -- ============================ EVENT_PRICE ============================ --
@@ -115,6 +143,7 @@ go
 	--delete EVENT_PRICE_by_priceId
 	drop proc sp_event_price_deleting_by_priceId
 	go
+
 	create proc sp_event_price_deleting_by_priceId
 		@Price_Id int
 	as
@@ -142,3 +171,4 @@ go
 		insert into Event_Price (Event_Id, Price, Description) values (@Event_Id, @Price, @Description)
 		set @Price_Id = SCOPE_iDENTITY()
 	end
+	go
