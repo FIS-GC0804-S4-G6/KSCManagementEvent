@@ -13,7 +13,7 @@
         </style>
     </head>
     <body>
-        <form method="GET" action="FilterEvent.guitar">
+        <form method="GET" action="EventFilter.guitar">
             Title<input type="text" name="title"/>
             <button id="filter-btn">Filter</button>
         </form>
@@ -46,5 +46,7 @@
                 </c:forEach>
             </tbody>
         </table>
+        <form method="GET" action="JSPEventPrev"><button class="pre-btn" type="submit">Previous</button></form>
+        <form method="GET" action="JSPEventNext"><button class="next-btn" type="submit">Next</button></form>
     </body>
 </html>

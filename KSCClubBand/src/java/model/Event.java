@@ -29,6 +29,15 @@ public class Event {
         this.cate_Id = cate_Id;
     }
     
+    public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id) {
+        this.event_Id = event_Id;
+        this.title = title;
+        this.address = address;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.cate_Id = cate_Id;
+    }
+    
     public Event(int event_Id, String title, DateTime startDate, DateTime endDate, String logo, int cate_Id) {
         this.event_Id = event_Id;
         this.title = title;
