@@ -102,14 +102,14 @@ public class EventServlet extends HttpServlet {
         session.setAttribute("event_Id", entity.getEvent_Id());
         response.sendRedirect("JSPEvent_Price");
 
-        if (checkBoxPrice != null && checkBoxPrice[0].equals("yes") == true) {
-                db.addEvent(entity);
-                //check creating event successfully?
-                javax.servlet.http.HttpSession session = request.getSession(true);
-                session.setAttribute("event_Id", entity.getEvent_Id());
-                response.sendRedirect("JSPEvent_Price");
-        }else{
-            request.getRequestDispatcher("/JSPEventCreating").forward(request, response);
-        }
+//        if (checkBoxPrice != null && checkBoxPrice[0].equals("yes") == true) {
+//                db.addEvent(entity);
+//                //check creating event successfully?
+//                javax.servlet.http.HttpSession session = request.getSession(true);
+//                session.setAttribute("event_Id", entity.getEvent_Id());
+//                response.sendRedirect("JSPEvent_Price");
+//        }else{
+//            request.getRequestDispatcher("/JSPEventCreating").forward(request, response);
+//        }
     }
 }
