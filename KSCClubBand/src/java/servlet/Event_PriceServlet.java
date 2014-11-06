@@ -39,10 +39,18 @@ public class Event_PriceServlet extends HttpServlet {
             response.getWriter().write(json);
         }else if (userPath.equals("/Event_PriceUpdating")) {
             int priceId = Integer.parseInt(request.getParameter("price_Id"));
-            float price = Float.parseFloat(request.getParameter("Price"));
-            String description = request.getParameter(request.getParameter("Description"));
+            float price = Float.parseFloat(request.getParameter("price"));
+            String description = request.getParameter("description");
             Event_Price_StorkTeam db = new Event_Price_StorkTeam();
             db.editEventPrice(new Event_Price(priceId, price, description));
+            
+            java.util.Map<String, String> options = new java.util.LinkedHashMap<String, String>();
+            options.put("result", "Price Updated");
+            String json = new com.google.gson.Gson().toJson(options);
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }
     }
 

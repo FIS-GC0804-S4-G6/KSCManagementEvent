@@ -34,8 +34,7 @@
                         <td>${i.getPrice()}</td>
                         <td>${i.getDescription()}</td>
                         <td>
-                            <!--<button class="edit-btn">Edit</button>-->
-                            <a href="javascript:;" onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn btn-primary btn-single btn-sm">Show Me</a>
+                            <a href="javascript:;" onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn btn-primary btn-single btn-sm" id="${i.getPrice_Id()}" name='editing'>Edit</a>
                         </td>
                         <td><button class="delete-btn" id="${i.getPrice_Id()}">Delete</button></td>
                     </tr>
@@ -50,67 +49,35 @@
             </form>
         </div>
 
-        <script>
-                                $(document).ready(function () {
-                                    $("button[type=submit]").click(function (e) {
-                                        e.preventDefault();
-                                        var price = $("input[name=price]").val();
-                                        var description = $("textarea[name=description]").val();
-                                        $.ajax({
-                                            data: {price: price, description: description},
-                                            url: "AJAXEvent_PriceInserting",
-                                            type: "GET",
-                                            dataType: "JSON",
-                                            error: function (jqXHR, textStatus, erroThrown) {
-                                                console.log(textStatus);
-                                            },
-                                            success: function (aPostData, textStatus, jqXHR) {
-                                                var data = "<tr>" +
-                                                        "<td>" + aPostData.price_Id + "</td>" +
-                                                        "<td>" + price + "</td>" +
-                                                        "<td>" + description + "</td>" +
-//                                                        '<td><button class="edit-btn">Edit</button></td>' +
-                                                        '<td><a href="javascript:;" onclick="jQuery("#modal-1").modal("show", {backdrop: "fade"});" class="btn btn-primary btn-single btn-sm">Show Me</a></td>'+
-                                                        "<td><button class='delete-btn' id='" + aPostData.price_Id + "'>Delete</button></td>" +
-                                                        "</tr>";
-                                                $('tbody').append(data);
-                                            }
-                                        });
-                                    });
-
-                                    $('table tbody').on("click", "button", function (e) {
-                                        e.preventDefault();
-                                        var self = $(this);
-                                        $.ajax({
-                                            data: {price_Id: self.attr('id')},
-                                            url: "Event_PriceDeleting",
-                                            type: "GET",
-                                            dataType: "JSON",
-                                            error: function (jqXHR, textStatus, errorThrown) {
-                                                console.log("error: ", textStatus);
-                                            },
-                                            success: function (data, textStatus, jqXHR) {
-                                                self.closest('tr').remove();
-                                            }
-                                        });
-                                    });
-                                });
-        </script>
-
         <div class="modal fade" id="modal-1" aria-hidden="true" style="display: none;">
             <div class="modal-dialog">
                 <div class="modal-content">
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Basic Modal</h4>
+                        <h4 class="modal-title">Editing Event Price</h4>
                     </div>
                     <div class="modal-body">
-                        Hello I am a Modal!
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info">Save changes</button>
-                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <form method="GET" action="Event_PriceUpdating" >
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-1" class="control-label">Price</label>
+                                        <input type="text" class="form-control" id="field-1" name="priceUnit" placeholder="Price"/>
+                                    </div>	
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="field-2" class="control-label">Description</label>
+                                        <input type="text" class="form-control" id="field-2" name="descriptionUnit" placeholder="Description"/>
+                                    </div>	
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-info">Save changes</button>
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -127,5 +94,72 @@
 
         <!-- JavaScripts initializations and stuff -->
         <script src="xenon/assets/js/xenon-custom.js"></script>
+<script>
+    $(document).ready(function () {
+        $("button[type=submit]").click(function (e) {
+            e.preventDefault();
+            var price = $("input[name=price]").val();
+            var description = $("textarea[name=description]").val();
+            $.ajax({
+                data: {price: price, description: description},
+                url: "AJAXEvent_PriceInserting",
+                type: "GET",
+                dataType: "JSON",
+                error: function (jqXHR, textStatus, erroThrown) {
+                    console.log(textStatus);
+                },
+                success: function (aPostData, textStatus, jqXHR) {
+                    var data = "<tr>" +
+                            "<td>" + aPostData.price_Id + "</td>" +
+                            "<td>" + price + "</td>" +
+                            "<td>" + description + "</td>" +
+                            "<td><a href='javascript:;' onclick=\"jQuery('#modal-1').modal('show', {backdrop: 'fade'});\" class='btn btn-primary btn-single btn-sm' id='" + aPostData.price_Id + "' name='editing' >Edit</a></td>" +
+                            "<td><button class='delete-btn' id='" + aPostData.price_Id + "'>Delete</button></td>" +
+                            "</tr>";
+                    $('tbody').append(data);
+                }
+            });
+        });
+
+        $('table tbody').on("click", "button", function (e) {
+            e.preventDefault();
+            var self = $(this);
+            $.ajax({
+                data: {price_Id: self.attr('id')},
+                url: "Event_PriceDeleting",
+                type: "GET",
+                dataType: "JSON",
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error: ", textStatus);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    self.closest('tr').remove();
+                }
+            });
+        });
+
+        $(document).on('click', 'a[name=editing]', function(){
+            var self = $(this);
+            $('.modal-footer .btn-info').attr('id', self.attr('id'));
+        });
+        
+        $('.modal-footer .btn-info').click(function (e) {
+            e.preventDefault();
+            var self = $(this);
+            $.ajax({
+                data: {price_Id: self.attr('id'), price: $('input[name=priceUnit]').val(), description: $('input[name=descriptionUnit]').val()},
+                url: "Event_PriceUpdating",
+                type: "GET",
+                dataType: "JSON",
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log("error: ", textStatus);
+                },
+                success: function (data, textStatus, jqXHR) {
+                    console.log(data);
+                }
+            });
+        });
+    });
+</script>
     </body>
 </html>

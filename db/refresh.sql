@@ -2,7 +2,7 @@
 --go
 --drop database KSCManagementEvent
 
---use KSCManagementEvent
+use KSCManagementEvent
 --go
 
 /* drop statement? try your own type. I'm so lazy. F*ck */
@@ -18,7 +18,6 @@ drop table Customer;
 drop table University;
 drop table Role;
 go
-
 
 create table Role(
 	Role_Id int identity primary key,
