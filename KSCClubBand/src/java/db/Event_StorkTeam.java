@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Timestamp;
 
 public class Event_StorkTeam {
     public void addEvent(Event event) {
@@ -31,10 +32,10 @@ public class Event_StorkTeam {
             cstmt.setNString("Speaker", event.getSpeaker());
             cstmt.setNString("Address", event.getAddress());
             cstmt.setNString("Slogan", event.getSlogan());
-            cstmt.setDate("StartDate", new Date(event.getStartDate().getMillis()) );
-            cstmt.setDate("EndDate", new Date(event.getEndDate().getMillis()) );
+            cstmt.setTimestamp("StartDate", new Timestamp(event.getStartDate().getMillis()) );
+            cstmt.setTimestamp("EndDate", new Timestamp(event.getEndDate().getMillis()) );
             cstmt.setInt("Cate_Id", event.getCate_Id());
-            int result = cstmt.executeUpdate();
+            cstmt.executeUpdate();
             int event_Id = cstmt.getInt("Event_Id");
             event.setEvent_Id(event_Id);
         } catch (SQLException se) {
@@ -49,12 +50,14 @@ public class Event_StorkTeam {
         }
     }
     
-    public Map<Integer, Event> selectAllFromEvent() {
+    public Map<Integer, Event> selectAllFromEvent(int pageNumber, int rowsPage) {
         Map<Integer, Event> mapOfEvents = new LinkedHashMap<Integer, Event>();
         Connection conn = null;
         try {
             conn = ConnectionUtil.getConnection();
-            CallableStatement cstmt = conn.prepareCall("{call sp_event_select}");
+            CallableStatement cstmt = conn.prepareCall("{call sp_event_select(?,?)}");
+            cstmt.setInt("PageNumber", pageNumber);
+            cstmt.setInt("RowsPage", rowsPage);
             ResultSet rs = cstmt.executeQuery();
             while(rs.next()) {
                 int event_Id = rs.getInt("Event_Id");
@@ -72,6 +75,42 @@ public class Event_StorkTeam {
         } finally {
             try {
                 if(conn != null) 
+                    conn.close();
+            } catch(SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return null;
+    }
+    
+    public Map<Integer, Event> selectEventByTitle(int pageNumber, int rowsPage, Event event) {
+        Map<Integer, Event> mapOfEvents = new LinkedHashMap<Integer, Event>();
+        Connection conn = null;
+        try {
+            conn = ConnectionUtil.getConnection();
+            CallableStatement cstmt = conn.prepareCall("{call sp_event_select_by_title(?,?,?,?,?)}");
+            cstmt.setInt("PageNumber", pageNumber);
+            cstmt.setInt("RowsPage", rowsPage);
+            cstmt.setString("Title", event.getTitle());
+            cstmt.setTimestamp("StartDate", new Timestamp(event.getStartDate().getMillis()));
+            cstmt.setTimestamp("EndDate", new Timestamp(event.getEndDate().getMillis()));
+            ResultSet rs = cstmt.executeQuery();
+            while(rs.next()) {
+                int event_Id = rs.getInt("Event_Id");
+                String title = rs.getString("Title");
+                String address = rs.getString("Address");
+                DateTime startDate = new DateTime( rs.getDate("StartDate").getTime() );
+                DateTime endDate = new DateTime( rs.getDate("EndDate").getTime() );
+                int cate_Id = rs.getInt("Cate_Id");
+                Event entity = new Event(event_Id, title, address, startDate, endDate, cate_Id);
+                mapOfEvents.put(event_Id, entity);
+            }
+            return mapOfEvents;
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn != null)
                     conn.close();
             } catch(SQLException se) {
                 se.printStackTrace();
