@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.File;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.Timestamp;
 
 public class Event_StorkTeam {
@@ -150,5 +151,100 @@ public class Event_StorkTeam {
         if(filecontent != null)
             filecontent.close();
         return fileName;
+    }
+    
+    public Map<Integer, Event> filterEvent(int pageNumber, int rowsPage, Event event) {
+        Map<Integer, Event> mapOfEvents = new LinkedHashMap<Integer, Event>();
+        Connection conn = null;
+        String title = event.getTitle();
+        DateTime startDate = event.getStartDate();
+        DateTime endDate = event.getEndDate();
+        String address = event.getAddress();
+        StringBuilder selectSuaBo = new StringBuilder("select * from Event where \n");
+        Map<String, Integer>  map = new LinkedHashMap<String, Integer>();
+        boolean head = false;
+        int numb = 0;
+        if(title == null && startDate == null && endDate == null && address == null) {
+            return null;
+        }
+        if(title != null) {
+            selectSuaBo.append("Title like '%' + ? + '%'\n");
+            head = true;
+            map.put("title", ++numb);
+        }
+        if(startDate != null) {
+            if(head) {
+                selectSuaBo.append(" and ");
+            }
+            selectSuaBo.append("StartDate >= ?\n");
+            map.put("startDate", ++numb);
+        }
+        if(endDate != null) {
+            if(head) {
+                selectSuaBo.append(" and ");
+            }
+            selectSuaBo.append("EndDate <= ?\n");
+            map.put("endDate", ++numb);
+        }
+        if(address != null) {
+            if(head) {
+                selectSuaBo.append(" and ");
+            }
+            selectSuaBo.append("Address like '%' + ? + '%'\n");
+            map.put("address", ++numb);
+        }
+        selectSuaBo.append("order by Event_Id\n");
+        selectSuaBo.append("offset ((? - 1) * ?) rows\n");
+        selectSuaBo.append("fetch next ? rows only");
+        System.out.println(selectSuaBo.toString());
+        try {
+            conn = ConnectionUtil.getConnection();
+            PreparedStatement pst = conn.prepareStatement(selectSuaBo.toString());
+            if(title != null) {
+                pst.setString(map.get("title"), title);
+            }
+            if(startDate != null) {
+                pst.setTimestamp( map.get("startDate"), new Timestamp(startDate.getMillis()) );
+            }
+            if(endDate != null) {
+                pst.setTimestamp( map.get("endDate"), new Timestamp(endDate.getMillis()) );
+            }
+            if(address != null) {
+                pst.setString( map.get("address"), address);
+            }
+            pst.setInt(map.size() + 1, pageNumber);
+            pst.setInt(map.size() + 2, rowsPage);
+            pst.setInt(map.size() + 3, rowsPage);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()) {
+                int event_Id = rs.getInt("Event_Id");
+                String ttitle = rs.getString("Title");
+                DateTime tstartDate = new DateTime(rs.getTimestamp("StartDate"));
+                DateTime tendDate = new DateTime(rs.getTimestamp("EndDate"));
+                int cate_Id = rs.getInt("Cate_Id");
+                String taddress = rs.getString("Address");
+                Event entity = new Event(event_Id, ttitle, taddress, tstartDate, tendDate, cate_Id);
+                mapOfEvents.put(event_Id, entity);
+            }
+            return mapOfEvents;
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn != null)
+                    conn.close();
+            } catch(SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return null;
+    }
+    public static void main(String[] arg) {
+//        Event_StorkTeam db = new Event_StorkTeam();
+//        Event event = new Event("Moon Soon 2014", null, null, null);
+//        Event event = new Event(null, null, new DateTime(2014, 10, 1, 23, 0), null);
+//        Event event = new Event(null, null, null, null);
+//        Event event = new Event("Moon Soon 2014", new DateTime(2014, 10, 1, 19, 30), new DateTime(2014, 10, 1, 23, 0), "Hoang Thanh");
+//        db.filterEvent(event);
     }
 }
