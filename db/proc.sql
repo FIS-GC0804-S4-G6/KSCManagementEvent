@@ -156,8 +156,6 @@ go
 
 	exec sp_event_price_deleting_by_priceId '1'
 	go
-	select * from Event_Price
-	go
 
 	--insert EVENT_PRICE
 	drop proc sp_event_price_inserting

@@ -120,5 +120,3 @@ create table MailingList(
 	Email varchar(200) primary key,
 	Status bit
 )
-
-select * from Event
