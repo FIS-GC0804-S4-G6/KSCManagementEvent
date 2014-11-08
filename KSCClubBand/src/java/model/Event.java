@@ -52,6 +52,13 @@ public class Event {
         this.startDate = startDate;
         this.endDate = endDate;
     }
+    
+    public Event(String title, DateTime startDate, DateTime endDate, String address) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.address = address;
+    }
 
     public int getCate_Id() {
         return cate_Id;

@@ -25,6 +25,7 @@ public class Event_PriceServlet extends HttpServlet {
         } else if(userPath.equals("/AJAXEvent_PriceInserting")) {
             insertIntoEvent_PriceUsingAJAX(request, event_Id, response);
         } else if(userPath.equals("/Event_PriceDeleting")) {
+            System.out.println("handling");
             int price_Id = Integer.parseInt(request.getParameter("price_Id"));
             Event_Price_StorkTeam db = new Event_Price_StorkTeam();
             db.deleteEventPriceByPriceId(price_Id);
