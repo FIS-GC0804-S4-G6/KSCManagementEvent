@@ -87,8 +87,8 @@ public class EventServlet extends HttpServlet {
         if (filePart.getSize() > 0) {
             try {
                 String path = getServletContext().getRealPath("/");
-                fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
-//                fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
+//                fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
+                fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
             } catch (FileNotFoundException fne) {
                 writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
                 writer.println("<br/> ERROR: " + fne.getMessage());
