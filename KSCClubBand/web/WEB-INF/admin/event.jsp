@@ -17,6 +17,7 @@
             Title<input type="text" name="title"/>
             Start Date<input type="text" name="startDate"/>
             End Date<input type="text" name="endDate"/>
+            Addresss<input type="text" name="address"/>
             <button id="filter-btn">Filter</button>
         </form>
         
