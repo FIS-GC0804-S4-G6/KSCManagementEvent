@@ -19,6 +19,7 @@
         <url-pattern>/JSPEventPrev</url-pattern>
         <url-pattern>/JSPEventDetail</url-pattern>
         <url-pattern>/EventFilter.guitar</url-pattern>
+        <url-pattern>/ThrowLogoAway.oneandoneistwo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CaiBap</servlet-name>
