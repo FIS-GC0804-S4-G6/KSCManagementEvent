@@ -78,34 +78,35 @@ go
 		@Event_Id int
 	as
 	begin
-		select * from Event where Event_Id = @Event_Id
+		select E.*, C.CategoryName from Event as E
+		join Category as C
+		on E.Cate_Id = C.Cate_Id
+		where E.Event_Id = @Event_Id and E.isDelete = '0'
 	end
 	go
 
 	execute sp_event_select_by_eventId 1
 	go
-
--- 4.Select event by Title
-	drop proc sp_event_select_by_title
+-- 4.Update Logo
+	drop proc sp_event_update_logo
 	go
-	create proc sp_event_select_by_title
-		@PageNumber int,
-		@RowsPage int,
-		@Title nvarchar(max),
-		@StartDate datetime,
-		@EndDate datetime
+	create proc sp_event_update_logo
+		@Logo nvarchar(max),
+		@Event_Id int
 	as
 	begin
-		select * from Event
-		where Title = @Title and StartDate = @StartDate and EndDate = @EndDate
-		order by Event_Id
-		offset ((@PageNumber - 1) * @RowsPage) rows
-		fetch next @RowsPage rows only
+		update Event set Logo = @Logo where Event_Id = @Event_Id
 	end
+-- 5.Delete Logo
+	drop proc sp_event_delete_logo_by_eventId
 	go
-
-	exec sp_event_select_by_title 1, 1, 'Yellow Submarine', '1 Oct 2014 19:30', '1 Oct 2014 23:00'
-	select * from Event
+	create proc sp_event_delete_logo_by_eventId
+		@Event_Id int
+	as
+	begin
+		update Event set Logo = null where Event_Id = @Event_Id
+	end
+	exec sp_event_delete_logo_by_eventId 1
 -- =============================================================== --
 -- ============================ EVENT_PRICE ============================ --
 -- =============================================================== --
