@@ -173,3 +173,31 @@ go
 		set @Price_Id = SCOPE_iDENTITY()
 	end
 	go
+
+	--CUSTOMER REGISTER
+	drop proc spRegister;
+	go
+	create proc spRegister
+		@Email nvarchar(max),
+		@FullName nvarchar(max),
+		@Password nvarchar(max),
+		@Gender varchar(6)
+	as
+	begin
+		insert into Customer (Email, FullName, Password, Gender) values (@Email, @FullName, @Password, @Gender);
+	end
+	go
+	exec spRegister 'a@gmail.com', 'Nguyen Hoang Giap', '123456abc', 'Male'
+	go
+
+	DROP proc spActiveLink
+	go
+	create procedure spActiveLink
+		@email varchar(max),
+		@active bit
+	as
+	begin
+		update Customer
+		set Active = @active
+		where @email = Email
+	end

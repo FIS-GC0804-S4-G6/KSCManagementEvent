@@ -91,7 +91,7 @@
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Delete Event Price</h4>
+                        <h4 class="modal-title">Are you sure?</h4>
                     </div>
                     <div class="modal-body">
                         <form method="GET" action="Event_PriceDeleting" >
@@ -146,7 +146,7 @@
                                     $(document).on('click', 'a[name=editing], a[name=deleting]', function () {
                                         var self = $(this);
                                         var modal = "";
-                                        if(self.attr('name') === "editing") {
+                                        if (self.attr('name') === "editing") {
                                             modal = "#modal-1";
                                         } else {
                                             modal = "#modal-2";
@@ -171,7 +171,7 @@
                                                     $('a[data-priceId=' + price_Id + '][name=editing]').closest('tr').remove();
                                                 }
                                             });
-                                        } else if(self.hasClass('btn-eventPrice-update')) {
+                                        } else if (self.hasClass('btn-eventPrice-update')) {
                                             var priceUnit = $('input[name=priceUnit]').val();
                                             var description = $('input[name=descriptionUnit]').val();
                                             $.ajax({

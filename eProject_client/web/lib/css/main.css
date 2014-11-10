@@ -1,0 +1,144 @@
+@font-face {
+   font-family: 'Multicolore';
+   src: url('fonts/Multicolore.eot');
+   src: url('fonts/Multicolore.eot?#iefix') format('embedded-opentype'),
+        url('fonts/Multicolore.woff') format('woff'),
+        url('fonts/Multicolore.ttf') format('truetype'),
+        url('fonts/Multicolore.svg#Sri-TSCRegular') format('svg');
+   font-weight: normal;
+   font-style: normal;
+}
+
+.center { text-align: center; }
+
+a { text-decoration: none; }
+
+.multicolore { font-family: "Multicolore", serif; }
+
+.slides-pagination a {
+	border-color: white;
+}
+
+.slides-pagination a.current {
+	background: white;
+}
+
+.fa-chevron-circle-right {
+	margin-right: 25px;
+	border: white;
+	color: white;	
+}
+
+.fa-chevron-circle-left {
+	margin-left: 25px;
+	border: white;
+	color: white;	
+}
+
+.header {
+	z-index: 10;
+	position: fixed;
+	width: 100%;
+	list-style: none;
+	margin: 0;
+	margin-left: 90px;
+	margin-top: 25px;
+	padding: 20px;
+}
+
+#logo > a {
+	color: white;
+	font-size: 18px;
+}
+
+#logo > a:hover {
+	border: 1px solid #65c6fe;
+	padding: 10px 10px 10px 10px;
+	color: #65c6fe;
+	background-color: white;
+}
+
+.fa-heart-o {
+	color: red;
+}
+
+.menu {
+	position: absolute;
+	z-index: 10;
+	top: 0;
+	margin: 0;
+	margin-top: 26px;
+	right: 0;
+	border: 0;
+}
+
+.menu li {
+	display: inline-block;
+	padding: 20px;
+}
+
+.menu li a { color: white; }
+
+.menu li a:hover { color: #65c6fe; }
+
+h1 {
+  font-weight: normal;
+  font-weight: 300;
+  color: white;
+  text-shadow: 0 1px 1px #000;
+  margin: 225px 0 0 50px;
+  font-size: 50px;
+}
+
+p {
+	font-size: 1.39058em;
+	color: white;
+	text-shadow: 0 1px 1px #555;
+	margin: 125px 550px 10px 150px;
+}
+
+.container {
+  position: relative;
+  width: 50%;
+  max-width: 500px;
+  left: 90px;
+  top: 13%;
+  padding: 10px 20px;
+}
+
+.contrast {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1px 10px;
+  -webkit-box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 23px 5px rgba(0, 0, 0, 0.4);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.fa-chevron-right {
+	color: white;
+	font-size: 15px;
+}
+
+.contrast a i {
+	margin-left: 5px;
+}
+
+.dropdown {
+	color: white;
+}
+
+.dropdown a[id="login"] {
+	color: white;
+	display: none;
+}
+
+.dropdown:hover #login, .dropdown:focus #Login {
+	display: block;
+	margin-top: 15px;
+	position: absolute;
+}
