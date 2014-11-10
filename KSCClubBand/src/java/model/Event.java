@@ -4,7 +4,7 @@ import org.joda.time.DateTime;
 
 public class Event {
 
-    private int event_Id;
+    private int event_Id = -1;
     private String title;
     private String logo;
     private String description;
@@ -16,7 +16,26 @@ public class Event {
     private boolean homeTag;
     private boolean status;
     private int cate_Id;
+    private String categoryName;
 
+    public Event(){}
+    
+    public Event(int event_Id, String title, String logo, String description,
+            String speaker, String address, String slogan, DateTime startDate,
+            DateTime endDate, String categoryName, int cate_Id) {
+        this.event_Id = event_Id;
+        this.title = title;
+        this.logo = logo;
+        this.description = description;
+        this.speaker = speaker;
+        this.address = address;
+        this.slogan = slogan;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.categoryName = categoryName;
+        this.cate_Id = cate_Id;
+    }
+    
     public Event(String title, String logo, String description, String speaker, String address, String slogan, DateTime startDate, DateTime endDate, int cate_Id) {
         this.title = title;
         this.logo = logo;
@@ -154,5 +173,21 @@ public class Event {
 
     public void setStatus(boolean value) {
         this.status = value;
+    }
+    
+    public String getCategoryName() {
+        return categoryName;
+    }
+    
+    public void setCategoryName(String value) {
+        this.categoryName = value;
+    }
+    
+    @Override
+    public String toString() {
+        return "event: " + title + "{logo: " + logo + "\ndescription: " + description + "\nspeaker: " + speaker + "\naddress: " + address
+                + "\nslogan: " + slogan + "\nstartDate: " + startDate.getYear() + "-" + startDate.getMonthOfYear() + "-" + startDate.getDayOfMonth() + " " + startDate.getHourOfDay() + "::" + startDate.getMinuteOfHour()
+                + "\nendDate: " + endDate.getYear() + "-" + endDate.getMonthOfYear() + "-" + endDate.getDayOfMonth() + " " + endDate.getHourOfDay() + "::" + endDate.getMinuteOfHour()
+                + "\ncate_Id" + cate_Id + "\ncategoryName: " + categoryName + "}";
     }
 }
