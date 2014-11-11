@@ -201,3 +201,64 @@ go
 		set Active = @active
 		where @email = Email
 	end
+
+
+	--select event and payment type
+	go
+	drop proc showEventDetail
+	go
+	create proc showEventDetail
+		@Event_Id int
+	as
+	begin
+		select Title, Logo, Description, Speaker, Address, Slogan, StartDate, EndDate, Category.CategoryName
+		from Event 
+		inner join Category
+		on Event.Cate_Id = Category.Cate_Id
+		where Event_Id = @Event_Id;
+	end
+	go
+	exec showEventDetail 1
+	go
+	select * from Event
+	go
+	select* from Category
+	go
+
+
+	drop proc showCustEvent
+	go
+	create proc showCustEvent
+		@Event_Id int
+	as
+	begin
+		select Customer.FullName, Customer.Avatar, Customer.Email, Payment_Option.Payment_Type
+		from Cust_Event
+		inner join Customer
+		on Cust_Event.Cust_Id =  Customer.Cust_Id
+		inner join Payment_Option
+		on Cust_Event.Cust_Id = Payment_Option.Payment_Id
+		where Event_Id = @Event_Id
+	end
+	go
+	exec showCustEvent 1;
+	
+	select * from Customer
+	select * from Cust_Event
+	select * from Payment_Option
+
+	go
+	drop proc showEventPrice
+	go
+	create proc showEventPrice
+		@Event_Id int
+	as
+	begin
+		select Event_Price.Price
+		from Event_Price
+		where Event_Id = @Event_Id
+	end
+	go
+	exec showEventPrice 1
+	go
+	select * from Event_Price

@@ -39,6 +39,7 @@ public class AutoActive extends HttpServlet {
         String port = getServletContext().getInitParameter("Port");
         String username = getServletContext().getInitParameter("Username");
         String password = getServletContext().getInitParameter("Password");
+        
         String action = request.getParameter("act");
         
         AccountDB db = new AccountDB(driver, server, port, database, username, password);
@@ -83,8 +84,7 @@ public class AutoActive extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-    private void isActive(String act, HttpServletRequest request, AccountDB db) {
-        
+    private void isActive(String act, HttpServletRequest request, AccountDB db) { 
         db.custActiveLink(act, true);
     }
 }

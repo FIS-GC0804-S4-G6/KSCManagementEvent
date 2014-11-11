@@ -220,7 +220,7 @@ public class AccountDB {
 
     public void senderAPI(final String emailUsername, final String emailPassword, boolean auth, boolean tls, String host, String port, String fullName, String toEmail, String custPassword) {
         EmailDeploy mail = new EmailDeploy();
-        String linkActive = "http://localhost:8080/eProject_client/autoActive?act=&email=" + toEmail;
+        String linkActive = "http://localhost:8080/eProject_client/autoActive?act=" + toEmail;
         String content = "Chào mừng " + fullName + " đã đăng kí tham gia làm thành viên của KSCEvent \n\n"
                 + "KSCEvent là nơi bạn có thể tìm kiếm và tham gia vào các hoạt động của trường KSC \n\n"
                 + "Nơi giao lưu học hỏi và giải trí giúp các sinh viên có được kiến thức và nâng cao "
@@ -230,15 +230,16 @@ public class AccountDB {
                 + "password " + custPassword + "\n\n"
                 + "Hãy click vào link sau để active tài khoản của bạn: \n\n"
                 + linkActive;
-        mail.emailSender("ducndgc00467@fpt.edu.vn", "Duc76268481993@", auth, tls, host, port, "ducndgc00467@fpt.edu.vn", toEmail, "Admin KSCSchool - Register Complete", content);
+        mail.emailSender(emailUsername, emailPassword, auth, tls, host, port, emailUsername, toEmail, "Admin KSCSchool - Register Complete", content);
     }
 
-    public static void main(String[] arg){
-//        String driver, String servername, String port, String databsae, String username, String password
-        AccountDB db = new AccountDB("com.microsoft.sqlserver.jdbc.SQLServerDriver", "localhost", "1433", "KSCManagementEvent", "sa", "sa");
-        db.custActiveLink("ducndgc00467@fpt.edu.vn", true);
-        
-    }
+//    public static void main(String[] arg){
+////        String driver, String servername, String port, String databsae, String username, String password
+//        AccountDB db = new AccountDB("com.microsoft.sqlserver.jdbc.SQLServerDriver", "localhost", "1433", "KSCManagementEvent", "sa", "sa");
+//        db.custActiveLink("ducndgc00467@fpt.edu.vn", true);
+//        
+//    }
+    
     public boolean custActiveLink(String email, boolean active) {
         Connection conn = null;
         CallableStatement cstm = null;
