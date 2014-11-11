@@ -50,7 +50,7 @@ public class Event_StorkTeam {
         }
     }
     
-    public Map<Integer, Event> selectAllFromEvent(int pageNumber, int rowsPage) {
+    public Map<Integer, Event> selectEvent(int pageNumber, int rowsPage) {
         Map<Integer, Event> mapOfEvents = new LinkedHashMap<Integer, Event>();
         Connection conn = null;
         try {
@@ -62,11 +62,14 @@ public class Event_StorkTeam {
             while(rs.next()) {
                 int event_Id = rs.getInt("Event_Id");
                 String title = rs.getString("Title");
-                DateTime startDate = new DateTime( rs.getDate("StartDate").getTime() );
-                DateTime endDate = new DateTime( rs.getDate("EndDate").getTime() );
-                String logo = rs.getString("Logo");
+                String address = rs.getString("Address");
+                DateTime startDate = new DateTime( rs.getTimestamp("StartDate").getTime() );
+                DateTime endDate = new DateTime( rs.getTimestamp("EndDate").getTime() );
                 int cate_Id = rs.getInt("Cate_Id");
-                Event entity = new Event(event_Id, title, startDate, endDate, logo, cate_Id);
+                String categoryName = rs.getString("CategoryName");
+                int amountPaticipants = rs.getInt("AmountPaticipants");
+                float sumPrice = rs.getFloat("SumPrice");
+                Event entity = new Event(event_Id, title, address, startDate, endDate, cate_Id, categoryName, amountPaticipants, sumPrice);
                 mapOfEvents.put(event_Id, entity);
             }
             return mapOfEvents;
@@ -123,7 +126,26 @@ public class Event_StorkTeam {
         DateTime startDate = event.getStartDate();
         DateTime endDate = event.getEndDate();
         String address = event.getAddress();
-        StringBuilder selectSuaBo = new StringBuilder("select * from Event where \n");
+        StringBuilder selectSuaBo = new StringBuilder("declare @Current datetime = GETDATE()");
+        selectSuaBo.append("select CE.AmountPaticipants, CE.SumPrice, \"TimeStatus\" = \n");
+        selectSuaBo.append("case\n");
+        selectSuaBo.append("\twhen EndDate < GETDATE() then 'Past'\n");
+        selectSuaBo.append("\twhen StartDate <= @Current and @Current < EndDate then 'In Processing'\n");
+        selectSuaBo.append("\twhen GETDATE() < StartDate then 'In the Future'\n");
+        selectSuaBo.append("\tend,\n");
+        selectSuaBo.append("\tC.CategoryName, E.*\n");
+        selectSuaBo.append("from Event as E\n");
+        selectSuaBo.append("left outer join\n");
+        selectSuaBo.append("(");
+        selectSuaBo.append("\tselect Event_Id, count(*) as AmountPaticipants, sum(Price) as SumPrice from Cust_Event\n");
+        selectSuaBo.append("\twhere IsDelete = 0\n");
+        selectSuaBo.append("\tgroup by Event_Id\n");
+        
+        selectSuaBo.append(") CE\n");
+        selectSuaBo.append("on E.Event_Id = CE.Event_Id\n");
+        selectSuaBo.append("join Category as C on\n");
+        selectSuaBo.append("E.Cate_Id = C.Cate_Id\n");
+        selectSuaBo.append("where E.IsDelete = 0 and\n");
         Map<String, Integer>  map = new LinkedHashMap<String, Integer>();
         boolean head = false;
         int numb = 0;
@@ -159,6 +181,7 @@ public class Event_StorkTeam {
         selectSuaBo.append("order by Event_Id\n");
         selectSuaBo.append("offset ((? - 1) * ?) rows\n");
         selectSuaBo.append("fetch next ? rows only");
+        System.out.println(selectSuaBo.toString());
         try {
             conn = ConnectionUtil.getConnection();
             PreparedStatement pst = conn.prepareStatement(selectSuaBo.toString());
@@ -184,9 +207,13 @@ public class Event_StorkTeam {
                 DateTime tstartDate = new DateTime(rs.getTimestamp("StartDate"));
                 DateTime tendDate = new DateTime(rs.getTimestamp("EndDate"));
                 int cate_Id = rs.getInt("Cate_Id");
+                String categoryName = rs.getString("CategoryName");
                 String taddress = rs.getString("Address");
-                Event entity = new Event(event_Id, ttitle, taddress, tstartDate, tendDate, cate_Id);
+                int amountPaticipants = rs.getInt("AmountPaticipants");
+                float sumPrice = rs.getFloat("SumPrice");
+                Event entity = new Event(event_Id, ttitle, taddress, tstartDate, tendDate, cate_Id, categoryName, amountPaticipants, sumPrice);
                 mapOfEvents.put(event_Id, entity);
+                System.out.println("title: " + title);
             }
             return mapOfEvents;
         } catch(SQLException se) {
@@ -200,6 +227,20 @@ public class Event_StorkTeam {
             }
         }
         return null;
+    }
+    
+    public int selectEventFilterCounting(Event event) {
+        Connection conn = null;
+        String title = event.getTitle();
+        DateTime startDate = event.getStartDate();
+        DateTime endDate = event.getEndDate();
+        String address = event.getAddress();
+        StringBuilder selectSuaBo = new StringBuilder("declare @Current datetime = GETDATE()");
+        try {
+            conn = ConnectionUtil.getConnection();
+        } catch(SQLException se) {
+            se.printStackTrace();
+        }
     }
     
     public Event selectEventByEvent_Id(int event_Id) {
@@ -260,6 +301,9 @@ public class Event_StorkTeam {
     
     public static void main(String[] arg) {
         Event_StorkTeam db = new Event_StorkTeam();
-        System.out.println(db.deleteLogoByEvent_Id(1));
+        DateTime startDate = new DateTime(2014, 10, 1, 19, 30);
+        DateTime endDate = new DateTime(2014, 10, 1, 23, 0);
+        Event event = new Event("Moon S", startDate, endDate, "");
+        db.filterEvent(1, 10, event);
     }
 }

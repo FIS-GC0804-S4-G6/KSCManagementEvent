@@ -17,7 +17,9 @@ public class Event {
     private boolean status;
     private int cate_Id;
     private String categoryName;
-
+    private int amountPaticipants;
+    private float sumPrice;
+    
     public Event(){}
     
     public Event(int event_Id, String title, String logo, String description,
@@ -57,19 +59,16 @@ public class Event {
         this.cate_Id = cate_Id;
     }
     
-    public Event(int event_Id, String title, DateTime startDate, DateTime endDate, String logo, int cate_Id) {
+    public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id, String categoryName, int amountPaticipants, float sumPrice) {
         this.event_Id = event_Id;
         this.title = title;
+        this.address = address;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.logo = logo;
         this.cate_Id = cate_Id;
-    }
-    
-    public Event(String title, DateTime startDate, DateTime endDate) {
-        this.title = title;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.categoryName = categoryName;
+        this.amountPaticipants = amountPaticipants;
+        this.sumPrice = sumPrice;
     }
     
     public Event(String title, DateTime startDate, DateTime endDate, String address) {
@@ -181,6 +180,20 @@ public class Event {
     
     public void setCategoryName(String value) {
         this.categoryName = value;
+    }
+    
+    public int getAmountPaticipants() {
+        return amountPaticipants;
+    }
+    public void setAmountPaticipants(int value) {
+        this.amountPaticipants = value;
+    }
+    
+    public float getSumPrice() {
+        return sumPrice;
+    }
+    public void setSumPrice(float value) {
+        this.sumPrice = value;
     }
     
     @Override

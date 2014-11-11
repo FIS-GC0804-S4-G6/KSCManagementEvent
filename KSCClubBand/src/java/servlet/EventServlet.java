@@ -46,6 +46,7 @@ public class EventServlet extends HttpServlet {
                 }
             } else {
                 response.getWriter().write("There were birds in the sky but I never saw them winging");
+                response.getWriter().write("We can not get the detail.");
             }
         } else if(userPath.equals("/EventFilter.guitar")) {
             filterEvent(request, response);
@@ -56,8 +57,10 @@ public class EventServlet extends HttpServlet {
             ServletException, IOException{
         String title = request.getParameter("title");
         DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm");
-        DateTime startDate = datetimeFormatter.parseDateTime(request.getParameter("startDate"));
-        DateTime endDate = datetimeFormatter.parseDateTime(request.getParameter("endDate"));
+        String strStartDate = request.getParameter("startDate");
+        String strEndDate = request.getParameter("endDate");
+        DateTime startDate = strStartDate.equals("") ? null : datetimeFormatter.parseDateTime(strStartDate);
+        DateTime endDate = strEndDate.equals("") ? null : datetimeFormatter.parseDateTime(request.getParameter("endDate"));
         String address = request.getParameter("address");
 
         Event entity = new Event(title, startDate, endDate, address);
@@ -77,12 +80,14 @@ public class EventServlet extends HttpServlet {
             if(userPath.equals("/JSPEventNext")) {
                 pageNumber++;
             } else if (userPath.equals("/JSPEventPrev")) {
-                pageNumber--;
+                if(pageNumber > 1) {
+                    pageNumber--;
+                }
             }
         }
         session.setAttribute("pageNumber", pageNumber);
         Event_StorkTeam db = new Event_StorkTeam();
-        Map<Integer, Event> mapOfEvents = db.selectAllFromEvent(pageNumber, 10);
+        Map<Integer, Event> mapOfEvents = db.selectEvent(pageNumber, 10);
         request.setAttribute("mapOfEvents", mapOfEvents);
         request.getRequestDispatcher("WEB-INF/admin/event.jsp").forward(request, response);
     }
@@ -98,48 +103,53 @@ public class EventServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        final PrintWriter writer = response.getWriter();
-        String fileName = null;
+        String userPath = request.getServletPath();
+        if(userPath.equals("/EventCreating")) {
+            response.setContentType("text/html;charset=UTF-8");
+            final PrintWriter writer = response.getWriter();
+            String fileName = null;
 
-        final Part filePart = request.getPart("logo");
-        Event_StorkTeam db = new Event_StorkTeam();
-        if (filePart.getSize() > 0) {
-            try {
-                String path = getServletContext().getRealPath("/");
-//                fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
-                fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
-            } catch (FileNotFoundException fne) {
-                writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
-                writer.println("<br/> ERROR: " + fne.getMessage());
-                return;
+            final Part filePart = request.getPart("logo");
+            Event_StorkTeam db = new Event_StorkTeam();
+            if (filePart.getSize() > 0) {
+                try {
+                    String path = getServletContext().getRealPath("/");
+                    fileName = db.uploadLogo(filePart, fileName, "D:/06.Drive/SVN/trunk/KSCClubBand/web/img");
+//                    fileName = db.uploadLogo(filePart, fileName, "E:/FGR/Sem4/eProject/KSCManagementEvent/KSCClubBand/web/img");
+                } catch (FileNotFoundException fne) {
+                    writer.println("You either did not specify a file to upload or are trying to upload a file to a protected or nonexistent location.");
+                    writer.println("<br/> ERROR: " + fne.getMessage());
+                    return;
+                }
             }
+            String title = request.getParameter("title");
+            String description = request.getParameter("description");
+            String speaker = request.getParameter("speaker");
+            String address = request.getParameter("address");
+            String slogan = request.getParameter("slogan");
+            DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm");
+            DateTime starttime = datetimeFormatter.parseDateTime(request.getParameter("startDate") + " " + request.getParameter("startTime"));
+            DateTime endtime = datetimeFormatter.parseDateTime(request.getParameter("endDate") + " " + request.getParameter("endTime"));
+            int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));
+            Event entity = new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id);
+            db.addEvent(entity);
+            System.out.println("inserted");
+            if(entity.getEvent_Id() > -1) {
+                String[] checkBoxPrice = request.getParameterValues("checkBoxPrice");
+                if (checkBoxPrice != null) {
+                    if(checkBoxPrice[0] != null && checkBoxPrice[0].equals("yes") == true) {
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("event_Id", entity.getEvent_Id());
+                        response.sendRedirect("JSPEvent_Price");
+                    }
+                } else{
+                    request.getRequestDispatcher("/WEB-INF/admin/eventcreating.jsp").forward(request, response);
+                }
+            } else {
+                response.getWriter().write("chang may insert event nay nay that bai. Hen lan sau");
+            }
+            
+            
         }
-        String title = request.getParameter("title");
-        String description = request.getParameter("description");
-        String speaker = request.getParameter("speaker");
-        String address = request.getParameter("address");
-        String slogan = request.getParameter("slogan");
-        DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm");
-        DateTime starttime = datetimeFormatter.parseDateTime(request.getParameter("startDate") + " " + request.getParameter("startTime"));
-        DateTime endtime = datetimeFormatter.parseDateTime(request.getParameter("endDate") + " " + request.getParameter("endTime"));
-        int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));
-        String[] checkBoxPrice = request.getParameterValues("checkBoxPrice");
-        Event entity = new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id);
-        db.addEvent(entity);
-        //check creating event successfully?
-        HttpSession session = request.getSession(true);
-        session.setAttribute("event_Id", entity.getEvent_Id());
-        response.sendRedirect("JSPEvent_Price");
-
-//        if (checkBoxPrice != null && checkBoxPrice[0].equals("yes") == true) {
-//                db.addEvent(entity);
-//                //check creating event successfully?
-//                javax.servlet.http.HttpSession session = request.getSession(true);
-//                session.setAttribute("event_Id", entity.getEvent_Id());
-//                response.sendRedirect("JSPEvent_Price");
-//        }else{
-//            request.getRequestDispatcher("/JSPEventCreating").forward(request, response);
-//        }
     }
 }

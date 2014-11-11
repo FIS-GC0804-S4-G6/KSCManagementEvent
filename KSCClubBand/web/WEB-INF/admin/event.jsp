@@ -21,14 +21,18 @@
             <button id="filter-btn">Filter</button>
         </form>
         
-        <table>
+        <table border="1">
             <thead>
                 <tr>
                     <th>Event_Id</th>
                     <th>Title</th>
+                    <th>Address</th>
                     <th>StartDate</th>
                     <th>EndDate</th>
-                    <th>Cate_Id</th>
+                    <th>Category</th>
+                    <th>Detail</th>
+                    <th>Amount Paticipants</th>
+                    <th>Sum Price</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -37,10 +41,13 @@
                     <tr>
                         <td>${i.value.getEvent_Id()}</td>
                         <td>${i.value.getTitle()}</td>
+                        <td>${i.value.getAddress()}</td>
                         <td>${i.value.getStartDate()}</td>
                         <td>${i.value.getEndDate()}</td>
-                        <td>${i.value.getCate_Id()}</td>
+                        <td>${i.value.getCategoryName()}</td>
                         <td><a href="JSPEventDetail?event_Id=${i.value.getEvent_Id()}">MORE INFO</a></td>
+                        <td>${i.value.getAmountPaticipants()}</td>
+                        <td>${i.value.getSumPrice()}</td>
                         <td>
                             <button>Edit</button>
                             <button>Update</button>
