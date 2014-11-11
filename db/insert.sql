@@ -38,12 +38,47 @@ insert into Event(Title, Logo, Description, Speaker, Address, Slogan, StartDate,
 ('Fixing A Hole', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
 ('She''s Leaving Home', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
 ('Being For The Benefit Of Mr Kite', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
-('Within You Without You', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1')
+('Within You Without You', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
+('Tea Break With Dilmah', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '9 Nov 2014 18:00', '9 Nov 2014 23:00', '1'),
+('I Will', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '9 Nov 2014 18:00', '15 Nov 2014 06:00', '1'),
+('Noise', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '19 Dec 2014 18:00', '29 Dec 2014 18:00', '1'),
+('Rain', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2015 19:30', '19 Dec 2015 18:00', '1')
 
 insert into Event_Price(Event_Id, Price, Description) values
 ('1', '20', null),
 ('1', '30', null),
 ('1', '40', null)
+
+insert into University(Name, Address, Email, Home, Mobile) values
+('FPT', '8 Ton That Thuyet', 'fptgc@fpt.edu.vn', '0437610944', '01639668883'),
+('Making Up', 'Ner Fpt university', 'Makingup@mku@gmail.com', '047530232', '016442663')
+
+insert into Role(Roletype) values
+('Guest'),
+('Admin'),
+('User')
+
+
+insert into Customer(Email, FullName, Password, Gender, DateOfBirth, Address, Mobile, Home, IDCard,
+Avatar, Role_Id, Univercode, Active) values
+('giapnhgc00561@fpt.edu.vn', 'Nguyen Hoang Giap', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1'),
+('ducndgc00467@fpt.edu.vn', 'Nguyen Duy Duc', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1'),
+('haindgc00605@fpt.edu.vn', 'Nguyen Duc Hai', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1')
+
+
+insert into Payment_Option(Payment_Type) values
+('Demand Draft'),
+('Cheque'),
+('Cash')
+
+insert into Cust_Event (Cust_Id, Price_Id, Price, Payment_Id, Event_Id, TicketCode) values
+('1', '1', '100', '1', '1', '001'),
+('2', '1', '120', '1', '1', '002'),
+('3', '1', '120', '2', '1', '003'),
+('1', '1', '100', '1', '2', '001'),
+('2', '1', '120', '1', '2', '002'),
+('3', '1', '120', '2', '2', '003'),
+('3', '1', '120', '2', '2', '004')
 
 select * from Event_Price
 select * from Event

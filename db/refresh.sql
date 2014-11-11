@@ -38,14 +38,14 @@ create table Customer(
 	Email nvarchar(max),
 	FullName nvarchar(max),
 	Password nvarchar(max),
-	Gender varchar(6),
+	Gender bit not null,
 	DateOfBirth date,
 	Address nvarchar(max),
 	Mobile nvarchar(max),
 	Home nvarchar(max),
 	IDCard varchar(14),
 	Avatar nvarchar(max),
-	Role_Id int,
+	Role_Id int, --
 	Univercode int,
 	Active bit,
 	constraint FK_Customer_Role foreign key (Role_Id) references Role(Role_Id),
@@ -62,7 +62,7 @@ create table Payment_Option
 	Payment_Id int identity primary key,
 	Payment_Type nvarchar(max),
 )
-create table Event(
+create table [Event](
 	Event_Id int identity primary key,
 	Title nvarchar(max) not null,
 	Logo nvarchar(max),
@@ -75,8 +75,10 @@ create table Event(
 	Hometag bit default '0',
 	IsDelete bit default '0',
 	Cate_Id int not null,
+	[Status] bit default '0'
 	constraint FK_Event_Category foreign key (Cate_Id) references Category(Cate_Id)
 )
+
 go
 create table Event_Picture(
 	Eventpic_Id int identity primary key,
@@ -96,7 +98,7 @@ go
 create table Event_Price(
 	Price_Id int identity primary key,
 	Event_Id int,
-	Price float,
+	Price float check (Price > 0),
 	Description nvarchar(max),
 	IsDelete bit default '0',
 	constraint FK_EventPrice_Event foreign key(Event_Id) references Event(Event_Id)
@@ -108,13 +110,14 @@ create table Cust_Event(
 	Payment_Id int,
 	Event_Id int,
 	TicketCode varchar(20) not null,
-	Price float not null,
-	IsDelete bit,
+	Price float check (Price > 0) not null,
+	IsDelete bit default 0,
 	constraint FK_CustEvent_PaymentOption foreign key (Payment_Id) references Payment_Option(Payment_Id),
 	constraint FK_CustEvent_Customer foreign key(Cust_Id) references Customer(Cust_Id),
 	constraint FK_CustEvent_Event foreign key(Event_Id) references Event(Event_Id),
 	constraint PK_CustEvent primary key(Event_Id, TicketCode)
 )
+
 go
 create table MailingList(
 	Email varchar(200) primary key,

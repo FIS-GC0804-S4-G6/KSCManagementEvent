@@ -42,7 +42,7 @@ go
 		set @Event_Id = SCOPE_IDENTITY()
 	END
 	go
-
+	select * from Event_Price
 	execute sp_event_creating
 		@Title = 'Magical Mystery tour',
 		@Logo = null,
@@ -63,13 +63,34 @@ go
 		@PageNumber int,
 		@RowsPage int
 	as
-		select * from [Event]
-		order by Event_Id
+		declare
+			@current datetime = GETDATE()
+		select CE.AmountPaticipants, CE.SumPrice, "TimeStatus" =
+		case
+			when EndDate < GETDATE() then 'Past'
+			when StartDate <= @current and @current < EndDate then 'In Processing'
+			when GETDATE() < StartDate then 'In the Future'
+			end,
+			C.CategoryName, E.*
+		from Event as E
+		left outer join
+		(
+			select Event_Id, count(*) as AmountPaticipants, sum(Price) as SumPrice from Cust_Event
+			where IsDelete = 0
+			group by Event_Id
+		) CE
+		on E.Event_Id = CE.Event_Id
+		join Category as C on
+		E.Cate_Id = C.Cate_Id
+		where E.IsDelete = 0
+		order by E.Event_Id
 		offset ((@PageNumber - 1) * @RowsPage) rows
 		fetch next @RowsPage rows only
 	go
 
-	exec sp_event_select 1, 10
+
+
+	exec sp_event_select 1, 100
 	go
 -- 3.Select event by event_Id
 	drop proc sp_event_select_by_eventId
