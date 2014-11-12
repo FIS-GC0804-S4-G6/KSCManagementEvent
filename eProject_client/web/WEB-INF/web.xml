@@ -77,4 +77,7 @@
         <param-name>GmailPassword</param-name>
         <param-value>Duc76268481993@</param-value>
     </context-param>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>
