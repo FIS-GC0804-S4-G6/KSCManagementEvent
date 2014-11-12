@@ -56,7 +56,7 @@ go
 		@Event_Id = 0
 	go
 
--- 2.Select all events
+-- 2.Select events
 	drop proc sp_event_select
 	go
 	create proc sp_event_select
@@ -88,8 +88,6 @@ go
 		fetch next @RowsPage rows only
 	go
 
-
-
 	exec sp_event_select 1, 100
 	go
 -- 3.Select event by event_Id
@@ -118,6 +116,7 @@ go
 	begin
 		update Event set Logo = @Logo where Event_Id = @Event_Id
 	end
+	go
 -- 5.Delete Logo
 	drop proc sp_event_delete_logo_by_eventId
 	go
@@ -127,7 +126,24 @@ go
 	begin
 		update Event set Logo = null where Event_Id = @Event_Id
 	end
+	go
 	exec sp_event_delete_logo_by_eventId 1
+
+-- 6.Count all Events
+	drop proc sp_count_all_event
+	go
+
+	create proc sp_count_all_event
+		@AmountEvent int = -1 out
+	as
+		select @AmountEvent = count(*) from Event as E
+		where E.IsDelete = 0
+	go
+
+	declare @AmountEvent int
+	exec sp_count_all_event @AmountEvent out
+	select @AmountEvent
+	go
 -- =============================================================== --
 -- ============================ EVENT_PRICE ============================ --
 -- =============================================================== --
@@ -202,13 +218,13 @@ go
 		@Email nvarchar(max),
 		@FullName nvarchar(max),
 		@Password nvarchar(max),
-		@Gender varchar(6)
+		@Gender bit
 	as
 	begin
 		insert into Customer (Email, FullName, Password, Gender) values (@Email, @FullName, @Password, @Gender);
 	end
 	go
-	exec spRegister 'a@gmail.com', 'Nguyen Hoang Giap', '123456abc', 'Male'
+	exec spRegister 'a@gmail.com', 'Nguyen Hoang Giap', '123456abc', 1
 	go
 
 	DROP proc spActiveLink
@@ -222,12 +238,12 @@ go
 		set Active = @active
 		where @email = Email
 	end
-
-
-	--SELECT EVENT AND SHOW CUSTOMER IN EVENT
 	go
+
+	--select event and payment type
 	drop proc showEventDetail
 	go
+
 	create proc showEventDetail
 		@Event_Id int
 	as
@@ -239,6 +255,7 @@ go
 		where Event_Id = @Event_Id;
 	end
 	go
+
 	exec showEventDetail 1
 	go
 	select * from Event
@@ -262,13 +279,11 @@ go
 		where Event_Id = @Event_Id
 	end
 	go
+
 	exec showCustEvent 1
 	go
-	select * from Customer
-	select * from Cust_Event
-	select * from Payment_Option
 
-	go
+
 	drop proc showEventPrice
 	go
 	create proc showEventPrice
@@ -280,6 +295,6 @@ go
 		where Event_Id = @Event_Id
 	end
 	go
+
 	exec showEventPrice 1
 	go
-	select * from Event_Price
