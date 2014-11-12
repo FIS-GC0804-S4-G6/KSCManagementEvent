@@ -1,10 +1,10 @@
 @font-face {
    font-family: 'Multicolore';
-   src: url('fonts/Multicolore.eot');
-   src: url('fonts/Multicolore.eot?#iefix') format('embedded-opentype'),
-        url('fonts/Multicolore.woff') format('woff'),
-        url('fonts/Multicolore.ttf') format('truetype'),
-        url('fonts/Multicolore.svg#Sri-TSCRegular') format('svg');
+   src: url('../fonts/Multicolore.eot');
+   src: url('../fonts/Multicolore.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/Multicolore.woff') format('woff'),
+        url('../fonts/Multicolore.ttf') format('truetype'),
+        url('../fonts/Multicolore.svg#Sri-TSCRegular') format('svg');
    font-weight: normal;
    font-style: normal;
 }
