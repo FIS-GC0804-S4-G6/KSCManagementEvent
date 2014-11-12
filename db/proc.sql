@@ -202,15 +202,13 @@ go
 		@Email nvarchar(max),
 		@FullName nvarchar(max),
 		@Password nvarchar(max),
-		@Gender bit
+		@Gender varchar(6)
 	as
 	begin
 		insert into Customer (Email, FullName, Password, Gender) values (@Email, @FullName, @Password, @Gender);
 	end
 	go
-	exec spRegister 'a@gmail.com', 'Nguyen Hoang Giap', '123456abc', '1'
-	go
-	select*from Customer
+	exec spRegister 'a@gmail.com', 'Nguyen Hoang Giap', '123456abc', 'Male'
 	go
 
 	DROP proc spActiveLink
