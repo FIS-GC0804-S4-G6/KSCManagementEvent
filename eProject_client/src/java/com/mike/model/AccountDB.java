@@ -49,7 +49,7 @@ public class AccountDB {
                             rs.getString("Email"),
                             rs.getString("FullName"),
                             rs.getString("Password"),
-                            rs.getString("Gender"),
+                            rs.getBoolean("Gender"),
                             rs.getDate("DateOfBirth"),
                             rs.getString("Address"),
                             rs.getString("Mobile"),
@@ -63,7 +63,7 @@ public class AccountDB {
                         account.setEmail(rs.getString("Cust_Id"));
                         account.setEmail(rs.getString("Email"));
                         account.setFullname(rs.getString("FullName"));
-                        account.setGender(rs.getString("Gender"));
+                        account.setGender(rs.getBoolean("Gender"));
                         account.setDateOfBirth(rs.getDate("DateOfBirth"));
                         account.setAddress(rs.getString("Address"));
                         account.setMobile(rs.getString("Mobile"));
@@ -192,7 +192,7 @@ public class AccountDB {
         return false;
     }
 
-    public boolean signup(String email, String name, String custPassword, String gender) {
+    public boolean signup(String email, String name, String custPassword, boolean gender) {
         try {
             Connection conn = null;
             CallableStatement cstm = null;
@@ -202,7 +202,7 @@ public class AccountDB {
             cstm.setString(1, email);
             cstm.setString(2, name);
             cstm.setString(3, custPassword);
-            cstm.setString(4, gender);
+            cstm.setBoolean(4, gender);
             cstm.addBatch();
             cstm.executeBatch();
             return true;

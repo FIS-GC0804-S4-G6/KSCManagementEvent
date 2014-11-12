@@ -20,8 +20,8 @@
             <input type="password" placeholder="password" name="password" /><br/>
             <input type="password" placeholder="password" name="repassword" /><br/>
             <select name="gender">
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+                <option value="true">Male</option>
+                <option value="false">Female</option>
             </select>
             <input type="submit" value="Signup" />
             <a href="login.jsp"><input type="button" value="Back Login" /></a>

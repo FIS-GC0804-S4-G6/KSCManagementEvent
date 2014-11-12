@@ -262,8 +262,8 @@ go
 		where Event_Id = @Event_Id
 	end
 	go
-	exec showCustEvent 1;
-	
+	exec showCustEvent 1
+	go
 	select * from Customer
 	select * from Cust_Event
 	select * from Payment_Option

@@ -82,4 +82,5 @@ insert into Cust_Event (Cust_Id, Price_Id, Price, Payment_Id, Event_Id, TicketCo
 
 select * from Event_Price
 select * from Event
+select * from Customer
 go

@@ -8,6 +8,10 @@
         <servlet-name>AutoActive</servlet-name>
         <servlet-class>com.mike.controllers.AutoActive</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowEvent</servlet-name>
+        <servlet-class>com.mike.controllers.ShowEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Authentication</servlet-name>
         <url-pattern>/authentication</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>AutoActive</servlet-name>
         <url-pattern>/autoActive</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowEvent</servlet-name>
+        <url-pattern>/showEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

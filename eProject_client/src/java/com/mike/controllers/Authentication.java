@@ -30,6 +30,7 @@ public class Authentication extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String driver = getServletContext().getInitParameter("DriverName");
         String server = getServletContext().getInitParameter("ServerName");
         String database = getServletContext().getInitParameter("DatabaseName");
@@ -95,7 +96,7 @@ public class Authentication extends HttpServlet {
                         session.setAttribute("email", email);
                         session.setAttribute("itemSID", itemSID);
                         session.setAttribute("browserType", browserType);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);;
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
                     }
                 }
             }
@@ -158,7 +159,7 @@ public class Authentication extends HttpServlet {
         String email = request.getParameter("email");
         String custPassword = request.getParameter("password");
         String rePassword = request.getParameter("repassword");
-        String gender = request.getParameter("gender");
+        boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
         Global.setCustEmail(email);
         if (custPassword.equals(rePassword)) {
             db.signup(email, name, custPassword, gender);

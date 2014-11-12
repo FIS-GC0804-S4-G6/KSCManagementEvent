@@ -25,6 +25,37 @@ public class Event {
     private boolean homeTag;
     private boolean status;
     private int cate_Id;
+    private String categoryName;
+
+    private float price;
+
+    private String fullName;
+    private String avatar;
+    private String email;
+    private String paymentType;
+
+    public Event(String fullName, String avatar, String email, String paymentType) {
+        this.fullName = fullName;
+        this.avatar = avatar;
+        this.email = email;
+        this.paymentType = paymentType;
+    }
+
+    public Event(float price) {
+        this.price = price;
+    }
+
+    public Event(String title, String logo, String description, String speaker, String address, String slogan, DateTime startDate, DateTime endDate, String categoryName) {
+        this.title = title;
+        this.logo = logo;
+        this.description = description;
+        this.speaker = speaker;
+        this.address = address;
+        this.slogan = slogan;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.categoryName = categoryName;
+    }
 
     public Event(int event_Id, String title, String logo, String description, String speaker, String address, String slogan, DateTime startDate, DateTime endDate, boolean homeTag, boolean status, int cate_Id) {
         this.event_Id = event_Id;
@@ -39,6 +70,54 @@ public class Event {
         this.homeTag = homeTag;
         this.status = status;
         this.cate_Id = cate_Id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     public int getEvent_Id() {

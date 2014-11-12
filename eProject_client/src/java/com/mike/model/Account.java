@@ -13,7 +13,7 @@ public class Account {
     private String email;
     private String fullname;
     private String password;
-    private String gender;
+    private boolean gender;
     private Date dateOfBirth;
     private String address;
     private String mobile;
@@ -28,7 +28,7 @@ public class Account {
     private String device;
     private String sid_Device;
             
-    public Account(int custID, String email, String fullname, String password, String gender, Date dateOfBirth, String address, String mobile, String home, String idCard, String avatar, int roleID, int univercode, boolean active) {
+    public Account(int custID, String email, String fullname, String password, boolean gender, Date dateOfBirth, String address, String mobile, String home, String idCard, String avatar, int roleID, int univercode, boolean active) {
         this.custID = custID;
         this.email = email;
         this.fullname = fullname;
@@ -45,7 +45,7 @@ public class Account {
         this.active = active;
     }
 
-    public Account(String email, String fullname, String password, String gender) {
+    public Account(String email, String fullname, String password, boolean gender) {
         this.email = email;
         this.fullname = fullname;
         this.password = password;
@@ -95,11 +95,11 @@ public class Account {
         this.password = password;
     }
 
-    public String getGender() {
+    public boolean getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(boolean gender) {
         this.gender = gender;
     }
 
