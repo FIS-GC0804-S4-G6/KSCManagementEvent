@@ -78,7 +78,6 @@ create table [Event](
 	[Status] bit default '0'
 	constraint FK_Event_Category foreign key (Cate_Id) references Category(Cate_Id)
 )
-
 go
 create table Event_Picture(
 	Eventpic_Id int identity primary key,

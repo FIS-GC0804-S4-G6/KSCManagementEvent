@@ -80,7 +80,14 @@ insert into Cust_Event (Cust_Id, Price_Id, Price, Payment_Id, Event_Id, TicketCo
 ('3', '1', '120', '2', '2', '003'),
 ('3', '1', '120', '2', '2', '004')
 
+insert into Event_Picture (Event_Id, PicturePath) values 
+(1, '/eProject_client/web/img/a.jpg'),
+(1, '/eProject_client/web/img/a.jpg'),
+(2, '/eProject_client/web/img/a.jpg')
+go
+
 select * from Event_Price
 select * from Event
 select * from Customer
+select * from Event_Picture
 go
