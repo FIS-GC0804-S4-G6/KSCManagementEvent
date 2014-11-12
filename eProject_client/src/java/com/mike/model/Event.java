@@ -34,6 +34,12 @@ public class Event {
     private String email;
     private String paymentType;
 
+    private String picturePath;
+
+    public Event(String picturePath) {
+        this.picturePath = picturePath;
+    }
+
     public Event(String fullName, String avatar, String email, String paymentType) {
         this.fullName = fullName;
         this.avatar = avatar;
@@ -70,6 +76,14 @@ public class Event {
         this.homeTag = homeTag;
         this.status = status;
         this.cate_Id = cate_Id;
+    }
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
     }
 
     public String getFullName() {

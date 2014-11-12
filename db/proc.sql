@@ -252,17 +252,32 @@ go
 		from Event 
 		inner join Category
 		on Event.Cate_Id = Category.Cate_Id
-		where Event_Id = @Event_Id;
+		where Event.Event_Id = @Event_Id;
 	end
 	go
 
 	exec showEventDetail 1
 	go
+	
+	drop proc showEventPicture
+	go
+	create proc showEventPicture
+		@Event_Id int
+	as
+	begin
+		select Event_Picture.PicturePath from Event_Picture
+		where Event_Picture.Event_Id = @Event_Id
+	end
+	go
+	exec showEventPicture 1
+	go
+
+	select * from Event	
+	go
 	select * from Event
 	go
 	select* from Category
 	go
-
 
 	drop proc showCustEvent
 	go

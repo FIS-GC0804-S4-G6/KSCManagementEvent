@@ -10,10 +10,10 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Event Detail</title>
     </head>
     <body>
-        <table>
+        <table border = "1" style="background-color: pink;">
             <tr>
                 <td>Title</td>
                 <td>
@@ -52,13 +52,21 @@
                 <td>Price</td>
                 <td>
                     <c:forEach items="${price}" var="p" >
-                        ${p.getPrice()}
+                        ${p.getPrice()}</br>
+                    </c:forEach>
+                </td>
+            </tr>
+            <tr>
+                <td>Event Picture</td>
+                <td>
+                    <c:forEach items="${listEvtPic}" var="ep">
+                        ${ep.getPicturePath()}</br>
                     </c:forEach>
                 </td>
             </tr>
         </table>
-
-        <table>
+        </br>
+        <table border="1" style="background-color: pink;">
             <tr>
                 <td>Avatar</td>
                 <td>Full Name</td>

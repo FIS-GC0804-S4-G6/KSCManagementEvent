@@ -74,6 +74,34 @@ public class EventDb {
         return null;
     }
 
+    public List<Event> showEventPicture(int event_Id){
+        Connection conn = null;
+        CallableStatement cstm = null;
+        ResultSet rs = null;
+        List<Event> listEvtPic = new LinkedList<Event>();
+        try {
+            ConnectionUtil connector = new ConnectionUtil(driver, servername, port, database, username, password);
+            conn = connector.getConnection();
+            cstm = (CallableStatement) conn.prepareCall("{call showEventPicture(?)}");
+            cstm.setInt(1, event_Id);
+            rs = cstm.executeQuery();
+            while (rs.next()) {
+                Event event = new Event(rs.getString("PicturePath"));
+                listEvtPic.add(event);
+            }
+            return listEvtPic;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
     public List<Event> showEventPrice(int event_Id) {
         Connection conn = null;
         CallableStatement cstm = null;
@@ -101,6 +129,7 @@ public class EventDb {
         }
         return null;
     }
+    
 
     public List<Event> showCustEvent(int event_Id) {
         Connection conn = null;

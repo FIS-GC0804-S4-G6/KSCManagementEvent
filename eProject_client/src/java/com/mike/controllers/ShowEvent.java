@@ -49,6 +49,7 @@ public class ShowEvent extends HttpServlet {
         
         Event evt = db.showEventDetail(1);
         List<Event> listEvt = db.showEventPrice(1);
+        List<Event> listEvtPic = db.showEventPicture(1);
         List<Event> listCusEvt = db.showCustEvent(1);
         
         request.setAttribute("title", evt.getTitle());
@@ -62,6 +63,7 @@ public class ShowEvent extends HttpServlet {
         request.setAttribute("evtCate", evt.getCategoryName());
         
         request.setAttribute("price", listEvt);
+        request.setAttribute("listEvtPic", listEvtPic);
         request.setAttribute("listCusEvt", listCusEvt);
         request.getRequestDispatcher("eventDetail.jsp").forward(request, response);
         
