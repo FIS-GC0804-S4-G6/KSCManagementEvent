@@ -7,6 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/superslides.css" />
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
 	<link rel="stylesheet" type="text/css" href="css/event_detail.css" />
+	
 </head>
 <body>
 	<div class="navbar">
@@ -69,8 +70,8 @@
 			<p>Category: <span>Seminar</span></p>
 			<p>Description: <span>abcxyz</span></p>
 			<p>Price: 
-				<span><input type="button" value="100k" class="a_demo_two"/></span>
-				<span><input type="button" value="200k" class="a_demo_two"/></span>
+				<span><input type="button" value="100k" class="a_demo_two" id="getPrice" onclick="getValue()" /></span>
+				<span><input type="button" value="200k" class="a_demo_two" id="setPrice"/></span>
 				<span><input type="button" value="500k" class="a_demo_two"/></span>
 			</p>
 		</div>
@@ -98,5 +99,14 @@
 	<script type="text/javascript" src="js/jquery.animate-enhanced.min.js"></script>
 	<script type="text/javascript" src="js/jquery.superslides.min.js"></script> 
 	<script type="text/javascript" src="js/eventDetail.js"></script>
+	<script>
+		function getValue() {
+			$(document).ready(function($) {
+				var a = $("#getPrice").val();
+				$("#setPrice").val(a);
+			});	
+		}
+
+	</script>
 </body>
 </html>
