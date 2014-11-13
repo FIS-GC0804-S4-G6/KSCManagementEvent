@@ -1,7 +1,7 @@
 use KSCManagementEvent
 
 -- =============================================================== --
--- ============================ Category ============================ --
+-- ============================ Category ========================= --
 -- =============================================================== --
 go
 --1.Select Category
@@ -298,7 +298,6 @@ go
 	exec showCustEvent 1
 	go
 
-
 	drop proc showEventPrice
 	go
 	create proc showEventPrice
@@ -313,3 +312,33 @@ go
 
 	exec showEventPrice 1
 	go
+
+-- =============================================================== --
+-- ============================ CUSTOMER ========================= --
+-- =============================================================== --
+go
+--1. Select paticipants from an event
+drop proc sp_select_participants_from_event
+go
+
+create proc sp_select_participants_from_event
+	@Event_Id int
+as
+begin
+	select CE.TicketCode, CE.Price as [RealPrice]
+	, PO.Payment_Type
+	, C.Email
+	from Cust_Event as CE
+	join Customer as C
+	on CE.Cust_Id = C.Cust_Id
+	join Event as E
+	on CE.Event_Id = E.Event_Id
+	join Event_Price as EP
+	on CE.Price_Id = EP.Price_Id
+	join Payment_Option as PO
+	on CE.Payment_Id = PO.Payment_Id
+	where E.IsDelete = 0 and CE.IsDelete = 0 and CE.Event_Id = @Event_Id
+end
+go
+
+exec sp_select_participants_from_event 1
