@@ -18,6 +18,8 @@
         <url-pattern>/JSPEventNext</url-pattern>
         <url-pattern>/JSPEventPrev</url-pattern>
         <url-pattern>/JSPEventDetail</url-pattern>
+        <url-pattern>/JSPEventDetailTicket</url-pattern>
+        <url-pattern>/JSPEventDetailParticipants</url-pattern>
         <url-pattern>/EventFilter.guitar</url-pattern>
         <url-pattern>/ThrowLogoAway.oneandoneistwo</url-pattern>
     </servlet-mapping>
@@ -28,7 +30,6 @@
         <url-pattern>/AJAXEvent_PriceInserting</url-pattern>
         <url-pattern>/Event_PriceDeleting</url-pattern>
         <url-pattern>/Event_PriceUpdating</url-pattern>
-
     </servlet-mapping>
     <session-config>
         <session-timeout>

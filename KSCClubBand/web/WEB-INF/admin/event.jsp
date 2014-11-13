@@ -44,7 +44,7 @@
                         <td>${i.value.getAddress()}</td>
                         <td>${i.value.getStartDate()}</td>
                         <td>${i.value.getEndDate()}</td>
-                        <td>${i.value.getCategoryName()}</td>
+                        <td>${i.value.getCategory().getCategoryName()}</td>
                         <td><a href="JSPEventDetail?event_Id=${i.value.getEvent_Id()}">MORE INFO</a></td>
                         <td>${i.value.getAmountPaticipants()}</td>
                         <td>${i.value.getSumPrice()}</td>

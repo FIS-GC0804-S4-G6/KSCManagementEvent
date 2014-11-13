@@ -17,7 +17,8 @@ public class Event_PriceServlet extends HttpServlet {
         String userPath = request.getServletPath();
         PrintWriter writer = response.getWriter();
         javax.servlet.http.HttpSession session = request.getSession(true);
-        int event_Id = (Integer)session.getAttribute("event_Id");
+//        int event_Id = (Integer)session.getAttribute("event_Id");
+        int event_Id  = 1;
         if(userPath.equals("/JSPEvent_Price")) {
             moveJSPEvent_Creating(event_Id, request, response);
         } else if(userPath.equals("/Event_PriceInserting")) {

@@ -15,8 +15,7 @@ public class Event {
     private DateTime endDate;
     private boolean homeTag;
     private boolean status;
-    private int cate_Id;
-    private String categoryName;
+    private Category category;
     private int amountPaticipants;
     private float sumPrice;
     
@@ -34,8 +33,7 @@ public class Event {
         this.slogan = slogan;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.categoryName = categoryName;
-        this.cate_Id = cate_Id;
+        this.category = new Category(cate_Id, categoryName);
     }
     
     public Event(String title, String logo, String description, String speaker, String address, String slogan, DateTime startDate, DateTime endDate, int cate_Id) {
@@ -47,7 +45,7 @@ public class Event {
         this.slogan = slogan;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.cate_Id = cate_Id;
+        this.category = new Category(cate_Id);
     }
     
     public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id) {
@@ -56,7 +54,7 @@ public class Event {
         this.address = address;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.cate_Id = cate_Id;
+        this.category = new Category(cate_Id);
     }
     
     public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id, String categoryName, int amountPaticipants, float sumPrice) {
@@ -65,8 +63,7 @@ public class Event {
         this.address = address;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.cate_Id = cate_Id;
-        this.categoryName = categoryName;
+        this.category = new Category(cate_Id, categoryName);
         this.amountPaticipants = amountPaticipants;
         this.sumPrice = sumPrice;
     }
@@ -78,12 +75,12 @@ public class Event {
         this.address = address;
     }
 
-    public int getCate_Id() {
-        return cate_Id;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setCate_Id(int cate_Id) {
-        this.cate_Id = cate_Id;
+    public void setCategory(Category val) {
+        category = val;
     }
 
     public int getEvent_Id() {
@@ -174,14 +171,6 @@ public class Event {
         this.status = value;
     }
     
-    public String getCategoryName() {
-        return categoryName;
-    }
-    
-    public void setCategoryName(String value) {
-        this.categoryName = value;
-    }
-    
     public int getAmountPaticipants() {
         return amountPaticipants;
     }
@@ -201,6 +190,6 @@ public class Event {
         return "event: " + title + "{logo: " + logo + "\ndescription: " + description + "\nspeaker: " + speaker + "\naddress: " + address
                 + "\nslogan: " + slogan + "\nstartDate: " + startDate.getYear() + "-" + startDate.getMonthOfYear() + "-" + startDate.getDayOfMonth() + " " + startDate.getHourOfDay() + "::" + startDate.getMinuteOfHour()
                 + "\nendDate: " + endDate.getYear() + "-" + endDate.getMonthOfYear() + "-" + endDate.getDayOfMonth() + " " + endDate.getHourOfDay() + "::" + endDate.getMinuteOfHour()
-                + "\ncate_Id" + cate_Id + "\ncategoryName: " + categoryName + "}";
+                + "\ncate_Id" + category.getCate_Id() + "\ncategoryName: " + category.getCategoryName() + "}";
     }
 }

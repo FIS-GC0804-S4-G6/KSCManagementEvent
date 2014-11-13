@@ -34,7 +34,7 @@ public class Event_StorkTeam {
             cstmt.setNString("Slogan", event.getSlogan());
             cstmt.setTimestamp("StartDate", new Timestamp(event.getStartDate().getMillis()) );
             cstmt.setTimestamp("EndDate", new Timestamp(event.getEndDate().getMillis()) );
-            cstmt.setInt("Cate_Id", event.getCate_Id());
+            cstmt.setInt("Cate_Id", event.getCategory().getCate_Id());
             cstmt.executeUpdate();
             int event_Id = cstmt.getInt("Event_Id");
             event.setEvent_Id(event_Id);
@@ -229,19 +229,19 @@ public class Event_StorkTeam {
         return null;
     }
     
-    public int selectEventFilterCounting(Event event) {
-        Connection conn = null;
-        String title = event.getTitle();
-        DateTime startDate = event.getStartDate();
-        DateTime endDate = event.getEndDate();
-        String address = event.getAddress();
-        StringBuilder selectSuaBo = new StringBuilder("declare @Current datetime = GETDATE()");
-        try {
-            conn = ConnectionUtil.getConnection();
-        } catch(SQLException se) {
-            se.printStackTrace();
-        }
-    }
+//    public int selectEventFilterCounting(Event event) {
+//        Connection conn = null;
+//        String title = event.getTitle();
+//        DateTime startDate = event.getStartDate();
+//        DateTime endDate = event.getEndDate();
+//        String address = event.getAddress();
+//        StringBuilder selectSuaBo = new StringBuilder("declare @Current datetime = GETDATE()");
+//        try {
+//            conn = ConnectionUtil.getConnection();
+//        } catch(SQLException se) {
+//            se.printStackTrace();
+//        }
+//    }
     
     public Event selectEventByEvent_Id(int event_Id) {
         Connection conn = null;
@@ -299,11 +299,30 @@ public class Event_StorkTeam {
         }
     }
     
+    public int countAllEvent() {
+        Connection conn = null;
+        int amountEvent = -1;
+        try {
+            conn = ConnectionUtil.getConnection();
+            CallableStatement cstmt = conn.prepareCall("{call sp_count_all_event(?)}");
+            cstmt.registerOutParameter("AmountEvent", Types.INTEGER);
+            cstmt.execute();
+            amountEvent = cstmt.getInt("AmountEvent");
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn != null) 
+                    conn.close();
+            } catch(SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return amountEvent;
+    }
+    
     public static void main(String[] arg) {
         Event_StorkTeam db = new Event_StorkTeam();
-        DateTime startDate = new DateTime(2014, 10, 1, 19, 30);
-        DateTime endDate = new DateTime(2014, 10, 1, 23, 0);
-        Event event = new Event("Moon S", startDate, endDate, "");
-        db.filterEvent(1, 10, event);
+        System.out.println(db.countAllEvent());
     }
 }
