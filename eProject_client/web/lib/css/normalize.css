@@ -1,0 +1,29 @@
+/* Put your CSS here */
+html, body {
+  margin: 0px;
+}
+
+.modal {
+  position: relative;
+  margin: -500px 0px 0px 500px;
+  width: 300px;
+  background-color: black;
+  padding: 1em;
+}
+
+input {
+  width: 100%;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.flush--top {
+  margin-top: 0; 
+}

@@ -342,3 +342,8 @@ end
 go
 
 exec sp_select_participants_from_event 1
+
+--CUSTOMERS PAY THERE PRICE
+select * from Cust_Event
+select * from Payment_Option
+drop proc 

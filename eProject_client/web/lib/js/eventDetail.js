@@ -38,3 +38,31 @@ var currentImage;
         	showImage(parseInt(count)-1);
         });
 	});
+        
+        
+    $(document).ready(function () {
+    $('.a_demo_two').click(function () {
+        //lấy giá trị thuộc tính href - chính là phần tử "#login-box"
+        var loginBox = $(this).attr('href');
+        
+        //cho hiện hộp đăng nhập trong 300ms
+        $(loginBox).fadeIn("slow");
+
+        // thêm phần tử id="over" vào sau body
+        $('body').append('<div id="over"></div>');
+        $('#over').fadeIn(300);
+
+        var a = $(this).html();
+        $('#setPrice').html(a);
+
+        return false;
+    });
+
+    // khi click đóng hộp thoại
+    $(document).on('click', "a.close, #over", function () {
+        $('#over, .paymentJoin').fadeOut(300, function () {
+            $('#over').remove();
+        });
+        return false;
+    });
+});

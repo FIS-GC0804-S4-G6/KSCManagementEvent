@@ -10,7 +10,7 @@ insert into Category (CategoryName) values
 (N'Techno-Feat')
 
 insert into Event(Title, Logo, Description, Speaker, Address, Slogan, StartDate, EndDate, Cate_Id) values
-('Moon Soon 2014', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
+('Moon Soon 2014', 'lib/img/6.jp', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
 ('Here, There and Anywhere', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
 ('Yellow Submarine', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
 ('She said she said', null, 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '1 Oct 2014 23:00', '1'),
@@ -69,7 +69,8 @@ Avatar, Role_Id, Univercode, Active) values
 insert into Payment_Option(Payment_Type) values
 ('Demand Draft'),
 ('Cheque'),
-('Cash')
+('Cash'),
+('Active')
 
 insert into Cust_Event (Cust_Id, Price_Id, Price, Payment_Id, Event_Id, TicketCode) values
 ('1', '1', '100', '1', '1', '001'),
@@ -81,9 +82,9 @@ insert into Cust_Event (Cust_Id, Price_Id, Price, Payment_Id, Event_Id, TicketCo
 ('3', '1', '120', '2', '2', '004')
 
 insert into Event_Picture (Event_Id, PicturePath) values 
-(1, 'lib/img/a.jpg'),
-(1, 'lib/img/a.jpg'),
-(2, 'lib/img/a.jpg')
+(1, 'lib/img/5.jp'),
+(1, 'lib/img/6.jp'),
+(2, 'lib/img/5.jp')
 go
 
 select * from Event_Price

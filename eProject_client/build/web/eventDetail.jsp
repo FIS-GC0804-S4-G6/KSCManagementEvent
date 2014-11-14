@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="lib/css/superslides.css" />
         <link rel="stylesheet" type="text/css" href="lib/css/font-awesome.min.css" />
         <link rel="stylesheet" type="text/css" href="lib/css/event_detail.css" />
+        <link rel="stylesheet" type="text/css" href="lib/css/normalize.css">
     </head>
     <body>
         <div class="navbar">
@@ -50,7 +51,7 @@
                 <ul id="thumbs">
                     <c:forEach items="${listEvtPic}" var="ep">
                         <li rel="2"><img alt="" src="${ep.getPicturePath()}"> </li>
-                    </c:forEach>
+                        </c:forEach>
                     <!-- <li class="active" rel="1"><img alt="" src="imgs/1_thumb.jpg"></li>-->
                 </ul>
             </div>
@@ -66,13 +67,17 @@
                 <p>Description: <span>${description}</span></p>
                 <p>Address: <span>${address}</span></p>
                 <p>Price: 
+                    
                     <c:forEach items="${price}" var="p" >
-                        <span><input type="button" value="${p.getPrice()}" class="a_demo_two"/></span>
-                        </c:forEach>
+                        <span>
+                            <a class="a_demo_two" id="getPrice" href="#payment">${p.getPrice()}</a>
+                        </span>
+                        
+                    </c:forEach>
                 </p>
             </div>
-            <br/>
 
+            <br/>
             <h3 id="titleMember">List Member:</h3>
             <table id="member" align="center" cellpadding="1" cellspacing="1">
                 <tr>
@@ -80,7 +85,6 @@
                     <td>Full Name</td>
                     <td>Email</td>
                     <td>Payment Type</td>
-
                 </tr>
                 <c:forEach items="${listCusEvt}" var="c">
                     <tr>
@@ -91,6 +95,22 @@
                     </tr>
                 </c:forEach>
             </table>
+
+            <div id="payment" class="paymentJoin">
+                <p class="payTitle"> Payment and Join</p>
+                <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
+                <form method="post" class="paymentContent" action="#">
+                    <label class="price">
+                        <span>Price:</span>
+                        <p id="setPrice">0</p>
+                    </label>
+                    <label class="paymentType">
+                        <span>Payment Type:</span>
+                        <input id="password" name="password" value="" type="password" placeholder="Password">
+                    </label>
+                    <button class="button submit-button" type="button">Pay & Join</button>      
+                </form>
+            </div>
         </div>
         <br/><br/>
         <script type="text/javascript" src="lib/js/jquery-2.1.1.js"></script>
