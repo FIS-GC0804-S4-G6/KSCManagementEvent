@@ -12,7 +12,7 @@
             p {
                 display: inline;
             }
-            td:first-child {
+            .participants td:first-child {
                 color: blue;
                 text-decoration: underline;
                 cursor: pointer;
@@ -74,13 +74,14 @@
                     </table>
                 </c:when>
                 <c:when test="${tab == 'participants'}">
-                    <table>
+                    <table class="participants">
                         <thead>
                             <tr>
                                 <th>Email</th>
                                 <th>Ticket Code</th>
                                 <th>Payment Type</th>
                                 <th>Price</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -90,8 +91,55 @@
                                     <td>${i.value.getTicketCode()}</td>
                                     <td>${i.value.getPayment_Option().getPayment_Type()}</td>
                                     <td>${i.value.getRealPrice()}</td>
+                                    <td>
+                                        <form action="JSPParticipantsEditing" method="POST">
+                                            <input type="hidden" name="event_Id" value="${event_Id}"/>
+                                            <input type="hidden" name="ticketCode" value="${i.value.getTicketCode()}"/>
+                                            <button type="submit">Edit</button>
+                                        </form>
+                                        <a href="#">Delete</a>
+                                    </td>
                                 </tr>
                             </c:forEach>
+                        </tbody>
+                    </table>
+                </c:when>
+                <c:when test="${tab == 'participant_edit'}">
+                    <form method="POST" action="ParticipantEditing" id="lonelyNight">
+                        <input type="hidden" name="event_Id" value="${event_Id}"/>
+                    </form>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Email</th>
+                                <th>Ticket Code</th>
+                                <th>Payment Type</th>
+                                <th>Price</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>email not modify</td>
+                                <td>${ticketCode}</td>
+                                <td>
+                                    <option name="payment_Id">
+                                        <c:forEach items="${mapOfPayment_Options}" var="p">
+                                            <c:if test="${p.getPayment_Id() == payment_Id}">
+                                                <select value="${p.getPayment_Id()}" selected>${p.getPayment_Type()}</select>
+                                            </c:if>
+                                            <c:if test="${p.getPayment_Id() != payment_Id}">
+                                                <select value="${p.getPayment_Id()}" selected>${p.getPayment_Type()}</select>
+                                            </c:if>
+                                        </c:forEach>
+                                    </option>
+                                </td>
+                                <td><input type="text" name="price" form="lonelyNight"/></td>
+                                <td>
+                                    <button type="submit" form="lonelyNight">Save</button>
+                                    <button>Cancel</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </c:when>

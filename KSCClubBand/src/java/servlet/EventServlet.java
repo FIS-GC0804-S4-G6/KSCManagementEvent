@@ -43,6 +43,7 @@ public class EventServlet extends HttpServlet {
             int event_Id = 1;
             Cust_Event_StorkTeam db = new Cust_Event_StorkTeam();
             Map<String, Cust_Event> mapOfCust_Events = db.selectParticipantsFromEvent(event_Id);
+            request.setAttribute("event_Id", event_Id);
             request.setAttribute("tab", "participants");
             request.setAttribute("mapOfCust_Events", mapOfCust_Events);
             request.getRequestDispatcher("WEB-INF/admin/eventdetail.jsp").forward(request, response);

@@ -21,4 +21,14 @@ public class Payment_Option {
     public Payment_Option(String payment_Type) {
         this.payment_Type = payment_Type;
     }
+    
+    public Payment_Option(int payment_Id, String payment_Type) {
+        this.payment_Id = payment_Id;
+        this.payment_Type = payment_Type;
+    }
+    
+    @Override
+    public String toString() {
+        return "Payment_Option{payment_Id: " + payment_Id + ", payment_Type: " + payment_Type + "}";
+    }
 }
