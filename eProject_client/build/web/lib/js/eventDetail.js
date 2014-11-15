@@ -51,8 +51,8 @@ var currentImage;
         $('.setPrice').html(a);
 
         var pId = $(this).attr('id');
-        $('#pId').val(pId);
-        
+//        alert(pId);
+        $('#pId').append(pId.clone().attr('#pId'));
         return false;
     });
 

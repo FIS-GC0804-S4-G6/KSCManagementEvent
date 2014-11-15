@@ -6,9 +6,8 @@
             <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/controllers/ShowEvent.java</file>
             <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/web/eventDetail.jsp</file>
             <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/model/EventDb.java</file>
-            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/web/lib/css/event_detail.css</file>
-            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/model/Event.java</file>
-            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/web/WEB-INF/web.xml</file>
+            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/model/Payment_Option.java</file>
+            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/web/lib/js/eventDetail.js</file>
         </group>
     </open-files>
 </project-private>
