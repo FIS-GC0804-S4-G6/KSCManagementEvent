@@ -229,20 +229,6 @@ public class Event_StorkTeam {
         return null;
     }
     
-//    public int selectEventFilterCounting(Event event) {
-//        Connection conn = null;
-//        String title = event.getTitle();
-//        DateTime startDate = event.getStartDate();
-//        DateTime endDate = event.getEndDate();
-//        String address = event.getAddress();
-//        StringBuilder selectSuaBo = new StringBuilder("declare @Current datetime = GETDATE()");
-//        try {
-//            conn = ConnectionUtil.getConnection();
-//        } catch(SQLException se) {
-//            se.printStackTrace();
-//        }
-//    }
-    
     public Event selectEventByEvent_Id(int event_Id) {
         Connection conn = null;
         try {
@@ -319,10 +305,5 @@ public class Event_StorkTeam {
             }
         }
         return amountEvent;
-    }
-    
-    public static void main(String[] arg) {
-        Event_StorkTeam db = new Event_StorkTeam();
-        System.out.println(db.countAllEvent());
     }
 }

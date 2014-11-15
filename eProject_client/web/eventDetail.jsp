@@ -102,7 +102,7 @@
                 <form method="post" class="paymentContent" action="#">
                     <label class="price">
                         <span>Price:</span>
-                        <p class="setPrice" id="pId">0</p>
+                        <p class="setPrice" id="">0</p>
                     </label>
                     <label class="paymentType">
                         <span>Payment Type:</span>

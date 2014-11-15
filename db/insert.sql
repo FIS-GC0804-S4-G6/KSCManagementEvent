@@ -42,12 +42,22 @@ insert into Event(Title, Logo, Description, Speaker, Address, Slogan, StartDate,
 ('Tea Break With Dilmah', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '9 Nov 2014 18:00', '9 Nov 2014 23:00', '1'),
 ('I Will', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '9 Nov 2014 18:00', '15 Nov 2014 06:00', '1'),
 ('Noise', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '19 Dec 2014 18:00', '29 Dec 2014 18:00', '1'),
-('Rain', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2015 19:30', '19 Dec 2015 18:00', '1')
+('Rain', null, 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2015 19:30', '19 Dec 2015 18:00', '1'),
+('Through Our Love', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '7 Nov 2014 23:00', '1'),
+('My Love', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2014 19:30', '7 Feb 2014 23:00', '1'),
+('Nhung Ten Toi Trum Pham Ma Tuy', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '5 Jan 2016 19:30', '19 Jan 2016 23:00', '1'),
+('Vu Giet Nguoi Tren San Gon', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '3 Dec 2015 19:30', '24 Jan 2016 23:00', '1'),
+('Chang Re Quy', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '7 Jan 2016 19:30', '25 Feb 2016 23:00', '1'),
+('Giai Dieu Tinh Yeu', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2000 19:30', '1 Jan 2016 23:00', '1'),
+('Silly Love Song', 'lib/img/captain.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2000 19:30', '10 Feb 2016 23:00', '1')
 
 insert into Event_Price(Event_Id, Price, Description) values
 ('1', '20', null),
 ('1', '30', null),
-('1', '40', null)
+('1', '40', null),
+('44', '20', null),
+('44', '30', null),
+('44', '40', null)
 
 insert into University(Name, Address, Email, Home, Mobile) values
 ('FPT', '8 Ton That Thuyet', 'fptgc@fpt.edu.vn', '0437610944', '01639668883'),
@@ -61,6 +71,7 @@ insert into Role(Roletype) values
 
 insert into Customer(Email, FullName, Password, Gender, DateOfBirth, Address, Mobile, Home, IDCard,
 Avatar, Role_Id, Univercode, Active) values
+('rengar1404@gmail.com', 'Nguyen Duc Hiep', '12345', '1', '1 Jan 1994', 'Lieu Giai', '016445590', null, null, null, '3', '1', '1'),
 ('giapnhgc00561@fpt.edu.vn', 'Nguyen Hoang Giap', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1'),
 ('ducndgc00467@fpt.edu.vn', 'Nguyen Duy Duc', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1'),
 ('haindgc00605@fpt.edu.vn', 'Nguyen Duc Hai', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1')
@@ -79,7 +90,9 @@ insert into Cust_Event (Cust_Id, Price_Id, Price, Payment_Id, Event_Id, TicketCo
 ('1', '1', '100', '1', '2', '001'),
 ('2', '1', '120', '1', '2', '002'),
 ('3', '1', '120', '2', '2', '003'),
-('3', '1', '120', '2', '2', '004')
+('3', '1', '120', '2', '2', '004'),
+('4', '6', '100', '1', '44', '001'),
+('1', '6', '100', '1', '44', '002')
 
 insert into Event_Picture (Event_Id, PicturePath) values 
 (1, 'lib/img/5.jp'),

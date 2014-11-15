@@ -50,8 +50,8 @@ var currentImage;
         var a = $(this).html();
         $('.setPrice').html(a);
 
-        var id = $(this).attr('id');
-        $('#pId').val(id);
+        var pId = $(this).attr('id');
+        $('#pId').val(pId);
         
         return false;
     });
