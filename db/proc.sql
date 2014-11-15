@@ -304,7 +304,7 @@ go
 		@Event_Id int
 	as
 	begin
-		select Event_Price.Price
+		select Event_Price.Price_Id, Event_Price.Price
 		from Event_Price
 		where Event_Id = @Event_Id
 	end
@@ -312,6 +312,7 @@ go
 
 	exec showEventPrice 1
 	go
+	select * from Event_Price
 
 -- =============================================================== --
 -- ============================ CUSTOMER ========================= --
@@ -342,8 +343,41 @@ end
 go
 
 exec sp_select_participants_from_event 1
+go
 
 --CUSTOMERS PAY THERE PRICE
+
+go
+drop proc choosePriceAndPayment
+go
+create proc choosePriceAndPayment
+	@Cust_Id  int, 
+	@Price_Id int, 
+	@Payment_Id int, 
+	@Event_Id int, 
+	@TicketCode varchar(20),
+	@Price float
+as
+begin
+	insert into Cust_Event (Cust_Id, Price_Id, Payment_Id, Event_Id, TicketCode, Price)
+	values (@Cust_Id, @Price_Id , @Payment_Id, @Event_Id, @TicketCode, @Price)
+end
+go
+exec choosePriceAndPayment 3, 3, 3, 2, '297', 40
+go
 select * from Cust_Event
 select * from Payment_Option
-drop proc 
+select * from Customer
+select * from Event_Price
+
+go
+drop proc showPaymentType
+go
+create proc showPaymentType
+as
+begin
+	--select Payment_Id, Payment_Type from Payment_Option where Payment_Type='Demand Draft' or Payment_Type = 'Cheque' or Payment_Type = 'Cash'
+	select Payment_Id, Payment_Type from Payment_Option where Payment_Id != 4
+end
+go
+exec showPaymentType 

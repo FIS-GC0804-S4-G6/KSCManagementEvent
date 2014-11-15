@@ -7,6 +7,8 @@ package com.mike.controllers;
 
 import com.mike.model.Event;
 import com.mike.model.EventDb;
+import com.mike.model.Payment_Option;
+import com.mike.model.Payment_OptionDb;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -36,7 +38,7 @@ public class ShowEvent extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-//        HttpSession session = request.getSession();
+        HttpSession session = request.getSession();
         
         String driver = getServletContext().getInitParameter("DriverName");
         String server = getServletContext().getInitParameter("ServerName");
@@ -46,25 +48,29 @@ public class ShowEvent extends HttpServlet {
         String password = getServletContext().getInitParameter("Password");
         
         EventDb db = new EventDb(driver, server, port, database, username, password);
+        Payment_OptionDb db2 = new Payment_OptionDb(driver, server, port, database, username, password);
         
         Event evt = db.showEventDetail(1);
         List<Event> listEvt = db.showEventPrice(1);
         List<Event> listEvtPic = db.showEventPicture(1);
         List<Event> listCusEvt = db.showCustEvent(1);
         
-        request.setAttribute("title", evt.getTitle());
-        request.setAttribute("logo", evt.getLogo());
-        request.setAttribute("description", evt.getDescription());
-        request.setAttribute("speaker", evt.getSpeaker());
-        request.setAttribute("address", evt.getAddress());
-        request.setAttribute("slogan", evt.getSlogan());
-        request.setAttribute("startDate", evt.getStartDate());
-        request.setAttribute("endDate", evt.getEndDate());
-        request.setAttribute("evtCate", evt.getCategoryName());
+        List<Payment_Option> listPaymentType = db2.showPaymentType();
         
-        request.setAttribute("price", listEvt);
-        request.setAttribute("listEvtPic", listEvtPic);
-        request.setAttribute("listCusEvt", listCusEvt);
+        session.setAttribute("title", evt.getTitle());
+        session.setAttribute("logo", evt.getLogo());
+        session.setAttribute("description", evt.getDescription());
+        session.setAttribute("speaker", evt.getSpeaker());
+        session.setAttribute("address", evt.getAddress());
+        session.setAttribute("slogan", evt.getSlogan());
+        session.setAttribute("startDate", evt.getStartDate());
+        session.setAttribute("endDate", evt.getEndDate());
+        session.setAttribute("evtCate", evt.getCategoryName());
+        
+        session.setAttribute("price", listEvt);
+        session.setAttribute("listEvtPic", listEvtPic);
+        session.setAttribute("listCusEvt", listCusEvt);
+        session.setAttribute("listPaymentType", listPaymentType);
         request.getRequestDispatcher("eventDetail.jsp").forward(request, response);
         
     }

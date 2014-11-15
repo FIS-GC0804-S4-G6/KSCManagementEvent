@@ -114,7 +114,7 @@ public class EventDb {
             cstm.setInt(1, event_Id);
             rs = cstm.executeQuery();
             while (rs.next()) {
-                Event event = new Event(rs.getFloat("Price"));
+                Event event = new Event(rs.getInt("Price_Id"), rs.getFloat("Price"));
                 listEvt.add(event);
             }
             return listEvt;

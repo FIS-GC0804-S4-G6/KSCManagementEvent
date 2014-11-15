@@ -67,12 +67,12 @@
                 <p>Description: <span>${description}</span></p>
                 <p>Address: <span>${address}</span></p>
                 <p>Price: 
-                    
+
                     <c:forEach items="${price}" var="p" >
                         <span>
-                            <a class="a_demo_two" id="getPrice" href="#payment">${p.getPrice()}</a>
+                            <a class="a_demo_two" id="${p.getPrice_Id()}" href="#payment">${p.getPrice()}</a>
                         </span>
-                        
+
                     </c:forEach>
                 </p>
             </div>
@@ -102,11 +102,15 @@
                 <form method="post" class="paymentContent" action="#">
                     <label class="price">
                         <span>Price:</span>
-                        <p id="setPrice">0</p>
+                        <p class="setPrice" id="pId">0</p>
                     </label>
                     <label class="paymentType">
                         <span>Payment Type:</span>
-                        <input id="password" name="password" value="" type="password" placeholder="Password">
+                        <select>
+                            <c:forEach items="${listPaymentType}" var="p">
+                                <option id="${p.getPayment_Id()}">${p.getPaymentType()}</option>
+                            </c:forEach>
+                        </select>
                     </label>
                     <button class="button submit-button" type="button">Pay & Join</button>      
                 </form>

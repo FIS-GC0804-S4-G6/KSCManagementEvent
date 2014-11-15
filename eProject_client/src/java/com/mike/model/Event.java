@@ -27,6 +27,7 @@ public class Event {
     private int cate_Id;
     private String categoryName;
 
+    private int price_Id;
     private float price;
 
     private String fullName;
@@ -47,7 +48,8 @@ public class Event {
         this.paymentType = paymentType;
     }
 
-    public Event(float price) {
+    public Event(int price_Id, float price) {
+        this.price_Id = price_Id;
         this.price = price;
     }
 
@@ -116,6 +118,14 @@ public class Event {
 
     public void setPaymentType(String paymentType) {
         this.paymentType = paymentType;
+    }
+
+    public int getPrice_Id() {
+        return price_Id;
+    }
+
+    public void setPrice_Id(int price_Id) {
+        this.price_Id = price_Id;
     }
 
     public float getPrice() {
