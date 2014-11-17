@@ -210,8 +210,9 @@ go
 		set @Price_Id = SCOPE_iDENTITY()
 	end
 	go
-
-	--CUSTOMER REGISTER
+	--------------------------------------------------------------
+	-----------CUSTOMER REGISTER
+	--------------------------------------------------------------
 	drop proc spRegister;
 	go
 	create proc spRegister
@@ -239,11 +240,26 @@ go
 		where @email = Email
 	end
 	go
-
+	-------------------------------------
 	--select event and payment type
+	-------------------------------------
+
+	drop proc showEvent
+	go
+	create proc showEvent
+	as
+	begin
+		select Event_Id, Logo, Title, Description from Event
+	end
+	go
+	exec showEvent 
+	go
+	select * from Event
+	go
+	---------------
+
 	drop proc showEventDetail
 	go
-
 	create proc showEventDetail
 		@Event_Id int
 	as
@@ -313,9 +329,9 @@ go
 	exec showEventPrice 1
 	go
 	select * from Event_Price
-
+	---------------------------------------
 	--CUSTOMERS PAY THERE PRICE
-
+	---------------------------------------
 go
 drop proc choosePriceAndPayment
 go
@@ -664,4 +680,3 @@ go
 
 exec sp_select_events_month 2015, 11
 go
-
