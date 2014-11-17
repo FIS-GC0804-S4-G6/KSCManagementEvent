@@ -5,6 +5,7 @@
  */
 package com.mike.controllers;
 
+import com.mike.model.Cust_EventDb;
 import com.mike.model.Event;
 import com.mike.model.EventDb;
 import com.mike.model.Payment_Option;
@@ -47,8 +48,11 @@ public class ShowEvent extends HttpServlet {
         String username = getServletContext().getInitParameter("Username");
         String password = getServletContext().getInitParameter("Password");
         
+        String action = request.getParameter("act");
+        
         EventDb db = new EventDb(driver, server, port, database, username, password);
         Payment_OptionDb db2 = new Payment_OptionDb(driver, server, port, database, username, password);
+        Cust_EventDb db3 = new Cust_EventDb(driver, server, port, database, username, password);
         
         Event evt = db.showEventDetail(1);
         List<Event> listEvt = db.showEventPrice(1);
@@ -71,6 +75,10 @@ public class ShowEvent extends HttpServlet {
         session.setAttribute("listEvtPic", listEvtPic);
         session.setAttribute("listCusEvt", listCusEvt);
         session.setAttribute("listPaymentType", listPaymentType);
+        
+        if ("eventDetail".equals(action)) {
+            choosePriceAndPayment(request, db3, response);
+        }
         request.getRequestDispatcher("eventDetail.jsp").forward(request, response);
         
     }
@@ -114,4 +122,15 @@ public class ShowEvent extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void choosePriceAndPayment(HttpServletRequest request, Cust_EventDb db3, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        //Cust_Id, Price_Id, Payment_Id, Event_Id, TicketCode, Price
+        int cust_Id = 1;
+        int price_Id = Integer.parseInt(request.getParameter("priceId"));
+        int payment_Id = Integer.parseInt(request.getParameter("paymentId"));
+        int event_Id = 1;
+        String ticketCode = request.getParameter("ticketcode");
+        float price = Float.parseFloat(request.getParameter("price"));
+        db3.choosePriceAndPayment(cust_Id, price_Id, payment_Id, event_Id, ticketCode, price);
+    }
 }

@@ -21,18 +21,17 @@ public class Account {
     private String idCard;
     private String avatar;
     private int roleID;
-    private int univercode;
+    private String universityName;
     private boolean active;
     
     private int sid_Id;
     private String device;
     private String sid_Device;
             
-    public Account(int custID, String email, String fullname, String password, boolean gender, Date dateOfBirth, String address, String mobile, String home, String idCard, String avatar, int roleID, int univercode, boolean active) {
+    public Account(int custID, String email, String fullname, boolean gender, Date dateOfBirth, String address, String mobile, String home, String idCard, String avatar, String universityName) {
         this.custID = custID;
         this.email = email;
         this.fullname = fullname;
-        this.password = password;
         this.gender = gender;
         this.dateOfBirth = dateOfBirth;
         this.address = address;
@@ -40,9 +39,7 @@ public class Account {
         this.home = home;
         this.idCard = idCard;
         this.avatar = avatar;
-        this.roleID = roleID;
-        this.univercode = univercode;
-        this.active = active;
+        this.universityName = universityName;
     }
 
     public Account(String email, String fullname, String password, boolean gender) {
@@ -159,12 +156,12 @@ public class Account {
         this.roleID = roleID;
     }
 
-    public int getUnivercode() {
-        return univercode;
+    public String getUniversityName() {
+        return universityName;
     }
 
-    public void setUnivercode(int univercode) {
-        this.univercode = univercode;
+    public void setUniversityName(String universityName) {
+        this.universityName = universityName;
     }
 
     public boolean isActive() {

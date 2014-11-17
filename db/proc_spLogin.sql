@@ -7,7 +7,8 @@ create procedure spLoginMember
 	@Password varchar(max)
 as
 begin
-	select Customer.Cust_Id, Customer.Email, Customer.FullName, Customer.Gender, Customer.DateOfBirth, Customer.Address, Customer.Mobile, Customer.Home, Customer.IDCard, Customer.Avatar, University.Name as UniversityName from Customer
+	select Customer.Cust_Id, Customer.Email, Customer.FullName, Customer.Gender, Customer.DateOfBirth, Customer.Address, Customer.Mobile, Customer.Home, Customer.IDCard, Customer.Avatar, University.Name as UniversityName 
+	from Customer
 	inner join Role
 	on Role.Role_Id = Customer.Role_Id
 	inner join University
@@ -16,6 +17,9 @@ begin
 end
 go
 exec spLoginMember 'ducndgc00467@fpt.edu.vn', 12345;
+go
+select * from Customer
+select * from University
 go
 drop procedure spLoginAdmin
 go

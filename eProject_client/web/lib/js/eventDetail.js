@@ -48,12 +48,15 @@ var currentImage;
         $('#over').fadeIn(300);
 
         var a = $(this).html();
-        $('.setPrice').html(a);
+        $('label[for=price]').html(a);
+        $('input[name=price]').val(a);
 
         var pId = $(this).attr('id');
-//        alert(pId);
-        $('#pId').append(pId.clone().attr('#pId'));
+        $('#pId').val(pId);
         return false;
+        
+        var ticketCode = $('#ticketCode').val();
+        $('label[for=ticketcode]').html(ticketCode);
     });
 
     // khi click đóng hộp thoại

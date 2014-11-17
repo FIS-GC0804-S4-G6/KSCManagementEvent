@@ -39,7 +39,7 @@ public class AccountDB {
         try {
             ConnectionUtil connector = new ConnectionUtil(driver, servername, port, database, username, password);
             conn = connector.getConnection();
-            cstm = (CallableStatement) conn.prepareCall("{call spLogin(?, ?)}");
+            cstm = (CallableStatement) conn.prepareCall("{call spLoginMember(?, ?)}");
             cstm.setString(1, email);
             cstm.setString(2, pwd);
             rs = cstm.executeQuery();
@@ -48,7 +48,6 @@ public class AccountDB {
                     Account account = new Account(rs.getInt("Cust_Id"),
                             rs.getString("Email"),
                             rs.getString("FullName"),
-                            rs.getString("Password"),
                             rs.getBoolean("Gender"),
                             rs.getDate("DateOfBirth"),
                             rs.getString("Address"),
@@ -56,25 +55,9 @@ public class AccountDB {
                             rs.getString("Home"),
                             rs.getString("IDCard"),
                             rs.getString("Avatar"),
-                            rs.getInt("Role_Id"),
-                            rs.getInt("Univercode"),
-                            rs.getBoolean("Active"));
-                    if (account.isActive() == true) {
-                        account.setEmail(rs.getString("Cust_Id"));
-                        account.setEmail(rs.getString("Email"));
-                        account.setFullname(rs.getString("FullName"));
-                        account.setGender(rs.getBoolean("Gender"));
-                        account.setDateOfBirth(rs.getDate("DateOfBirth"));
-                        account.setAddress(rs.getString("Address"));
-                        account.setMobile(rs.getString("Mobile"));
-                        account.setHome(rs.getString("Home"));
-                        account.setIdCard(rs.getString("IDCard"));
-                        account.setAvatar(rs.getString("Avatar"));
-                        account.setRoleID(rs.getInt("Role_Id"));
-                        account.setUnivercode(rs.getInt("Univercode"));
-                        account.setActive(rs.getBoolean("Active"));
-                        return account;
-                    }
+                            rs.getString("UniversityName")
+                    );
+                    return account;
                 }
             }
             return null;
@@ -239,7 +222,6 @@ public class AccountDB {
 //        db.custActiveLink("ducndgc00467@fpt.edu.vn", true);
 //        
 //    }
-    
     public boolean custActiveLink(String email, boolean active) {
         Connection conn = null;
         CallableStatement cstm = null;

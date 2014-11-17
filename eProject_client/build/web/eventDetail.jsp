@@ -4,6 +4,7 @@
     Author     : Nguyen
 --%>
 
+<%@page import="java.util.Random"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -97,22 +98,39 @@
             </table>
 
             <div id="payment" class="paymentJoin">
-                <p class="payTitle"> Payment and Join</p>
+                <p class="payTitle"> Pay and Join</p>
                 <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                <form method="post" class="paymentContent" action="#">
+                <form method="post" class="paymentContent" action="showEvent?act=eventDetail">
                     <label class="price">
                         <span>Price:</span>
-                        <p class="setPrice" id="">0</p>
+                        <!--<p id="pId" name="priceId"></p>-->
+                        <!--<p class="setPrice" name="price">0</p>-->
+                        
+                        <input id="pId" name="priceId" type="hidden"/>
+                        <label for="price"></label>
+                        <input id="price" class="setPrice" name="price" type="hidden"/>
+                    </label>
+                    <label>
+                        <%
+                            Random rand = new Random();
+                            int randomnumber = rand.nextInt(90000) + 10000;
+                        %>
+                        <span>Ticket code:</span>
+                        <label for="ticketcode"></label>
+                        <input value="<%=randomnumber%>" id="ticketCode" type="text" name="ticketcode" type="hidden"/>
                     </label>
                     <label class="paymentType">
                         <span>Payment Type:</span>
-                        <select>
+                        <select name="paymentId">
                             <c:forEach items="${listPaymentType}" var="p">
-                                <option id="${p.getPayment_Id()}">${p.getPaymentType()}</option>
+                                <option value="${p.getPayment_Id()}">${p.getPaymentType()}</option>
                             </c:forEach>
                         </select>
                     </label>
-                    <button class="button submit-button" type="button">Pay & Join</button>      
+                    <label>
+                        <!--<button class="button submit-button" type="button" value="">Pay & Join</button>-->      
+                        <input type="submit" class="button submit-button" value="Pay & Join"/>
+                    </label>
                 </form>
             </div>
         </div>
