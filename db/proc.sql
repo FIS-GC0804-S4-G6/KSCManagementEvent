@@ -249,7 +249,7 @@ go
 	create proc showEvent
 	as
 	begin
-		select Event_Id, Logo, Title, Description from Event
+		select Event_Id, Title, Logo, Description from Event
 	end
 	go
 	exec showEvent 
@@ -274,7 +274,7 @@ go
 
 	exec showEventDetail 1
 	go
-	
+	------------------------
 	drop proc showEventPicture
 	go
 	create proc showEventPicture
@@ -287,7 +287,7 @@ go
 	go
 	exec showEventPicture 1
 	go
-
+	------------------------
 	select * from Event	
 	go
 	select * from Event

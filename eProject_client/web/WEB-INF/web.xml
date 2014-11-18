@@ -9,6 +9,10 @@
         <servlet-class>com.mike.controllers.AutoActive</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ShowEventDetail</servlet-name>
+        <servlet-class>com.mike.controllers.ShowEventDetail</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ShowEvent</servlet-name>
         <servlet-class>com.mike.controllers.ShowEvent</servlet-class>
     </servlet>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>AutoActive</servlet-name>
         <url-pattern>/autoActive</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowEventDetail</servlet-name>
+        <url-pattern>/showEventDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ShowEvent</servlet-name>

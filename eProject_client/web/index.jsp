@@ -29,7 +29,8 @@
                     response.addHeader("Pragma", "no-cache");
                     response.addDateHeader("Expires", 0);
             %>
-            <li><a href="event.jsp"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
+            <%--<jsp:include page="/showEvent" flush="true"></jsp:include>--%>
+            <li><a href="${pageContext.request.contextPath}/showEvent"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
             <li><a href="#"><i class="fa fa-university"></i>&nbsp;About</a></li>
             <li><a href="#"><i class="fa fa-search"></i>&nbsp;Search</a></li> 
             <li class="dropdown">
@@ -44,7 +45,7 @@
                 response.addHeader("Pragma", "no-cache");
                 response.addDateHeader("Expires", 0);
             %>
-            <li><a href="event.jsp"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
+            <li><a href="${pageContext.request.contextPath}/showEvent"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
             <li><a href="#"><i class="fa fa-university"></i>&nbsp;About</a></li>
             <li><a href="#"><i class="fa fa-search"></i>&nbsp;Search</a></li> 
             <li><a href="login.jsp" id="login"><i class="fa fa-gittip"></i>&nbsp;Log In</a></li>

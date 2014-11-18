@@ -74,7 +74,7 @@ public class EventDb {
         return null;
     }
 
-    public List<Event> showEventPicture(int event_Id){
+    public List<Event> showEventPicture(int event_Id) {
         Connection conn = null;
         CallableStatement cstm = null;
         ResultSet rs = null;
@@ -101,7 +101,7 @@ public class EventDb {
         }
         return null;
     }
-    
+
     public List<Event> showEventPrice(int event_Id) {
         Connection conn = null;
         CallableStatement cstm = null;
@@ -129,7 +129,6 @@ public class EventDb {
         }
         return null;
     }
-    
 
     public List<Event> showCustEvent(int event_Id) {
         Connection conn = null;
@@ -151,6 +150,37 @@ public class EventDb {
                 listCusEvt.add(event);
             }
             return listCusEvt;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public List<Event> showEvent() {
+        Connection conn = null;
+        CallableStatement cstm = null;
+        ResultSet rs = null;
+        List<Event> events = new LinkedList<Event>();
+        try {
+            ConnectionUtil connector = new ConnectionUtil(driver, servername, port, database, username, password);
+            conn = connector.getConnection();
+            cstm = (CallableStatement) conn.prepareCall("{call showEvent()}");
+            rs = cstm.executeQuery();
+            while (rs.next()) {
+                Event event = new Event(
+                        rs.getInt("Event_Id"),
+                        rs.getString("Title"),
+                        rs.getString("Logo"),
+                        rs.getString("Description"));
+                events.add(event);
+            }
+            return events;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {

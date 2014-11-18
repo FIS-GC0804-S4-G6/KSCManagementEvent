@@ -5,9 +5,7 @@
         <group>
             <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/utils/ConnectionUtil.java</file>
             <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/web/event.jsp</file>
-            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/model/Account.java</file>
-            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/controllers/Authentication.java</file>
-            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/model/AccountDB.java</file>
+            <file>file:/E:/FGR/Sem4/eProject/KSCManagementEvent/eProject_client/src/java/com/mike/controllers/ShowEvent.java</file>
         </group>
     </open-files>
 </project-private>

@@ -37,6 +37,13 @@ public class Event {
 
     private String picturePath;
 
+    public Event(int event_Id, String title, String logo, String description) {
+        this.event_Id = event_Id;
+        this.title = title;
+        this.logo = logo;
+        this.description = description;
+    }
+
     public Event(String picturePath) {
         this.picturePath = picturePath;
     }

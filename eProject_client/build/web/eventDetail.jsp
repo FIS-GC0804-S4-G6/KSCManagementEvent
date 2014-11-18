@@ -100,12 +100,12 @@
             <div id="payment" class="paymentJoin">
                 <p class="payTitle"> Pay and Join</p>
                 <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
-                <form method="post" class="paymentContent" action="showEvent?act=eventDetail">
+                <form method="post" class="paymentContent" action="showEventDetail?act=eventDetail">
                     <label class="price">
                         <span>Price:</span>
                         <!--<p id="pId" name="priceId"></p>-->
                         <!--<p class="setPrice" name="price">0</p>-->
-                        
+
                         <input id="pId" name="priceId" type="hidden"/>
                         <label for="price"></label>
                         <input id="price" class="setPrice" name="price" type="hidden"/>
