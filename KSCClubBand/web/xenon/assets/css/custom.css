@@ -1,11 +1,43 @@
-/**
- *
- * Apply your custom CSS here
- *
-*/
-
-body {	
+/* OVERRIDE STYLE */
+/* xenon-core.css 5286 */
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfood > tr > td,
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfood > tr > th {
+  padding: 12px 5px;
 }
 
-a {
+.table > thead > tr > th:nth-child(9),
+.table > tbody > tr > td:nth-child(9){
+    text-align: center;
 }
+
+.setWidth {
+    max-width: 120px;
+}
+.concat div {
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: inherit;
+}
+
+/*table > thead > tr > th:nth-child(7) {
+    width: 50px;
+}*/
+
+
+/* bootstrap.css 2111 */
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+    background-color: #ccccff;
+}
+
+
+tr.selected > * {
+    background: tomato!important;
+}
+

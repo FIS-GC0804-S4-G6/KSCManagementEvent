@@ -1,196 +1,294 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Category</title>
+<jsp:include page="../template/Header.jsp">
+    <jsp:param name="title" value="Event Price Creating"/>
+    <jsp:param name="heading" value="${titleOfEvent}"/>
+    <jsp:param name="headingNote" value="Event Creating is first step to have fun"/>
+    <jsp:param name="step1" value="Event"/>
+    <jsp:param name="step2" value="Event Price Creating"/>
+</jsp:include>
 
-        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Arimo:400,700,400italic">
-        <link rel="stylesheet" href="xenon/assets/css/fonts/linecons/css/linecons.css">
-        <link rel="stylesheet" href="xenon/assets/css/fonts/fontawesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="xenon/assets/css/bootstrap.css">
-        <link rel="stylesheet" href="xenon/assets/css/xenon-core.css">
-        <link rel="stylesheet" href="xenon/assets/css/xenon-forms.css">
-        <link rel="stylesheet" href="xenon/assets/css/xenon-components.css">
-        <link rel="stylesheet" href="xenon/assets/css/xenon-skins.css">
-        <link rel="stylesheet" href="xenon/assets/css/custom.css">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Table Event Price</h3>
+                        </div>
 
-        <script src="xenon/assets/js/jquery-1.11.1.min.js"></script>
-    </head>
-    <body>
-        <table>
-            <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <c:forEach items="${listOfEvent_Prices}" var="i">
-                    <tr>
-                        <td>${i.getPrice_Id()}</td>
-                        <td>${i.getPrice()}</td>
-                        <td>${i.getDescription()}</td>
-                        <td>
-                            <a href="javascript:;" onclick="jQuery('#modal-1').modal('show', {backdrop: 'fade'});" class="btn btn-primary btn-single btn-sm" name='editing' data-priceId="${i.getPrice_Id()}">Edit</a>
-                        </td>
-                        <td>
-                            <a href="javascript:;" onclick="jQuery('#modal-2').modal('show', {backdrop: 'fade'});" class="btn btn-primary btn-single btn-sm" name='deleting' data-priceId="${i.getPrice_Id()}">Delete</a>
-                        </td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        <div class="creating">
-            <form method="GET" action="Event_PriceInserting">
-                Price<input type="text" name="price"/><br/>
-                Description<textarea name="description"></textarea><br/>
-                <button type="submit">Submit</button>
-            </form>
-        </div>
-
-        <div class="modal fade" id="modal-1" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Editing Event Price</h4>
+                        <table class="table table-striped table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Price</th>
+                                    <th>Description</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:set var="count" value="1" scope="page"/>
+                                <c:forEach items="${listOfEvent_Prices}" var="i">
+                                    <tr>
+                                        <td data-eventPrice-id="${i.getPrice_Id()}">${count}</td>
+                                        <td>${i.getPrice()}</td>
+                                        <td>${i.getDescription()}</td>
+                                        <td class="middle-align">
+                                            <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left" name="editing">Edit</a>
+                                            <a href="#" class="btn btn-danger btn-sm btn-icon icon-left" name="deleting">Delete</a> 
+                                        </td>
+                                    </tr>
+                                    <c:set var="count" value="${count + 1}" scope="page"/>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
-                    <div class="modal-body">
-                        <form method="GET" action="Event_PriceUpdating" >
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="field-1" class="control-label">Price</label>
-                                        <input type="text" class="form-control" id="field-1" name="priceUnit" placeholder="Price"/>
-                                    </div>	
+                </div>
+                <div class="col-md-6 panel-edit-event-price">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Creating A Event Price</h3>
+                        </div>
+                        <div class="panel-body">
+                            <form role="form" class="form-horizontal" method="POST" action="Event_PriceInserting">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="field-1">Price</label>
+                                    <div class="col-sm-10">
+                                        <input name="price" type="text" class="form-control" id="field-1" placeholder="$">
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="field-2" class="control-label">Description</label>
-                                        <input type="text" class="form-control" id="field-2" name="descriptionUnit" placeholder="Description"/>
-                                    </div>	
+
+                                <div class="form-group-separator"></div>
+
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="field-5">Description</label>
+                                    <div class="col-sm-10">
+                                        <textarea name="description" class="form-control autogrow" cols="5" id="field-5" placeholder="Description for this event price because someone can wonder about price"></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-info btn-eventPrice-update" data-dismiss="modal">Save changes</button>
-                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                            </div>
-                        </form>
+                                
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label" for="field-5"></label>
+                                    <div class="col-sm-10">
+                                        <button type="submit" class="btn btn-secondary btn-single">Create</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div class="modal fade" id="modal-2" aria-hidden="true" style="display: none;">
-            <div class="modal-dialog">
-                <div class="modal-content">
-
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h4 class="modal-title">Are you sure?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form method="GET" action="Event_PriceDeleting" >
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-info btn-eventPrice-delete" data-dismiss="modal">Yes</button>
-                                <button type="button" class="btn btn-white" data-dismiss="modal">No</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        
+        <jsp:include page="../template/Footer.jsp"/>
+        
+        <!-- Modal 1 (Basic)-->
+	<div class="modal fade" id="modal-delete">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title">Delete Event Price</h4>
+				</div>
+				
+				<div class="modal-body">
+				    Delete
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+					<button type="submit" class="btn btn-info btn-delete" data-dismiss="modal">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+        
         <!-- Bottom Scripts -->
-        <script src="xenon/assets/js/bootstrap.min.js"></script>
-        <script src="xenon/assets/js/TweenMax.min.js"></script>
-        <script src="xenon/assets/js/resizeable.js"></script>
-        <script src="xenon/assets/js/joinable.js"></script>
-        <script src="xenon/assets/js/xenon-api.js"></script>
-        <script src="xenon/assets/js/xenon-toggles.js"></script>
+        <script type="text/javascript" src="xenon/assets/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="xenon/assets/js/TweenMax.min.js"></script>
+        <script type="text/javascript" src="xenon/assets/js/resizeable.js"></script>
+        <script type="text/javascript" src="xenon/assets/js/joinable.js"></script>
+        <script type="text/javascript" src="xenon/assets/js/xenon-api.js"></script>
+        <script type="text/javascript" src="xenon/assets/js/xenon-toggles.js"></script>
 
 
         <!-- JavaScripts initializations and stuff -->
-        <script src="xenon/assets/js/xenon-custom.js"></script>
-        <script>
-                                $(document).ready(function () {
-                                    $("button[type=submit]").click(function (e) {
-                                        e.preventDefault();
-                                        var price = $("input[name=price]").val();
-                                        var description = $("textarea[name=description]").val();
-                                        $.ajax({
-                                            data: {price: price, description: description},
-                                            url: "AJAXEvent_PriceInserting",
-                                            type: "GET",
-                                            dataType: "JSON",
-                                            error: function (jqXHR, textStatus, erroThrown) {
-                                                console.log(textStatus);
-                                            },
-                                            success: function (aPostData, textStatus, jqXHR) {
-                                                var data = "<tr>" +
-                                                        "<td>" + aPostData.price_Id + "</td>" +
-                                                        "<td>" + price + "</td>" +
-                                                        "<td>" + description + "</td>" +
-                                                        "<td><a href='javascript:;' onclick=\"jQuery('#modal-1').modal('show', {backdrop: 'fade'});\" class='btn btn-primary btn-single btn-sm' id='" + aPostData.price_Id + "' name='editing' data-priceId='" + aPostData.price_Id + "'>Edit</a></td>" +
-                                                        "<td><a href='javascript:;' onclick=\"jQuery('#modal-2').modal('show', {backdrop: 'fade'});\" class='btn btn-primary btn-single btn-sm' id='" + aPostData.price_Id + "' name='deleting' data-priceId='" + aPostData.price_Id + "'>Delete</a></td>" +
-                                                        "</tr>";
-                                                $('tbody').append(data);
-                                            }
-                                        });
-                                    });
+        <script type="text/javascript" src="xenon/assets/js/xenon-custom.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function () {
+                
+                $(document).on('click', 'a[name=editing]', function(e){
+                    e.preventDefault();
+                    var $tr = $(this).closest('tr');
+                    var price_Id = $tr.children().eq(0).attr('data-eventprice-id'),
+                        price = $tr.children().eq(1).html(),
+                        description = $tr.children().eq(2).html();
 
-                                    $(document).on('click', 'a[name=editing], a[name=deleting]', function () {
-                                        var self = $(this);
-                                        var modal = "";
-                                        if (self.attr('name') === "editing") {
-                                            modal = "#modal-1";
-                                        } else {
-                                            modal = "#modal-2";
-                                        }
-                                        $(modal + ' .modal-footer .btn-info').attr('data-priceId', self.attr('data-priceId'));
-                                    });
+                    var $panel = $('.panel-edit-event-price'),
+                        $heading = $panel.find('.panel-heading'),
+                        $price = $panel.find('input[name=price]'),
+                        $description = $panel.find('textarea[name=description]'),
+                        $submitBtn = $panel.find('button[type=submit]'),
+                        $oldCancelBtn = $panel.find('.btn-cancel'),
+                        $cancelBtn = $('<button>', {class: 'btn btn-info btn-single btn-cancel', html: 'Cancel'}),
+                        $form = $panel.find('form');
+                        
+                        $tr.siblings().removeClass('selected');
+                        $tr.addClass('selected');
 
-                                    $('.modal-footer .btn-info').click(function (e) {
-                                        e.preventDefault();
-                                        var self = $(this);
-                                        var price_Id = self.attr('data-priceId');
-                                        if (self.hasClass('btn-eventPrice-delete')) {
-                                            $.ajax({
-                                                data: {price_Id: price_Id},
-                                                url: "Event_PriceDeleting",
-                                                type: "GET",
-                                                dataType: "JSON",
-                                                error: function (jqXHR, textStatus, errorThrown) {
-                                                    console.log("error: ", textStatus);
-                                                },
-                                                success: function (data, textStatus, jqXHR) {
-                                                    $('a[data-priceId=' + price_Id + '][name=editing]').closest('tr').remove();
-                                                }
-                                            });
-                                        } else if (self.hasClass('btn-eventPrice-update')) {
-                                            var priceUnit = $('input[name=priceUnit]').val();
-                                            var description = $('input[name=descriptionUnit]').val();
-                                            $.ajax({
-                                                data: {price_Id: price_Id, price: priceUnit, description: description},
-                                                url: "Event_PriceUpdating",
-                                                type: "GET",
-                                                dataType: "JSON",
-                                                error: function (jqXHR, textStatus, errorThrown) {
-                                                    console.log("error: ", textStatus);
-                                                },
-                                                success: function (data, textStatus, jqXHR) {
-                                                    var $tr = $('a[data-priceId=' + price_Id + '][name=editing]').closest('tr');
-                                                    $tr.children('td').eq(1).html(priceUnit)
-                                                            .end().eq(2).html(description);
-                                                }
-                                            });
-                                        }
-                                    });
-                                });
+                        $form.attr('action', 'Event_PriceUpdating');
+                        $heading.html('Edit Event Price');
+                        $oldCancelBtn.remove();
+                        $submitBtn
+                                .attr({'name': 'price_Id', 'value': price_Id})
+                                .after($cancelBtn);
+                        $price.val(price);
+                        $description.val(description);
+                        $submitBtn.html('Update');
+                });
+                  
+                  
+                $('.panel-edit-event-price').on('click', '.btn-cancel', function(e) {
+                    e.preventDefault();
+
+                    var $panel = $(this).closest('.panel-edit-event-price'),
+                        $heading = $panel.find('.panel-heading'),
+                        $price = $panel.find('input[name=price]'),
+                        $description = $panel.find('textarea[name=description]'),
+                        $submitBtn = $panel.find('button[type=submit]'),
+                        $form = $panel.find('form');
+
+                    $('table tr.selected').removeClass('selected');
+                    
+                    $form.attr('action', 'Event_PriceInserting');
+                    $heading.html('Creating A Event Price');
+                    $price.val('');
+                    $description.val('');
+                    $submitBtn.html('Create').removeAttr('name').removeAttr('value');
+                    $(this).remove();
+                });
+                
+                
+                $('.panel-edit-event-price button[type=submit]').click(function (e) {
+                    e.preventDefault();
+                    var self = this;
+                    var $form = $(self).closest('form');
+                    var action = $form.attr('action');
+                    if (action === 'Event_PriceInserting') {
+                      var price = $('input[name=price]').val();
+                      var description = $('textarea[name=description]').val();
+                      $.ajax({
+                        data: {
+                          price: price,
+                          description: description
+                        },
+                        url: action,
+                        type: 'POST',
+                        dataType: 'JSON',
+                        error: function (jqXHR, textStatus, erroThrown) {
+                          console.log('textStatus: ' + textStatus);
+                        },
+                        success: function (data, textStatus, jqXHR) {
+                          var lastIndex = $('tbody').find('tr:last-child td:first-child').html();
+                          
+                          var $rightPanel = $(self).closest('.panel-edit-event-price'),
+                              $price = $rightPanel.find('input[name=price]'),
+                              $description = $rightPanel.find('textarea[name=description]');
+                          
+                          data = 
+                          '<tr>\n' +
+                            '\t<td data-eventPrice-id="' + data.price_Id + '">' + (parseInt(lastIndex)+1) + '</td>\n' +
+                            '\t<td>' + price + '</td>\n' +
+                            '\t<td>' + description + '</td>\n' +
+                            '\t<td class="middle-align">\n' +
+                              '\t\t<a href="#" class="btn btn-secondary btn-sm btn-icon icon-left" name="editing">Edit</a>\n' +
+                              '\t\t<a href="#" class="btn btn-danger btn-sm btn-icon icon-left" name="deleting">Delete</a>\n' +
+                            '\t</td>\n' + 
+                          '</tr>';
+                          $('tbody').append(data);
+                          
+                          $price.val('');
+                          $description.val('');
+                        }
+                      });
+                      
+                      
+                    } else if(action === 'Event_PriceUpdating') {
+                        var $rightPanel = $(self).closest('.panel-edit-event-price'),
+                            $heading = $rightPanel.find('.panel-heading'),
+                            $price = $rightPanel.find('input[name=price]'),
+                            $description = $rightPanel.find('textarea[name=description]');
+
+                        var price_Id = self.value,
+                            price = $price.val(),
+                            description = $description.val();
+
+                        $.ajax({
+                            data: {
+                                price_Id: price_Id,
+                                price: price,
+                                description: description
+                            },
+                            url: action,
+                            type: "POST",
+                            dataType: "JSON",
+                            error: function(jqXHR, textStatus, errorThrown) {
+                              console.log('Error\'s textStatus: ' + textStatus);
+                            },
+                            success: function(data, textStatus, jqXHR) {
+                                if(data.result) {
+                                    var $tr = $('table tr.selected');
+
+                                    $price.val('');
+                                    $description.val('');
+                                    $heading.html('Creating A Event Price');
+                                    $(self).html('Create')
+                                           .removeAttr('name')
+                                           .removeAttr('value');
+                                    $form.attr('action', 'Event_PriceInserting');
+
+                                    $tr.children()
+                                      .eq(1).html(price).end()
+                                      .eq(2).html(description);
+                                    $tr.removeClass('selected');
+                                }
+                            }
+                        });
+                    }
+                });
+                
+                $(document).on('click', 'a[name=deleting]', function(e) {
+                    e.preventDefault();
+                    var $tr = $(this).closest('tr');
+                    var price_Id = $tr.find('td:first-child').attr('data-eventprice-id');
+
+                    $('#modal-delete .btn-delete').attr({'name': 'price_Id', 'value': price_Id});
+
+                    $('#modal-delete').modal('show', {backdrop: 'fade'});
+                });
+
+                $('#modal-delete .btn-delete').click(function (e) {
+                    e.preventDefault();
+
+                    var self = this;
+                    var price_Id = self.value;
+                    $.ajax({
+                      data: {
+                        price_Id: price_Id
+                      },
+                      url: 'Event_PriceDeleting',
+                      type: 'POST',
+                      dataType: 'JSON',
+                      error: function (jqXHR, textStatus, errorThrown) {
+                        console.log('error: ', textStatus);
+                      },
+                      success: function (data, textStatus, jqXHR) {
+                        $('table td:first-child[data-eventprice-id=' + price_Id + ']').closest('tr').remove();
+                        
+                        $('table td:first-child').each(function(index, td1st) {
+                            $(td1st).html(++index);
+                        });
+                      }
+                    });
+                });
+            });
         </script>
     </body>
 </html>
