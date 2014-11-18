@@ -20,41 +20,12 @@ public class Event_PriceServlet extends HttpServlet {
 //        int event_Id = (Integer)session.getAttribute("event_Id");
         int event_Id  = 1;
         if(userPath.equals("/JSPEvent_Price")) {
+            request.setAttribute("titleOfEvent", "The Magical Mystery Tour");
             moveJSPEvent_Creating(event_Id, request, response);
-        } else if(userPath.equals("/Event_PriceInserting")) {
-            insertIntoEvent_Price(request, event_Id, writer);
-        } else if(userPath.equals("/AJAXEvent_PriceInserting")) {
-            insertIntoEvent_PriceUsingAJAX(request, event_Id, response);
-        } else if(userPath.equals("/Event_PriceDeleting")) {
-            int price_Id = Integer.parseInt(request.getParameter("price_Id"));
-            Event_Price_StorkTeam db = new Event_Price_StorkTeam();
-            db.deleteEventPriceByPriceId(price_Id);
-            
-            java.util.Map<String, String> options = new java.util.LinkedHashMap<String, String>();
-            options.put("result", "The Price Type has been deleted");
-            String json = new com.google.gson.Gson().toJson(options);
-            
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
-        }else if (userPath.equals("/Event_PriceUpdating")) {
-            int priceId = Integer.parseInt(request.getParameter("price_Id"));
-            float price = Float.parseFloat(request.getParameter("price"));
-            String description = request.getParameter("description");
-            Event_Price_StorkTeam db = new Event_Price_StorkTeam();
-            db.editEventPrice(new Event_Price(priceId, price, description));
-            
-            java.util.Map<String, String> options = new java.util.LinkedHashMap<String, String>();
-            options.put("result", "Price Updated");
-            String json = new com.google.gson.Gson().toJson(options);
-            
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
         }
     }
 
-    private void insertIntoEvent_PriceUsingAJAX(HttpServletRequest request, int event_Id, HttpServletResponse response) throws IOException, NumberFormatException {
+    private void insertIntoEvent_Price(HttpServletRequest request, int event_Id, HttpServletResponse response) throws IOException, NumberFormatException {
         float price = Float.parseFloat(request.getParameter("price"));
         String description = request.getParameter("description");
         Event_Price_StorkTeam db = new Event_Price_StorkTeam();
@@ -69,19 +40,6 @@ public class Event_PriceServlet extends HttpServlet {
         response.getWriter().write(json);
     }
 
-    private void insertIntoEvent_Price(HttpServletRequest request, int event_Id, PrintWriter writer) throws NumberFormatException {
-        float price = Float.parseFloat(request.getParameter("price"));
-        String description = request.getParameter("description");
-        Event_Price_StorkTeam db = new Event_Price_StorkTeam();
-        Event_Price event_Price = new Event_Price(price, description, event_Id);
-        db.insertEvent_Price(event_Price);
-        if(event_Price.getPrice_Id() <= 0) {
-            writer.println("<html><body><h1>Error Creating Event_Price</h1></body></html>");
-        } else {
-            writer.println("<html><body><h1>Success Creating Event_Price</h1></body></html>");
-        }
-    }
-
     private void moveJSPEvent_Creating(int event_Id, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Event_Price_StorkTeam db = new Event_Price_StorkTeam();
         List<Event_Price> listOfEvent_Prices = db.selectEvent_PriceByEvent_Id(event_Id);
@@ -92,6 +50,36 @@ public class Event_PriceServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        String userPath = request.getServletPath();
+        int event_Id = 1;
+        if(userPath.equals("/Event_PriceInserting")) {
+            insertIntoEvent_Price(request, event_Id, response);
+        } else if (userPath.equals("/Event_PriceUpdating")) {
+            int priceId = Integer.parseInt(request.getParameter("price_Id"));
+            float price = Float.parseFloat(request.getParameter("price"));
+            String description = request.getParameter("description");
+            Event_Price_StorkTeam db = new Event_Price_StorkTeam();
+            boolean result = db.editEventPrice(new Event_Price(priceId, price, description));
+            
+            java.util.Map<String, Boolean> options = new java.util.LinkedHashMap<String, Boolean>();
+            options.put("result", result);
+            String json = new com.google.gson.Gson().toJson(options);
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        } else if(userPath.equals("/Event_PriceDeleting")) {
+            int price_Id = Integer.parseInt(request.getParameter("price_Id"));
+            Event_Price_StorkTeam db = new Event_Price_StorkTeam();
+            db.deleteEventPriceByPriceId(price_Id);
+            
+            java.util.Map<String, String> options = new java.util.LinkedHashMap<String, String>();
+            options.put("result", "The Price Type has been deleted");
+            String json = new com.google.gson.Gson().toJson(options);
+            
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
     }
 }
