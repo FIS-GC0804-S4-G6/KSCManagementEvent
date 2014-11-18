@@ -29,7 +29,7 @@
                                     <tr>
                                         <td data-eventPrice-id="${i.getPrice_Id()}">${count}</td>
                                         <td>${i.getPrice()}</td>
-                                        <td>${i.getDescription()}</td>
+                                        <td class="setWidth concat">${i.getDescription()}</td>
                                         <td class="middle-align">
                                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left" name="editing">Edit</a>
                                             <a href="#" class="btn btn-danger btn-sm btn-icon icon-left" name="deleting">Delete</a> 
