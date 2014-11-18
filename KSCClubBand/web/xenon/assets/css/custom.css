@@ -24,6 +24,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     width: inherit;
+    word-break: break-all;
 }
 
 /*table > thead > tr > th:nth-child(7) {
