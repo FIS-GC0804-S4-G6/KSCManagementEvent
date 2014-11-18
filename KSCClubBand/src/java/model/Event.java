@@ -18,6 +18,7 @@ public class Event {
     private Category category;
     private int amountPaticipants;
     private float sumPrice;
+    private String type;
     
     public Event(){}
     
@@ -66,6 +67,16 @@ public class Event {
         this.category = new Category(cate_Id, categoryName);
         this.amountPaticipants = amountPaticipants;
         this.sumPrice = sumPrice;
+    }
+    
+    public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id, String categoryName, String type) {
+        this.event_Id = event_Id;
+        this.title = title;
+        this.address = address;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.category = new Category(cate_Id, categoryName);
+        this.type = type;
     }
     
     public Event(String title, DateTime startDate, DateTime endDate, String address) {
@@ -185,11 +196,18 @@ public class Event {
         this.sumPrice = value;
     }
     
+    public String getType() {
+        return type;
+    }
+    public void setType(String val) {
+        type = val;
+    }
+    
     @Override
     public String toString() {
         return "event: " + title + "{logo: " + logo + "\ndescription: " + description + "\nspeaker: " + speaker + "\naddress: " + address
                 + "\nslogan: " + slogan + "\nstartDate: " + startDate.getYear() + "-" + startDate.getMonthOfYear() + "-" + startDate.getDayOfMonth() + " " + startDate.getHourOfDay() + "::" + startDate.getMinuteOfHour()
                 + "\nendDate: " + endDate.getYear() + "-" + endDate.getMonthOfYear() + "-" + endDate.getDayOfMonth() + " " + endDate.getHourOfDay() + "::" + endDate.getMinuteOfHour()
-                + "\ncate_Id" + category.getCate_Id() + "\ncategoryName: " + category.getCategoryName() + "}";
+                + "\ncate_Id" + category.getCate_Id() + "\ncategoryName: " + category.getCategoryName() + "\nType: " + type + "}";
     }
 }
