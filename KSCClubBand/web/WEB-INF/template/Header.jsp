@@ -31,7 +31,7 @@
 
 
     </head>
-    <body class="page-body">
+    <body class="page-body ${param.pageName}">
 
         <div class="settings-pane">
 

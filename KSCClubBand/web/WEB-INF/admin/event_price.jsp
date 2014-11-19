@@ -80,24 +80,24 @@
         
         <!-- Modal 1 (Basic)-->
 	<div class="modal fade" id="modal-delete">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 class="modal-title">Delete Event Price</h4>
-				</div>
-				
-				<div class="modal-body">
-				    Delete
-				</div>
-				
-				<div class="modal-footer">
-					<button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
-					<button type="submit" class="btn btn-info btn-delete" data-dismiss="modal">Delete</button>
-				</div>
-			</div>
-		</div>
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Delete Event Price</h4>
+                    </div>
+
+                    <div class="modal-body">
+                        Delete
+                    </div>
+
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancel</button>
+                            <button type="submit" class="btn btn-info btn-delete" data-dismiss="modal">Delete</button>
+                    </div>
+                </div>
+            </div>
 	</div>
         
         <!-- Bottom Scripts -->
@@ -186,26 +186,28 @@
                           console.log('textStatus: ' + textStatus);
                         },
                         success: function (data, textStatus, jqXHR) {
-                          var lastIndex = $('tbody').find('tr:last-child td:first-child').html();
+                            var lastIndex = $('tbody').find('tr:last-child td:first-child').html();
+                            if(lastIndex === undefined) {
+                              lastIndex = 0;
+                            }
+                            var $rightPanel = $(self).closest('.panel-edit-event-price'),
+                                $price = $rightPanel.find('input[name=price]'),
+                                $description = $rightPanel.find('textarea[name=description]');
                           
-                          var $rightPanel = $(self).closest('.panel-edit-event-price'),
-                              $price = $rightPanel.find('input[name=price]'),
-                              $description = $rightPanel.find('textarea[name=description]');
-                          
-                          data = 
-                          '<tr>\n' +
-                            '\t<td data-eventPrice-id="' + data.price_Id + '">' + (parseInt(lastIndex)+1) + '</td>\n' +
-                            '\t<td>' + price + '</td>\n' +
-                            '\t<td>' + description + '</td>\n' +
-                            '\t<td class="middle-align">\n' +
-                              '\t\t<a href="#" class="btn btn-secondary btn-sm btn-icon icon-left" name="editing">Edit</a>\n' +
-                              '\t\t<a href="#" class="btn btn-danger btn-sm btn-icon icon-left" name="deleting">Delete</a>\n' +
-                            '\t</td>\n' + 
-                          '</tr>';
-                          $('tbody').append(data);
-                          
-                          $price.val('');
-                          $description.val('');
+                            data = 
+                            '<tr>\n' +
+                              '\t<td data-eventPrice-id="' + data.price_Id + '">' + (parseInt(lastIndex)+1) + '</td>\n' +
+                              '\t<td>' + price + '</td>\n' +
+                              '\t<td class="setWidth concat">' + description + '</td>\n' +
+                              '\t<td class="middle-align">\n' +
+                                '\t\t<a href="#" class="btn btn-secondary btn-sm btn-icon icon-left" name="editing">Edit</a>\n' +
+                                '\t\t<a href="#" class="btn btn-danger btn-sm btn-icon icon-left" name="deleting">Delete</a>\n' +
+                              '\t</td>\n' + 
+                            '</tr>';
+                            $('tbody').append(data);
+
+                            $price.val('');
+                            $description.val('');
                         }
                       });
                       

@@ -127,6 +127,12 @@
             
         <jsp:include page="../template/Footer.jsp"/>
         
+        <!-- Imported styles on this page -->
+        <link rel="stylesheet" href="xenon/assets/js/daterangepicker/daterangepicker-bs3.css">
+        <link rel="stylesheet" href="xenon/assets/js/select2/select2.css">
+        <link rel="stylesheet" href="xenon/assets/js/select2/select2-bootstrap.css">
+        <link rel="stylesheet" href="xenon/assets/js/multiselect/css/multi-select.css">
+        
         <!-- Bottom Scripts -->
         <script src="xenon/assets/js/bootstrap.min.js" type="text/javascript"></script>
         <script src="xenon/assets/js/TweenMax.min.js"></script>
@@ -135,12 +141,6 @@
         <script src="xenon/assets/js/xenon-api.js"></script>
         <script src="xenon/assets/js/xenon-toggles.js"></script>
         <script src="xenon/assets/js/moment.min.js"></script>
-
-        <!-- Imported styles on this page -->
-        <link rel="stylesheet" href="xenon/assets/js/daterangepicker/daterangepicker-bs3.css">
-        <link rel="stylesheet" href="xenon/assets/js/select2/select2.css">
-        <link rel="stylesheet" href="xenon/assets/js/select2/select2-bootstrap.css">
-        <link rel="stylesheet" href="xenon/assets/js/multiselect/css/multi-select.css">
 
         <!-- Imported scripts on this page -->
         <script src="xenon/assets/js/daterangepicker/daterangepicker.js"></script>

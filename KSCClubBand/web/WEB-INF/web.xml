@@ -42,6 +42,7 @@
         <url-pattern>/JSPEventDetailParticipants</url-pattern>
         <url-pattern>/EventFilter.guitar</url-pattern>
         <url-pattern>/ThrowLogoAway.oneandoneistwo</url-pattern>
+        <url-pattern>/JSPEventInfo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Event Price</servlet-name>

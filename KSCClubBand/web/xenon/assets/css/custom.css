@@ -6,7 +6,7 @@
 .table > thead > tr > th,
 .table > tbody > tr > th,
 .table > tfood > tr > th {
-  padding: 12px 5px;
+  padding: 12px 10px;
 }
 
 .table > thead > tr > th:nth-child(9),
@@ -27,6 +27,11 @@
     word-break: break-all;
 }
 
+/* boostrap.css 2337 */
+.form-inline .form-control {
+  width: 100%;
+}
+
 /*table > thead > tr > th:nth-child(7) {
     width: 50px;
 }*/
@@ -42,3 +47,25 @@ tr.selected > * {
     background: tomato!important;
 }
 
+/* eventinfo.jsp */
+.event-info .col-md-4:nth-child(1) {
+    padding-left: 0;
+}
+
+.event-info .col-md-4:nth-child(3) {
+    padding-right: 0;
+}
+
+.event-info .table > tbody > tr > td, .table > tfoot > tr > td, 
+.event-info .table > tbody > tr > th, .table > tfoot > tr > th {
+    border-bottom: 0 none;
+    border-top: 0 none;
+}
+
+.event-info .modal .modal-dialog .modal-content {
+    padding: 0;
+}
+/* /eventinfo.jsp */
+.col-md-6 .panel {
+    padding-bottom: 0;
+}
