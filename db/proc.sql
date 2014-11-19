@@ -392,11 +392,7 @@ create proc sp_select_participants_from_event
 as
 begin
 	select CE.TicketCode, CE.Price as [RealPrice], CE.Price_Id, CE.TicketCode
-	, PO.Payment_Type,
-	Case
-		when PO.Payment_Id = 4 then 0
-		else 1
-	End as [Check]
+	, PO.Payment_Type, PO.Payment_Id
 	, C.Email, C.FullName
 	from Cust_Event as CE
 	join Customer as C
