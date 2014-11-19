@@ -122,5 +122,5 @@ create table MailingList(
 	Email varchar(200) primary key,
 	Status bit
 )
-
-select*from Customer
+go
+select * from Customer

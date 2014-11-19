@@ -16,6 +16,10 @@
         <servlet-name>ShowEvent</servlet-name>
         <servlet-class>com.mike.controllers.ShowEvent</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeEvent</servlet-name>
+        <servlet-class>com.mike.controllers.HomeEvent</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Authentication</servlet-name>
         <url-pattern>/authentication</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ShowEvent</servlet-name>
         <url-pattern>/showEvent</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeEvent</servlet-name>
+        <url-pattern>/homeEvent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
@@ -85,4 +93,7 @@
         <param-name>GmailPassword</param-name>
         <param-value>Duc76268481993@</param-value>
     </context-param>
+    <welcome-file-list>
+        <welcome-file>homeEvent</welcome-file>
+    </welcome-file-list>
 </web-app>

@@ -243,6 +243,17 @@ go
 	-------------------------------------
 	--select event and payment type
 	-------------------------------------
+	drop proc showSixEvent
+	go
+	create proc showSixEvent
+	as
+	begin
+		select top 6 Event_Id, Title, Logo, Description from Event
+		order by Event_Id DESC
+	end
+	go
+	exec showSixEvent
+	go
 
 	drop proc showEvent
 	go

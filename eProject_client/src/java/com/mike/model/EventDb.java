@@ -192,4 +192,35 @@ public class EventDb {
         }
         return null;
     }
+
+    public List<Event> showSixEvent() {
+        Connection conn = null;
+        CallableStatement cstm = null;
+        ResultSet rs = null;
+        List<Event> sixEvents = new LinkedList<Event>();
+        try {
+            ConnectionUtil connector = new ConnectionUtil(driver, servername, port, database, username, password);
+            conn = connector.getConnection();
+            cstm = (CallableStatement) conn.prepareCall("{call showSixEvent()}");
+            rs = cstm.executeQuery();
+            while (rs.next()) {
+                Event event = new Event(
+                        rs.getInt("Event_Id"),
+                        rs.getString("Title"),
+                        rs.getString("Logo"),
+                        rs.getString("Description"));
+                sixEvents.add(event);
+            }
+            return sixEvents;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(EventDb.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
 }

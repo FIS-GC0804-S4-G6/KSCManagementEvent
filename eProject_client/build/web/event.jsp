@@ -41,7 +41,7 @@
                         <p>
                             ${e.getDescription()}
                         </p>
-                        <a href="#"><i class="fa fa-angle-right fa-4x" id="${e.getEvent_Id()}"></i></a>
+                        <a href="${pageContext.request.contextPath}/showEventDetail"><i class="fa fa-angle-right fa-4x" id="${e.getEvent_Id()}"></i></a>
                     </li>
                 </c:forEach>
 <!--                <li>

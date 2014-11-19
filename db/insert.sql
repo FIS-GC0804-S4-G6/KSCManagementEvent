@@ -43,13 +43,13 @@ insert into Event(Title, Logo, Description, Speaker, Address, Slogan, StartDate,
 ('I Will', 'lib/img/icon.jpg', 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '9 Nov 2014 18:00', '15 Nov 2014 06:00', '1'),
 ('Noise', 'lib/img/icon.jpg', 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '19 Dec 2014 18:00', '29 Dec 2014 18:00', '1'),
 ('Rain', 'lib/img/icon.jpg', 'Comon comon comon comon', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2015 19:30', '19 Dec 2015 18:00', '1'),
-('Through Our Love', 'lib/img/icon.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '7 Nov 2014 23:00', '1'),
-('My Love', 'lib/img/icon.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2014 19:30', '7 Feb 2014 23:00', '1'),
-('Nhung Ten Toi Trum Pham Ma Tuy', 'lib/img/icon.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '5 Jan 2016 19:30', '19 Jan 2016 23:00', '1'),
-('Vu Giet Nguoi Tren San Gon', 'lib/img/icon.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '3 Dec 2015 19:30', '24 Jan 2016 23:00', '1'),
-('Chang Re Quy', 'lib/img/icon.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '7 Jan 2016 19:30', '25 Feb 2016 23:00', '1'),
-('Giai Dieu Tinh Yeu', 'lib/img/icon.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2000 19:30', '1 Jan 2016 23:00', '1'),
-('Silly Love Song', 'lib/img/icon.jpg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2000 19:30', '10 Feb 2016 23:00', '1')
+('Through Our Love', 'lib/img/people.jpeg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Oct 2014 19:30', '7 Nov 2014 23:00', '1'),
+('My Love', 'lib/img/affinity.jpeg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2014 19:30', '7 Feb 2014 23:00', '1'),
+('Nhung Ten Toi Trum Pham Ma Tuy', 'lib/img/cinelli.jpeg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '5 Jan 2016 19:30', '19 Jan 2016 23:00', '1'),
+('Vu Giet Nguoi Tren San Gon', 'lib/img/surly.jpeg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '3 Dec 2015 19:30', '24 Jan 2016 23:00', '1'),
+('Chang Re Quy', 'lib/img/people.jpeg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '7 Jan 2016 19:30', '25 Feb 2016 23:00', '1'),
+('Giai Dieu Tinh Yeu', 'lib/img/affinity.jpeg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2000 19:30', '1 Jan 2016 23:00', '1'),
+('Silly Love Song', 'lib/img/cinelli.jpeg', 'Buổi hòa nhạc gần như im lặng', 'Steve', 'Hoang Thanh', 'Cang dong cang vui', '1 Jan 2000 19:30', '10 Feb 2016 23:00', '1')
 go
 insert into Event_Price(Event_Id, Price, Description) values
 ('1', '20', null),
