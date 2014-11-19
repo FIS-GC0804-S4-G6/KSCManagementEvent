@@ -391,9 +391,13 @@ create proc sp_select_participants_from_event
 	@Event_Id int
 as
 begin
-	select CE.TicketCode, CE.Price as [RealPrice], CE.Price_Id
-	, PO.Payment_Type
-	, C.Email
+	select CE.TicketCode, CE.Price as [RealPrice], CE.Price_Id, CE.TicketCode
+	, PO.Payment_Type,
+	Case
+		when PO.Payment_Id = 4 then 0
+		else 1
+	End as [Check]
+	, C.Email, C.FullName
 	from Cust_Event as CE
 	join Customer as C
 	on CE.Cust_Id = C.Cust_Id
@@ -404,11 +408,12 @@ begin
 	join Payment_Option as PO
 	on CE.Payment_Id = PO.Payment_Id
 	where E.IsDelete = 0 and CE.IsDelete = 0 and CE.Event_Id = @Event_Id
+	order by CE.Cust_Id
 end
 go
+
 exec sp_select_participants_from_event 1
 go
-
 
 
 -- =============================================================== --
@@ -619,7 +624,7 @@ create proc sp_select_events_month
 	@Month int
 as
 begin
-	select Title, StartDate, EndDate,
+	select E.*, C.CategoryName,
 	case
 		when
 			Year(StartDate) = @Year and Month(StartDate) = @Month and
@@ -651,8 +656,9 @@ begin
 				or 
 			(Year(StartDate) < @Year and Year(EndDate) > @Year)
 		then 'before month after'
-		end as [YouAreHere]
-	from Event
+		end as [Type]
+	from Event as E
+	join Category as C on E.Cate_Id = C.Cate_Id
 	where IsDelete = 0
 	and (
 		(Year(StartDate) = @Year and Month(StartDate) = @Month and
@@ -687,8 +693,9 @@ begin
 			(Year(StartDate) < @Year and Year(EndDate) > @Year)
 		)
 	)
+	order by [Type]
 end
 go
 
-exec sp_select_events_month 2015, 11
+exec sp_select_events_month 2016, 2
 go
