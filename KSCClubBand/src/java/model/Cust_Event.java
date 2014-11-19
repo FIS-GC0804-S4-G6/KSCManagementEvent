@@ -50,11 +50,11 @@ public class Cust_Event {
         realPrice = val;
     }
     
-    public Cust_Event(String ticketCode, float realPrice, String payment_Type, String email) {
+    public Cust_Event(String ticketCode, float realPrice, String payment_Type, int payment_Id, String email, String fullName) {
         this.ticketCode = ticketCode;
         this.realPrice = realPrice;
-        this.payment_Option = new Payment_Option(payment_Type);
-        this.customer = new Customer(email);
+        this.payment_Option = new Payment_Option(payment_Id, payment_Type);
+        this.customer = new Customer(email, fullName);
     }
     
     @Override

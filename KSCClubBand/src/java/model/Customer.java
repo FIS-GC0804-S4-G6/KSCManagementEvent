@@ -119,4 +119,9 @@ public class Customer {
     public Customer(String email) {
         this.email = email;
     }
+    
+    public Customer(String email, String fullName) {
+        this.email = email;
+        this.fullName = fullName;
+    }
 }
