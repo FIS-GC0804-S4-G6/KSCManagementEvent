@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -9,19 +8,15 @@ import javax.servlet.http.HttpServletResponse;
 import db.Event_Price_StorkTeam;
 import java.util.List;
 import model.Event_Price;
+import javax.servlet.http.HttpSession;
 
 public class Event_PriceServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userPath = request.getServletPath();
-        PrintWriter writer = response.getWriter();
-        javax.servlet.http.HttpSession session = request.getSession(true);
-//        int event_Id = (Integer)session.getAttribute("event_Id");
-        int event_Id  = 1;
         if(userPath.equals("/JSPEvent_Price")) {
-            request.setAttribute("titleOfEvent", "The Magical Mystery Tour");
-            moveJSPEvent_Creating(event_Id, request, response);
+            moveJSPEvent_Creating(request, response);
         }
     }
 
@@ -40,10 +35,16 @@ public class Event_PriceServlet extends HttpServlet {
         response.getWriter().write(json);
     }
 
-    private void moveJSPEvent_Creating(int event_Id, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    private void moveJSPEvent_Creating(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        HttpSession session = request.getSession(true);
+        int event_Id = (Integer)session.getAttribute("event_Id");
+        String title = (String)session.getAttribute("title");
+        
         Event_Price_StorkTeam db = new Event_Price_StorkTeam();
         List<Event_Price> listOfEvent_Prices = db.selectEvent_PriceByEvent_Id(event_Id);
+        
         request.setAttribute("listOfEvent_Prices", listOfEvent_Prices);
+        request.setAttribute("titleOfEvent", title);
         request.getRequestDispatcher("WEB-INF/admin/event_price.jsp").forward(request, response);
     }
 
@@ -51,7 +52,8 @@ public class Event_PriceServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String userPath = request.getServletPath();
-        int event_Id = 1;
+        HttpSession session = request.getSession(true);
+        int event_Id = (Integer)session.getAttribute("event_Id");
         if(userPath.equals("/Event_PriceInserting")) {
             insertIntoEvent_Price(request, event_Id, response);
         } else if (userPath.equals("/Event_PriceUpdating")) {

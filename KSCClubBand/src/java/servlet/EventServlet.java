@@ -50,6 +50,21 @@ public class EventServlet extends HttpServlet {
             request.getRequestDispatcher("WEB-INF/admin/eventdetail.jsp").forward(request, response);
         } else if(userPath.equals("/EventFilter.guitar")) {
             filterEvent(request, response);
+        } else if(userPath.equals("/JSPEventInfo")) {
+            int event_Id = Integer.parseInt(request.getParameter("event_Id"));
+            Event_StorkTeam db = new Event_StorkTeam();
+            Event entity = db.selectEventByEvent_Id(event_Id);
+            if(entity != null) {
+                if(entity.getEvent_Id() != -1) {
+                    request.setAttribute("entity", entity);
+                    request.getRequestDispatcher("WEB-INF/admin/eventinfo.jsp").forward(request, response);
+                } else {
+                    response.getWriter().write("The event_Id is not existed");
+                }
+            } else {
+                response.getWriter().write("We can not get the detail.");
+            }
+            
         }
     }
     
@@ -100,11 +115,18 @@ public class EventServlet extends HttpServlet {
     private void filterEvent(HttpServletRequest request, HttpServletResponse response) throws
             ServletException, IOException{
         String title = request.getParameter("title");
-        DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm");
-        String strStartDate = request.getParameter("startDate");
-        String strEndDate = request.getParameter("endDate");
-        DateTime startDate = strStartDate.equals("") ? null : datetimeFormatter.parseDateTime(strStartDate);
-        DateTime endDate = strEndDate.equals("") ? null : datetimeFormatter.parseDateTime(request.getParameter("endDate"));
+        DateTimeFormatter datetimeFormatter = DateTimeFormat.forPattern("dd/mm/yyyy HH:mm aa");
+        String strStartDate = request.getParameter("startDate") + " " + request.getParameter("startTime");
+        String strEndDate = request.getParameter("endDate") + " " + request.getParameter("endTime");
+        DateTime startDate = null;
+        DateTime endDate = null;
+        try {
+            startDate = datetimeFormatter.parseDateTime(strStartDate);
+            endDate = datetimeFormatter.parseDateTime(strEndDate);
+        } catch(IllegalArgumentException iae) {
+            // parse error and get null values
+            iae.printStackTrace();
+        }
         String address = request.getParameter("address");
 
         Event entity = new Event(title, startDate, endDate, address);
@@ -190,17 +212,17 @@ public class EventServlet extends HttpServlet {
             int cate_Id = Integer.parseInt(request.getParameter("cate_Id"));
             Event entity = new Event(title, fileName, description, speaker, address, slogan, starttime, endtime, cate_Id);
             db.addEvent(entity);
-            System.out.println("inserted");
             if(entity.getEvent_Id() > -1) {
                 String[] checkBoxPrice = request.getParameterValues("checkBoxPrice");
                 if (checkBoxPrice != null) {
                     if(checkBoxPrice[0] != null && checkBoxPrice[0].equals("yes") == true) {
                         HttpSession session = request.getSession(true);
                         session.setAttribute("event_Id", entity.getEvent_Id());
+                        session.setAttribute("title", entity.getTitle());
                         response.sendRedirect("JSPEvent_Price");
                     }
                 } else{
-                    request.getRequestDispatcher("/WEB-INF/admin/eventcreating.jsp").forward(request, response);
+                    getJSPEventCreating(request, response);
                 }
             } else {
                 response.getWriter().write("chang may insert event nay nay that bai. Hen lan sau");
