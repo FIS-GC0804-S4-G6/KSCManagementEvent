@@ -83,10 +83,11 @@ go
 		join Category as C on
 		E.Cate_Id = C.Cate_Id
 		where E.IsDelete = 0
-		order by E.Event_Id
+		order by E.StartDate desc, E.EndDate desc
 		offset ((@PageNumber - 1) * @RowsPage) rows
 		fetch next @RowsPage rows only
 	go
+
 	select * from Event
 	exec sp_event_select 1, 100
 	go
@@ -715,7 +716,7 @@ begin
 			(Year(StartDate) < @Year and Year(EndDate) > @Year)
 		)
 	)
-	order by [Type]
+	order by [Type], E.StartDate desc, E.EndDate desc
 end
 go
 
