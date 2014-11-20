@@ -219,7 +219,7 @@
                             </a>
                             <ul>
                                 <li>
-                                    <a href="layout-variants.html">
+                                    <a href="JSPSumPriceEveryMonthOfYear">
                                         <span class="title">Statistic</span>
                                     </a>
                                 </li>
