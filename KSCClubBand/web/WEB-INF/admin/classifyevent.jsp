@@ -30,7 +30,7 @@
                             <td>${i.value.getStartDate()}</td>
                             <td>${i.value.getEndDate()}</td>
                             <td>${i.value.getType()}</td>
-                            <td><a href="#">Go Detail</a></td>
+                            <td><a href="JSPEventInfo?event_Id=${i.key}">Go Detail</a></td>
                         </tr>
                     </c:forEach>
                 </c:if>
