@@ -39,7 +39,7 @@ public class SiteHitCounter implements Filter {
         hitCount++;
 
         // Print the counter.
-        System.out.println("Site visits count :" + hitCount);
+//        System.out.println("Site visits count :" + hitCount);
 
         // Pass request back down the filter chain
         chain.doFilter(request, response);
