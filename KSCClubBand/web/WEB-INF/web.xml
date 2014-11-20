@@ -47,6 +47,7 @@
         <url-pattern>/EventFilter.guitar</url-pattern>
         <url-pattern>/ThrowLogoAway.oneandoneistwo</url-pattern>
         <url-pattern>/JSPEventInfo</url-pattern>
+        <url-pattern>/EventStatusToggling</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Event Price</servlet-name>
@@ -59,6 +60,7 @@
         <servlet-name>Cust_Event Servlet</servlet-name>
         <url-pattern>/JSPParticipantsEditing</url-pattern>
         <url-pattern>/ParticipantEditing</url-pattern>
+        <url-pattern>/JSPParticipant</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>StatisticServlet</servlet-name>
