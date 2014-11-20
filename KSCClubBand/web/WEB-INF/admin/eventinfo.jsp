@@ -2,22 +2,28 @@
 <%@taglib prefix="joda" uri="http://www.joda.org/joda/time/tags"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:include page="../template/Header.jsp">
-    <jsp:param name="title" value="Event Detail"/>
+    <jsp:param name="title" value="Event Information"/>
     <jsp:param name="heading" value="${entity.getTitle()}"/>
     <jsp:param name="headingNote" value="Dig a hole and you'll get the treasure. These are all Infomation from Event"/>
     <jsp:param name="step1" value="Event"/>
-    <jsp:param name="step2" value="Event Filter"/>
+    <jsp:param name="step2" value="Event Information"/>
     <jsp:param name="pageName" value="event-info"/>
 </jsp:include>
         <div class="row">
             <div class="col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
+                        <form id="eventStatusToggling" action="EventStatusToggling" method="POST"></form>
                         <button class="btn btn-primary">Edit</button>
                         <button class="btn btn-secondary">Delete Event</button>
-                        <button class="btn btn-purple">Active</button>
-                        <button class="btn btn-pink">Ticket</button>
-                        <button class="btn btn-orange">Participants</button>
+                        <c:if test="${entity.getStatus() == true}">
+                            <button form="eventStatusToggling" type="submit" name="event_Id" value="${entity.getEvent_Id()}" class="btn btn-purple">Deactive</button>
+                        </c:if>
+                        <c:if test="${entity.getStatus() == false}">
+                            <button form="eventStatusToggling" type="submit" name="event_Id" value="${entity.getEvent_Id()}" class="btn btn-purple">Active</button>
+                        </c:if>
+                        <button form="eventStatusToggling" class="btn btn-pink">Ticket</button>
+                        <a href="JSPParticipant?event_Id=${entity.getEvent_Id()}"><button class="btn btn-orange">Participants</button></a>
                     </div>
                 </div>
             </div>
@@ -220,7 +226,7 @@
 	<script src="xenon/assets/js/xenon-toggles.js"></script>
 
         <!-- Imported scripts on this page -->
-	<script src="assets/js/jquery-ui/jquery-ui.min.js"></script>
+	<script src="xenon/assets/js/jquery-ui/jquery-ui.min.js"></script>
 
 	<!-- JavaScripts initializations and stuff -->
 	<script src="xenon/assets/js/xenon-custom.js"></script>
