@@ -78,10 +78,9 @@
                                 </tr>
                             </thead>
                             <tbody class="middle-align">
-                                <c:set var="count" value="1" scope="page"/>
+                                <c:set var="count" value="${pageNumber * 10 - 9}" scope="page"/>
                                 <c:forEach items="${mapOfEvents}" var="i">
                                     <tr>
-                                        <%-- 29/01/1994 19:30 --%>
                                         <td data-event-id="${i.value.getEvent_Id()}">${count}</td>
                                         <td class="setWidth concat"><div>${i.value.getTitle()}</div></td>
                                         <td>${i.value.getAddress()}</td>

@@ -125,9 +125,22 @@
             </div>
         </div>
             
+        <form role="form" method="post">
+			
+                <div class="form-group">
+                        <textarea class="form-control wysihtml5" data-stylesheet-url="xenon/assets/js/wysihtml5/lib/css/wysiwyg-color.css" name="sample_wysiwyg" id="sample_wysiwyg"></textarea>
+                </div>
+
+        </form>
+
         <jsp:include page="../template/Footer.jsp"/>
         
         <!-- Imported styles on this page -->
+	<link rel="stylesheet" href="xenon/assets/js/wysihtml5/src/bootstrap-wysihtml5.css">
+	<link rel="stylesheet" href="xenon/assets/js/uikit/vendor/codemirror/codemirror.css">
+	<link rel="stylesheet" href="xenon/assets/js/uikit/uikit.css">
+	<link rel="stylesheet" href="xenon/assets/js/uikit/css/addons/uikit.almost-flat.addons.min.css">
+        
         <link rel="stylesheet" href="xenon/assets/js/daterangepicker/daterangepicker-bs3.css">
         <link rel="stylesheet" href="xenon/assets/js/select2/select2.css">
         <link rel="stylesheet" href="xenon/assets/js/select2/select2-bootstrap.css">
@@ -141,6 +154,7 @@
         <script src="xenon/assets/js/xenon-api.js"></script>
         <script src="xenon/assets/js/xenon-toggles.js"></script>
         <script src="xenon/assets/js/moment.min.js"></script>
+        <script src="xenon/assets/js/wysihtml5/lib/js/wysihtml5-0.3.0.js"></script>
 
         <!-- Imported scripts on this page -->
         <script src="xenon/assets/js/daterangepicker/daterangepicker.js"></script>
@@ -154,6 +168,14 @@
         <script src="xenon/assets/js/typeahead.bundle.js"></script>
         <script src="xenon/assets/js/handlebars.min.js"></script>
         <script src="xenon/assets/js/multiselect/js/jquery.multi-select.js"></script>
+        
+	<script src="xenon/assets/js/wysihtml5/src/bootstrap-wysihtml5.js"></script>
+	<script src="xenon/assets/js/uikit/vendor/codemirror/codemirror.js"></script>
+	<script src="xenon/assets/js/uikit/vendor/marked.js"></script>
+	<script src="xenon/assets/js/uikit/js/uikit.min.js"></script>
+	<script src="xenon/assets/js/uikit/js/addons/htmleditor.min.js"></script>
+	<script src="xenon/assets/js/ckeditor/ckeditor.js"></script>
+	<script src="xenon/assets/js/ckeditor/adapters/jquery.js"></script>
 
         <script src="xenon/assets/js/xenon-custom.js"></script>
     </body>

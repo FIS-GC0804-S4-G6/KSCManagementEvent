@@ -52,6 +52,7 @@
     <servlet-mapping>
         <servlet-name>Event Price</servlet-name>
         <url-pattern>/JSPEvent_Price</url-pattern>
+        <url-pattern>/RedirectJSPEvent_Price</url-pattern>
         <url-pattern>/Event_PriceInserting</url-pattern>
         <url-pattern>/Event_PriceDeleting</url-pattern>
         <url-pattern>/Event_PriceUpdating</url-pattern>
@@ -83,7 +84,6 @@
             30
         </session-timeout>
     </session-config>
-    <url-pattern>/Login</url-pattern>
     <welcome-file-list>
         <welcome-file>/WEB-INF/admin/login.jsp</welcome-file>
     </welcome-file-list>
