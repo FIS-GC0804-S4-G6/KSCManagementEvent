@@ -25,7 +25,8 @@ public class Cust_Event_StorkTeam {
                 int payment_Id = rs.getInt("Payment_Id");
                 String email = rs.getString("Email");
                 String fullName = rs.getString("FullName");
-                Cust_Event entity = new Cust_Event(ticketCode, realPrice, payment_Type, payment_Id, email, fullName);
+                float lastPrice = rs.getFloat("LastestPrice");
+                Cust_Event entity = new Cust_Event(ticketCode, realPrice, price_Id, payment_Type, payment_Id, email, fullName, lastPrice);
                 mapOfCust_Events.put(ticketCode ,entity);
             }
             return mapOfCust_Events;
