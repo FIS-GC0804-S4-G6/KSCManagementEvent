@@ -35,7 +35,7 @@ create table University(
 go
 create table Customer(
 	Cust_Id int identity primary key,
-	Email nvarchar(max),
+	Email nvarchar(200) not null unique,
 	FullName nvarchar(max),
 	Password nvarchar(max),
 	Gender bit not null,

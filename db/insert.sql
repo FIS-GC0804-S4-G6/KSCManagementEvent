@@ -69,12 +69,17 @@ go
 
 insert into Role(Roletype) values
 ('Customer'),
-('Subadmin')
+('Subadmin'),
+('Admin')
 go
 
-insert into Customer(Email, FullName, Password, Gender, DateOfBirth, Address, Mobile, Home, IDCard,
-Avatar, Role_Id, Univercode, Active) values
-('haindgc00605@fpt.edu.vn', 'Nguyen Duc Hai', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1')go
+insert into Customer(Email, FullName, Password, Gender, DateOfBirth, Address, Mobile, Home, IDCard, Avatar, Role_Id, Univercode, Active) 
+values 
+('haindgc00605@fpt.edu.vn', 'Nguyen Duc Hai', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1'),
+('giapnhgc@gmail.com', 'Nguyen Hoang Giap', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '2', '1', '1'),
+('duc@gmail.com', 'Nguyen Duy Duc', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '1', '1', '1'),
+('a@gmail.com', 'Nguyen Van A', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '1', '1', '1')
+go
 
 insert into Payment_Option(Payment_Type) values
 ('Demand Draft'),
