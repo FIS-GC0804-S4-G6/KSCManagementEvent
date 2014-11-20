@@ -4,7 +4,7 @@
 <jsp:include page="../template/Header.jsp">
     <jsp:param name="title" value="Event Tsunami"/>
     <jsp:param name="heading" value="We Build All Magical Events Around The World With 50 Monkeys"/>
-    <jsp:param name="headingNote" value="Do whatever you want if every events have fun"/>
+    <jsp:param name="headingNote" value="Do whatever you want as long as every events have fun"/>
     <jsp:param name="step1" value="Event"/>
     <jsp:param name="step2" value="Event Filter"/>
     <jsp:param name="fullName" value="${username}"/>
@@ -101,8 +101,8 @@
                                 </c:forEach>
                             </tbody>
                         </table>
-                        <form method="GET" action="JSPEventNext"><button class="btn next-btn pull-right btn-blue" type="submit">Next</button></form>
-                        <form method="GET" action="JSPEventPrev"><button class="btn pre-btn pull-right btn-blue"" type="submit">Previous</button></form>
+                        <a href="JSPEventNext"><button class="btn next-btn pull-right btn-blue" type="submit">Next</button></a>
+                        <a href="JSPEventPrev"><button class="btn pre-btn pull-right btn-blue" type="submit">Previous</button></a>
                     </div>
                 </div>
             </div>
