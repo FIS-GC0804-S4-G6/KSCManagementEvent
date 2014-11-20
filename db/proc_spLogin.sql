@@ -39,3 +39,18 @@ go
 exec spLoginAdmin 'giapnhgc@gmail.com', 12345;
 go
 select * from Customer
+
+go
+drop proc spRemember
+go
+create proc spRemember
+	@cust_Id int,
+	@sid_device varchar(max),
+	@device varchar(max)
+as
+begin
+	insert into Session
+	values (@cust_Id, @sid_device, @device)
+end
+go
+select * from Session

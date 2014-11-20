@@ -54,29 +54,25 @@ public class CustomerServlet extends HttpServlet {
                         session.setAttribute("email", email);
                         session.setAttribute("itemSID", itemSID);
                         session.setAttribute("browserType", browserType);
-                        request.getRequestDispatcher("/JSPEventSelecting").forward(request, response);
+                        response.sendRedirect("JSPEventSelecting");
                     } else {
                         if (rm.equals("Remember me")) {
                             if (db.rememberMe(customer.getCust_Id(), itemSID.getValue(), browserType)) {
-                                session.setAttribute("username", customer.getFullName());
-                                session.setAttribute("email", email);
-                                session.setAttribute("itemSID", itemSID);
-                                session.setAttribute("browserType", browserType);
-                                RequestDispatcher redirect = request.getRequestDispatcher("index.jsp");
-                                redirect.forward(request, response);
+                                System.out.println("Successed");
                             } else {
-                                session.setAttribute("username", customer.getFullName());
-                                session.setAttribute("email", email);
-                                session.setAttribute("itemSID", itemSID);
-                                session.setAttribute("browserType", browserType);
-                                request.getRequestDispatcher("/JSPEventSelecting").forward(request, response);
+                                System.out.println("False");
                             }
+                            session.setAttribute("username", customer.getFullName());
+                            session.setAttribute("email", email);
+                            session.setAttribute("itemSID", itemSID);
+                            session.setAttribute("browserType", browserType);
+                            response.sendRedirect("JSPEventSelecting");
                         } else {
                             session.setAttribute("username", customer.getFullName());
                             session.setAttribute("email", email);
                             session.setAttribute("itemSID", itemSID);
                             session.setAttribute("browserType", browserType);
-                            request.getRequestDispatcher("/JSPEventSelecting").forward(request, response);
+                            response.sendRedirect("JSPEventSelecting");
                         }
                     }
                 }

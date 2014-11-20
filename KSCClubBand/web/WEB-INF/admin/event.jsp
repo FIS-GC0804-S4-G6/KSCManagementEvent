@@ -7,6 +7,7 @@
     <jsp:param name="headingNote" value="Do whatever you want if every events have fun"/>
     <jsp:param name="step1" value="Event"/>
     <jsp:param name="step2" value="Event Filter"/>
+    <jsp:param name="fullName" value="${username}"/>
 </jsp:include>
 
         <div class="row">

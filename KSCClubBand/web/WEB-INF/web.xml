@@ -82,7 +82,7 @@
         </session-timeout>
     </session-config>
     <url-pattern>/Login</url-pattern>
-    <welcome-file-list>
+<!--    <welcome-file-list>
         <welcome-file>/WEB-INF/admin/login.jsp</welcome-file>
-    </welcome-file-list>
+    </welcome-file-list>-->
 </web-app>

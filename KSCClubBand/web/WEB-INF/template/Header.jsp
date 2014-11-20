@@ -508,7 +508,7 @@
                             <a href="#" data-toggle="dropdown">
                                 <img src="xenon/assets/images/user-4.png" alt="user-image" class="img-circle img-inline userpic-32" width="28" />
                                 <span>
-                                    Arlind Nushi
+                                    ${param.fullName}
                                     <i class="fa-angle-down"></i>
                                 </span>
                             </a>
