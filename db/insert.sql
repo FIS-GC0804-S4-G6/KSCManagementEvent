@@ -73,10 +73,10 @@ insert into Role(Roletype) values
 go
 insert into Customer(Email, FullName, Password, Gender, DateOfBirth, Address, Mobile, Home, IDCard,
 Avatar, Role_Id, Univercode, Active) values
-('rengar1404@gmail.com', 'Nguyen Duc Hiep', '12345', '1', '1 Jan 1994', 'Lieu Giai', '016445590', null, null, null, '3', '1', '1'),
-('giapnhgc00561@fpt.edu.vn', 'Nguyen Hoang Giap', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1'),
-('ducndgc00467@fpt.edu.vn', 'Nguyen Duy Duc', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '1', '1', '1'),
-('haindgc00605@fpt.edu.vn', 'Nguyen Duc Hai', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1')
+('rengar1404@gmail.com', 'Nguyen Duc Hiep', '12345', '1', '1 Jan 1994', 'Lieu Giai', '016445590', null, null, null, '2', '1', '1'),
+('giapnhgc@gmail.com', 'Nguyen Hoang Giap', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1'),
+('ducndgc00467@gmail.com', 'Nguyen Duy Duc', '12345', '1', '1 Jan 1994', 'Lieu Giai', '0166893456', null, null, null, '1', '1', '1'),
+('haindgc@gmail.com', 'Nguyen Duc Hai', '12345', '1', '1 Jan 1991', 'Lieu Giai', '0166893456', null, null, null, '3', '1', '1')
 go
 
 insert into Payment_Option(Payment_Type) values

@@ -28,6 +28,10 @@
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>servlet.NewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerServlet</servlet-name>
+        <servlet-class>servlet.CustomerServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Event Servlet</servlet-name>
         <url-pattern>/JSPEventCreating</url-pattern>
@@ -68,9 +72,17 @@
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerServlet</servlet-name>
+        <url-pattern>/Customer</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
+    <url-pattern>/Login</url-pattern>
+    <welcome-file-list>
+        <welcome-file>/WEB-INF/admin/login.jsp</welcome-file>
+    </welcome-file-list>
 </web-app>

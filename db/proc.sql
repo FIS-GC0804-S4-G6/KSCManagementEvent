@@ -222,12 +222,14 @@ go
 		@Gender bit
 	as
 	begin
-		insert into Customer (Email, FullName, Password, Gender) values (@Email, @FullName, @Password, @Gender);
+		insert into Customer (Email, FullName, Password, Gender, Role_Id)
+		values (@Email, @FullName, @Password, @Gender, 1);
 	end
 	go
 	exec spRegister 'a@gmail.com', 'Nguyen Hoang Giap', '123456abc', 1
 	go
-
+	select * from Customer
+	go
 	DROP proc spActiveLink
 	go
 	create procedure spActiveLink

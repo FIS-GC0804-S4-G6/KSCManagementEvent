@@ -36,4 +36,6 @@ begin
 	where @Email = Customer.Email and @Password = Customer.Password and Role.Role_Id != 1 and Customer.Active = 1
 end
 go
-exec spLoginAdmin 'giapnhgc00561@fpt.edu.vn', 12345;
+exec spLoginAdmin 'giapnhgc@gmail.com', 12345;
+go
+select * from Customer
