@@ -20,7 +20,7 @@
         <div class="navbar">
             <ul class="header">
                 <li id="logo" class="multicolore">
-                    <a href="index.html"><i class="fa fa-heart-o"></i>&nbsp;KSCEvent</a>
+                    <a href="${pageContext.request.contextPath}/homeEvent"><i class="fa fa-heart-o"></i>&nbsp;KSCEvent</a>
                 </li>
             </ul>
             <ul class="menu multicolore">

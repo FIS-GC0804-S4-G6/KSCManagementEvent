@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 public class Authentication extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -74,7 +75,7 @@ public class Authentication extends HttpServlet {
                     session.setAttribute("email", email);
                     session.setAttribute("itemSID", itemSID);
                     session.setAttribute("browserType", browserType);
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    response.sendRedirect("homeEvent");
                 } else {
                     if (rm.equals("Remember me")) {
                         if (db.rememberMe(account.getCustID(), itemSID.getValue(), browserType)) {
@@ -82,26 +83,26 @@ public class Authentication extends HttpServlet {
                             session.setAttribute("email", email);
                             session.setAttribute("itemSID", itemSID);
                             session.setAttribute("browserType", browserType);
-                            RequestDispatcher redirect = request.getRequestDispatcher("index.jsp");
-                            redirect.forward(request, response);
+                            response.sendRedirect("homeEvent");
                         } else {
                             session.setAttribute("username", account.getFullname());
                             session.setAttribute("email", email);
                             session.setAttribute("itemSID", itemSID);
                             session.setAttribute("browserType", browserType);
-                            request.getRequestDispatcher("index.jsp").forward(request, response);
+                            response.sendRedirect("homeEvent");
+                            response.sendRedirect("homeEvent");
                         }
                     } else {
                         session.setAttribute("username", account.getFullname());
                         session.setAttribute("email", email);
                         session.setAttribute("itemSID", itemSID);
                         session.setAttribute("browserType", browserType);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        response.sendRedirect("homeEvent");
                     }
                 }
             }
         } else {
-            request.setAttribute("Error", "Wrong email or password !");
+            request.setAttribute("msgR", "Wrong email or password! Please try again!");
             RequestDispatcher redirect = request.getRequestDispatcher("login.jsp");
             redirect.forward(request, response);
         }
@@ -146,24 +147,28 @@ public class Authentication extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void signup(HttpServletRequest request, AccountDB db, HttpServletResponse response) {
+    private void signup(HttpServletRequest request, AccountDB db, HttpServletResponse response) throws ServletException, IOException {
         boolean auth = Boolean.parseBoolean(getServletContext().getInitParameter("mail.smtp.auth"));
         boolean tls = Boolean.parseBoolean(getServletContext().getInitParameter("mail.smtp.starttls.enable"));
         String host = getServletContext().getInitParameter("mail.smtp.host");
         String port = getServletContext().getInitParameter("mail.smtp.port");
-        
+
         String gmailUser = getServletContext().getInitParameter("GmailUser");
         String gmailPassword = getServletContext().getInitParameter("GmailPassword");
-        
+
         String name = request.getParameter("fullname");
         String email = request.getParameter("email");
         String custPassword = request.getParameter("password");
         String rePassword = request.getParameter("repassword");
         boolean gender = Boolean.parseBoolean(request.getParameter("gender"));
         Global.setCustEmail(email);
+
         if (custPassword.equals(rePassword)) {
             db.signup(email, name, custPassword, gender);
             db.senderAPI(gmailUser, gmailPassword, auth, tls, host, port, name, email, rePassword);
+            request.setAttribute("msgB", "Create successful! Please check your email to active your account!");
+            RequestDispatcher redirect = request.getRequestDispatcher("signup.jsp");
+            redirect.forward(request, response);
         }
     }
 }

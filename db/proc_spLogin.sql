@@ -16,7 +16,7 @@ begin
 	where @Email = Customer.Email and @Password = Customer.Password and Role.Role_Id = 1 and Customer.Active = 1
 end
 go
-exec spLoginMember 'ducndgc00467@fpt.edu.vn', 12345;
+exec spLoginMember 'duc@gmail.com', 12345;
 go
 select * from Customer
 select * from University

@@ -11,7 +11,7 @@
         <div class="body"></div>
         <div class="grad"></div>
         <div class="header">
-            <a href="index.jsp"><span class="randomText">Register</span><br/><span>KSCEvent</span></a>
+            <a href="${pageContext.request.contextPath}/homeEvent"><span class="randomText">Register</span><br/><span>KSCEvent</span></a>
         </div>
         <br/>
         <form class="signup" method="post" action="authentication?act=signup">
@@ -25,6 +25,12 @@
             </select>
             <input type="submit" value="Signup" />
             <a href="login.jsp"><input type="button" value="Back Login" /></a>
+            <c:if test="${!empty(msgR)}" >
+                <h3 style="color:red;">${msgR}</h3>
+            </c:if>
+            <c:if test="${!empty(msgB)}" >
+                <h2 style="color:#5379fa;">${msgB}</h2>
+            </c:if>
         </form>	
         <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
         <script type="text/javascript" src="js/prefixfree.min.js"></script>
