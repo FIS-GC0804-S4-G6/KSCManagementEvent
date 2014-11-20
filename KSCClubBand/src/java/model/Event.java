@@ -24,7 +24,7 @@ public class Event {
     
     public Event(int event_Id, String title, String logo, String description,
             String speaker, String address, String slogan, DateTime startDate,
-            DateTime endDate, String categoryName, int cate_Id) {
+            DateTime endDate, String categoryName, int cate_Id, boolean status) {
         this.event_Id = event_Id;
         this.title = title;
         this.logo = logo;
@@ -35,6 +35,7 @@ public class Event {
         this.startDate = startDate;
         this.endDate = endDate;
         this.category = new Category(cate_Id, categoryName);
+        this.status = status;
     }
     
     public Event(String title, String logo, String description, String speaker, String address, String slogan, DateTime startDate, DateTime endDate, int cate_Id) {
@@ -58,7 +59,9 @@ public class Event {
         this.category = new Category(cate_Id);
     }
     
-    public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id, String categoryName, int amountPaticipants, float sumPrice) {
+    public Event(int event_Id, String title, String address, DateTime startDate,
+            DateTime endDate, int cate_Id, String categoryName, int amountPaticipants,
+            float sumPrice, boolean status) {
         this.event_Id = event_Id;
         this.title = title;
         this.address = address;
@@ -67,6 +70,7 @@ public class Event {
         this.category = new Category(cate_Id, categoryName);
         this.amountPaticipants = amountPaticipants;
         this.sumPrice = sumPrice;
+        this.status = status;
     }
     
     public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id, String categoryName, String type) {

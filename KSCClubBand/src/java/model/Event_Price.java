@@ -6,18 +6,6 @@ public class Event_Price {
     private float price;
     private String description;
     
-    public Event_Price(int price_Id, float price, String description) {
-        this.price_Id = price_Id;
-        this.price = price;
-        this.description = description;
-    }
-    
-    public Event_Price(float price, String description, int event_Id){
-        this.event_Id = event_Id;
-        this.price = price;
-        this.description = description;
-    }
-    
     public int getPrice_Id() {
         return price_Id;
     }
@@ -44,5 +32,22 @@ public class Event_Price {
     }
     public void setDescription(String value) {
         description = value;
+    }
+    
+    public Event_Price(int price_Id, float price, String description) {
+        this.price_Id = price_Id;
+        this.price = price;
+        this.description = description;
+    }
+    
+    public Event_Price(float price, String description, int event_Id){
+        this.event_Id = event_Id;
+        this.price = price;
+        this.description = description;
+    }
+    
+    public Event_Price(int price_Id, float price) {
+        this.price_Id = price_Id;
+        this.price = price;
     }
 }

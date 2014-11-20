@@ -50,9 +50,10 @@ public class Cust_Event {
         realPrice = val;
     }
     
-    public Cust_Event(String ticketCode, float realPrice, String payment_Type, int payment_Id, String email, String fullName) {
+    public Cust_Event(String ticketCode, float realPrice, int price_Id, String payment_Type, int payment_Id, String email, String fullName, float lastestPrice) {
         this.ticketCode = ticketCode;
         this.realPrice = realPrice;
+        this.event_Price = new Event_Price(price_Id, lastestPrice);
         this.payment_Option = new Payment_Option(payment_Id, payment_Type);
         this.customer = new Customer(email, fullName);
     }
