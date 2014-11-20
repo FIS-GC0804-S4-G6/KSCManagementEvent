@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import db.Event_Price_StorkTeam;
 import java.util.List;
 import model.Event_Price;
+import model.Event;
+import db.Event_StorkTeam;
 import javax.servlet.http.HttpSession;
 
 public class Event_PriceServlet extends HttpServlet {
@@ -16,7 +18,19 @@ public class Event_PriceServlet extends HttpServlet {
             throws ServletException, IOException {
         String userPath = request.getServletPath();
         if(userPath.equals("/JSPEvent_Price")) {
-            moveJSPEvent_Creating(request, response);
+            int event_Id = Integer.parseInt(request.getParameter("event_Id"));
+            Event_StorkTeam db = new Event_StorkTeam();
+            Event entity = db.selectEventByEvent_Id(event_Id);
+            if(entity != null) {
+                String title = entity.getTitle();
+                request.setAttribute("titleOfEvent", title);
+                moveJSPEvent_Creating(event_Id, request, response);
+            }
+            response.getWriter().write("Cannot get Title");
+        } else if(userPath.equals("/RedirectJSPEvent_Price")) {
+            HttpSession session = request.getSession(true);
+            int event_Id = (Integer)session.getAttribute("event_Id");
+            moveJSPEvent_Creating(event_Id, request, response);
         }
     }
 
@@ -35,16 +49,12 @@ public class Event_PriceServlet extends HttpServlet {
         response.getWriter().write(json);
     }
 
-    private void moveJSPEvent_Creating(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        HttpSession session = request.getSession(true);
-        int event_Id = (Integer)session.getAttribute("event_Id");
-        String title = (String)session.getAttribute("title");
-        
+    private void moveJSPEvent_Creating(int event_Id, HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         Event_Price_StorkTeam db = new Event_Price_StorkTeam();
         List<Event_Price> listOfEvent_Prices = db.selectEvent_PriceByEvent_Id(event_Id);
         
         request.setAttribute("listOfEvent_Prices", listOfEvent_Prices);
-        request.setAttribute("titleOfEvent", title);
+//        request.setAttribute("titleOfEvent", title);
         request.getRequestDispatcher("WEB-INF/admin/event_price.jsp").forward(request, response);
     }
 
