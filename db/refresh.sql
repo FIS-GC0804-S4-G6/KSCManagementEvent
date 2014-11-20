@@ -64,7 +64,7 @@ create table Payment_Option
 )
 create table [Event](
 	Event_Id int identity primary key,
-	Title nvarchar(max) not null,
+	Title nvarchar(200) not null unique,
 	Logo nvarchar(max),
 	Description nvarchar(max),
 	Speaker nvarchar(max),
@@ -79,6 +79,7 @@ create table [Event](
 	constraint FK_Event_Category foreign key (Cate_Id) references Category(Cate_Id)
 )
 go
+
 create table Event_Picture(
 	Eventpic_Id int identity primary key,
 	Event_Id int,
@@ -123,4 +124,3 @@ create table MailingList(
 	Status bit
 )
 go
-select * from Customer

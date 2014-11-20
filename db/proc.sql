@@ -87,7 +87,7 @@ go
 		offset ((@PageNumber - 1) * @RowsPage) rows
 		fetch next @RowsPage rows only
 	go
-
+	select * from Event
 	exec sp_event_select 1, 100
 	go
 -- 3.Select event by event_Id
@@ -144,6 +144,29 @@ go
 	exec sp_count_all_event @AmountEvent out
 	select @AmountEvent
 	go
+
+-- 7.Toogle Status
+	drop proc sp_toggle_status_from_event
+	go
+
+	create proc sp_toggle_status_from_event
+		@Event_Id int
+	as
+	begin
+		declare @Status bit = 0
+		select @Status = [Status] from [Event] where Event_Id = @Event_Id
+		if(@Status = 0)
+			set @Status = 1
+		else
+			set @Status = 0
+		update [Event] set [Status] = @Status where Event_Id = @Event_Id
+	end
+	go
+
+	exec sp_toggle_status_from_event 1
+	select * from Event
+	go
+
 -- =============================================================== --
 -- ============================ EVENT_PRICE ============================ --
 -- =============================================================== --
@@ -396,6 +419,7 @@ begin
 	select CE.TicketCode, CE.Price as [RealPrice], CE.Price_Id, CE.TicketCode
 	, PO.Payment_Type, PO.Payment_Id
 	, C.Email, C.FullName
+	, EP.Price as [LastestPrice]
 	from Cust_Event as CE
 	join Customer as C
 	on CE.Cust_Id = C.Cust_Id
