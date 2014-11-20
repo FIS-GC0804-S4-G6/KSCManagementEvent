@@ -77,7 +77,7 @@ public class CustomerServlet extends HttpServlet {
                     }
                 }
             } else {
-                request.setAttribute("Error", "Wrong email or password !");
+                request.setAttribute("msgR", "Wrong email or password! Please try again!");
                 request.getRequestDispatcher("/WEB-INF/admin/login.jsp").forward(request, response);
             }
         }
