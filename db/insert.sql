@@ -100,7 +100,7 @@ insert into Cust_Event (Cust_Id, Price_Id, Price, Payment_Id, Event_Id, TicketCo
 go
 
 insert into Event_Picture (Event_Id, PicturePath) values 
-(1, '5.jp'),
-(1, '6.jp'),
-(2, '5.jp')
+(1, '5.jpg'),
+(1, '6.jpg'),
+(2, '5.jpg')
 go

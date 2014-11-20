@@ -27,8 +27,8 @@
                 <li><a href="${pageContext.request.contextPath}/showEvent"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
                 <li><a href="#"><i class="fa fa-university"></i>&nbsp;About</a></li>
                 <li><a href="#"><i class="fa fa-search"></i>&nbsp;Search</a></li>
-                <li><a href="login.html" id="login"><i class="fa fa-gittip"></i>&nbsp;Log In</a></li>
-                <li><a href="signup.html"><i class="fa fa-user"></i>&nbsp;Sign Up</a></li>
+                <li><a href="login.jsp" id="login"><i class="fa fa-gittip"></i>&nbsp;Log In</a></li>
+                <li><a href="signup.jsp"><i class="fa fa-user"></i>&nbsp;Sign Up</a></li>
             </ul>
         </div>
         <div class="clearfix"></div>
@@ -37,7 +37,7 @@
                 <c:forEach items="${listEvents}" var="e">
                     <li>
                         <a href="#"><h2 class="multicolore">${e.getTitle()}</h2></a>
-                        <img src="${e.getLogo()}"/>
+                        <img src="lib/img/${e.getLogo()}"/>
                         <p>
                             ${e.getDescription()}
                         </p>

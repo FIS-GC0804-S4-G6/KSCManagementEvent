@@ -26,11 +26,11 @@
                 </li>
             </ul>
             <ul class="menu multicolore">
-                <li><a href="event.html"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
+                <li><a href="${pageContext.request.contextPath}/showEvent"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
                 <li><a href="#"><i class="fa fa-university"></i>&nbsp;About</a></li>
                 <li><a href="#"><i class="fa fa-search"></i>&nbsp;Search</a></li>
-                <li><a href="login.html" id="login"><i class="fa fa-gittip"></i>&nbsp;Log In</a></li>
-                <li><a href="signup.html"><i class="fa fa-user"></i>&nbsp;Sign Up</a></li>
+                <li><a href="login.jsp" id="login"><i class="fa fa-gittip"></i>&nbsp;Log In</a></li>
+                <li><a href="signup.jsp"><i class="fa fa-user"></i>&nbsp;Sign Up</a></li>
             </ul>
         </div>
         <div class="clearfix"></div>
@@ -43,15 +43,15 @@
             </h3>
             <div class="category">
                 <div id="bigPic">
-                    <img alt="" src="${logo}"/>
+                    <img alt="" src="lib/img/${logo}"/>
                     <c:forEach items="${listEvtPic}" var="ep">
-                        <img alt="" src=" ${ep.getPicturePath()}">
+                        <img alt="" src="lib/img/${ep.getPicturePath()}">
                     </c:forEach>
                 </div>
 
                 <ul id="thumbs">
                     <c:forEach items="${listEvtPic}" var="ep">
-                        <li rel="2"><img alt="" src="${ep.getPicturePath()}"> </li>
+                        <li rel="2"><img alt="" src="lib/img/${ep.getPicturePath()}"> </li>
                         </c:forEach>
                     <!-- <li class="active" rel="1"><img alt="" src="imgs/1_thumb.jpg"></li>-->
                 </ul>
@@ -99,7 +99,7 @@
 
             <div id="payment" class="paymentJoin">
                 <p class="payTitle"> Pay and Join</p>
-                <a href="#" class="close"><img src="close.png" class="img-close" title="Close Window" alt="Close" /></a>
+                <a href="#" class="close"><img src="lib/img/close.png" class="img-close" title="Close Window" alt="Close" /></a>
                 <form method="post" class="paymentContent" action="showEventDetail?act=eventDetail">
                     <label class="price">
                         <span>Price:</span>

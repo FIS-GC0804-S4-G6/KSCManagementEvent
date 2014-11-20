@@ -60,7 +60,7 @@
             <ul class="slides-container">
                 <c:forEach items="${listSixEvents}" var="e">
                     <li>
-                        <img src="${e.getLogo()}">
+                        <img src="lib/img/${e.getLogo()}">
                         <div class="container">
                             <h1>${e.getTitle()}</h1>
                         </div>
@@ -72,63 +72,6 @@
                         </div>
                     </li>
                 </c:forEach>
-
-                <!--                <li>
-                                    <img src="lib/img/people.jpeg">
-                                    <div class="container">
-                                        <h1>Hello, World</h1>
-                                    </div>
-                                    <div class="contrast">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<a href="#"><i class="fa fa-chevron-right fa-1x"></i></a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="lib/img/cinelli-front.jpeg">
-                                    <div class="container">
-                                        <h1>Hello, World</h1>
-                                    </div>
-                                    <div class="contrast">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<a href="#"><i class="fa fa-chevron-right fa-1x"></i></a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="lib/img/cinelli.jpeg">
-                                    <div class="container">
-                                        <h1>Hello, World</h1>
-                                    </div>
-                                    <div class="contrast">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<a href="#"><i class="fa fa-chevron-right fa-1x"></i></a></p>
-                                    </div>
-                                </li>
-                                <li>
-                                    <img src="lib/img/surly.jpeg">
-                                    <div class="container">
-                                        <h1>Hello, World</h1>
-                                    </div>
-                                    <div class="contrast">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                            proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <a href="#"><i class="fa fa-chevron-right fa-1x"></i></a></p>
-                                    </div>
-                                </li>-->
             </ul>
             <nav class="slides-navigation">
                 <a href="#" class="next">
