@@ -69,3 +69,37 @@ tr.selected > * {
 .col-md-6 .panel {
     padding-bottom: 0;
 }
+
+/* participant.jsp */
+.participant a {
+    text-decoration: underline;
+    color: skyblue;
+    font-weight: bold;
+}
+
+.participant b, strong, em {
+    color: black;
+}
+
+.participant .table > thead > tr > th {
+    text-align: center;
+}
+
+.participant table > tbody > tr:hover a{
+    color: #08C;
+}
+
+.participant .status {
+    font-style: normal;
+    font-weight: bold;
+}
+
+.participant .status.paid {
+    color: green;
+}
+
+.participant .status.no-paid {
+    color: red;
+}
+
+/* /participant.jsp */
