@@ -69,7 +69,8 @@ public class Event_StorkTeam {
                 String categoryName = rs.getString("CategoryName");
                 int amountPaticipants = rs.getInt("AmountPaticipants");
                 float sumPrice = rs.getFloat("SumPrice");
-                Event entity = new Event(event_Id, title, address, startDate, endDate, cate_Id, categoryName, amountPaticipants, sumPrice);
+                boolean status = rs.getBoolean("Status");
+                Event entity = new Event(event_Id, title, address, startDate, endDate, cate_Id, categoryName, amountPaticipants, sumPrice, status);
                 mapOfEvents.put(event_Id, entity);
             }
             return mapOfEvents;
@@ -210,9 +211,9 @@ public class Event_StorkTeam {
                 String taddress = rs.getString("Address");
                 int amountPaticipants = rs.getInt("AmountPaticipants");
                 float sumPrice = rs.getFloat("SumPrice");
-                Event entity = new Event(event_Id, ttitle, taddress, tstartDate, tendDate, cate_Id, categoryName, amountPaticipants, sumPrice);
+                boolean status = rs.getBoolean("Status");
+                Event entity = new Event(event_Id, ttitle, taddress, tstartDate, tendDate, cate_Id, categoryName, amountPaticipants, sumPrice, status);
                 mapOfEvents.put(event_Id, entity);
-                System.out.println("title: " + title);
             }
             return mapOfEvents;
         } catch(SQLException se) {
@@ -244,10 +245,11 @@ public class Event_StorkTeam {
                 String address = rs.getString("Address");
                 String slogan = rs.getString("Slogan");
                 DateTime startDate = new DateTime(rs.getTimestamp("StartDate"));
-                DateTime endDate = new DateTime(rs.getTimestamp("endDate"));
+                DateTime endDate = new DateTime(rs.getTimestamp("EndDate"));
                 String categoryName = rs.getString("CategoryName");
-                int cate_Id = rs.getInt("cate_Id");
-                entity = new Event(event_Id, title, logo, description, speaker, address, slogan, startDate, endDate, categoryName, cate_Id);
+                int cate_Id = rs.getInt("Cate_Id");
+                boolean status = rs.getBoolean("Status");
+                entity = new Event(event_Id, title, logo, description, speaker, address, slogan, startDate, endDate, categoryName, cate_Id, status);
             }
             return entity;
         } catch(SQLException se) {
@@ -304,5 +306,26 @@ public class Event_StorkTeam {
             }
         }
         return amountEvent;
+    }
+    
+    public boolean toggleStatusFromEvent(int event_Id) {
+        Connection conn = null;
+        try {
+            conn = ConnectionUtil.getConnection();
+            CallableStatement cstmt = conn.prepareCall("{call sp_toggle_status_from_event(?)}");
+            cstmt.setInt("Event_Id", event_Id);
+            cstmt.executeUpdate();
+            return true;
+        } catch(SQLException se) {
+            se.printStackTrace();
+        } finally {
+            try {
+                if(conn != null)
+                    conn.close();
+            } catch(SQLException se) {
+                se.printStackTrace();
+            }
+        }
+        return false;
     }
 }
