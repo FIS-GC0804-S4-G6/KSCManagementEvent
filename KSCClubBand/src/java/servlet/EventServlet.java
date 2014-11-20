@@ -51,7 +51,13 @@ public class EventServlet extends HttpServlet {
         } else if(userPath.equals("/EventFilter.guitar")) {
             filterEvent(request, response);
         } else if(userPath.equals("/JSPEventInfo")) {
-            int event_Id = Integer.parseInt(request.getParameter("event_Id"));
+            moveJSPEventInfo(request, response);
+        }
+    }
+    
+    private void moveJSPEventInfo(HttpServletRequest request, HttpServletResponse response) throws 
+           ServletException, IOException {
+        int event_Id = Integer.parseInt(request.getParameter("event_Id"));
             Event_StorkTeam db = new Event_StorkTeam();
             Event entity = db.selectEventByEvent_Id(event_Id);
             if(entity != null) {
@@ -64,8 +70,6 @@ public class EventServlet extends HttpServlet {
             } else {
                 response.getWriter().write("We can not get the detail.");
             }
-            
-        }
     }
     
     private void getJSPEventDetailTicket(HttpServletRequest request, HttpServletResponse response) throws
@@ -226,6 +230,15 @@ public class EventServlet extends HttpServlet {
                 }
             } else {
                 response.getWriter().write("chang may insert event nay nay that bai. Hen lan sau");
+            }
+        } else if(userPath.equals("/EventStatusToggling")) {
+            int event_Id = Integer.parseInt(request.getParameter("event_Id"));
+            Event_StorkTeam db = new Event_StorkTeam();
+            boolean result = db.toggleStatusFromEvent(event_Id);
+            if(result) {
+                moveJSPEventInfo(request, response);
+            } else {
+                response.getWriter().write("Error Toggle Status");
             }
         }
     }

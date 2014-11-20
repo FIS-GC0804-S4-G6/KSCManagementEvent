@@ -22,7 +22,6 @@ public class StatisticServlet extends HttpServlet {
             Statistic_StorkTeam db = new Statistic_StorkTeam();
             int currentYear;
             if(userPath.equals("/JSPNextSumPriceEveryMonthOfYear")) {
-                System.out.println("currenetYear: " + Integer.parseInt(request.getParameter("currentYear")));
                 currentYear = Integer.parseInt(request.getParameter("currentYear")) + 1;
             } else if(userPath.equals("/JSPPrevSumPriceEveryMonthOfYear")) {
                 currentYear = Integer.parseInt(request.getParameter("currentYear")) - 1;
