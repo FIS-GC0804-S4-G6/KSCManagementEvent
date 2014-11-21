@@ -89,8 +89,8 @@
                                             Start Date: <joda:format value="${i.value.getStartDate()}" pattern="dd MMM yyyy - HH:mm"/><br/><br/>
                                             End Date: <joda:format value="${i.value.getEndDate()}" pattern="dd MMM yyyy - HH:mm"/></td>
                                         
-                                        <td class="col-sm-1">${i.value.getAmountPaticipants()}</td>
-                                        <td class="col-sm1">${i.value.getSumPrice()}</td>
+                                        <td class="col-sm-1" style="text-align: center;">${i.value.getAmountPaticipants()}</td>
+                                        <td class="col-sm1" style="text-align: right;">$${i.value.getSumPrice()}</td>
                                         <td>${i.value.getTimeStatus()}</td>
                                         <c:if test="${i.value.getStatus() == true}">
                                             <td style="text-align: center;"><i class="el-ok-circled" style="color: #68b828;"></i></td>
