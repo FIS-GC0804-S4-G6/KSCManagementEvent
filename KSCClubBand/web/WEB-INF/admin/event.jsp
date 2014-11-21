@@ -40,14 +40,14 @@
 
                                     <div class="col-xs-3">
                                         <div class="date-and-time">
-                                            <input placeholder="28/09/2014" name="startDate" id="startDate" type="text" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                            <input placeholder="dd/mm/yyyy" name="startDate" id="startDate" type="text" class="form-control datepicker" data-format="dd/mm/yyyy">
                                             <input name="startTime" type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="11:00 AM" data-show-meridian="true" data-minute-step="5"/>
                                         </div>
                                     </div>
 
                                     <div class="col-xs-3">
                                         <div class="date-and-time">
-                                            <input placeholder="28/11/2014" name="endDate" id="endDate" type="text" class="form-control datepicker" data-format="dd/mm/yyyy">
+                                            <input placeholder="dd/mm/yyyy" name="endDate" id="endDate" type="text" class="form-control datepicker" data-format="dd/mm/yyyy">
                                             <input name="endTime" type="text" class="form-control timepicker" data-template="dropdown" data-show-seconds="false" data-default-time="01:00 AM" data-show-meridian="true" data-minute-step="5"/>
                                         </div>
                                     </div>
@@ -83,7 +83,12 @@
                                 <c:forEach items="${mapOfEvents}" var="i">
                                     <tr>
                                         <td data-event-id="${i.value.getEvent_Id()}">${count}</td>
-                                        <td class="setWidth concat"><div>${i.value.getTitle()}<br/>${i.value.getCategory().getCategoryName()}</div></td>
+                                        <td class="setWidth concat">
+                                            <div>
+                                                ${i.value.getTitle()}<br/>
+                                                <strong>${i.value.getCategory().getCategoryName()}</strong>
+                                            </div>
+                                        </td>
                                         <td>${i.value.getAddress()}</td>
                                         <td>
                                             Start Date: <joda:format value="${i.value.getStartDate()}" pattern="dd MMM yyyy - HH:mm"/><br/><br/>
