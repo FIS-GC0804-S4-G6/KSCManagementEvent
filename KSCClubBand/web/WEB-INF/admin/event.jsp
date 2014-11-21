@@ -68,12 +68,13 @@
                             <thead>
                                 <tr role="row">
                                     <th class="middle-align">#</th>
-                                    <th class="middle-align">Title</th>
+                                    <th class="middle-align">Title + Category</th>
                                     <th class="middle-align">Address</th>
                                     <th class="middle-align">Time</th>
-                                    <th class="middle-align">Category</th>
                                     <th class="middle-align">Amount People</th>
                                     <th class="middle-align">Sum Price</th>
+                                    <th class="middle-align">Time Status</th>
+                                    <th class="middle-align">Active</th>
                                     <th class="middle-align">Actions</th>
                                 </tr>
                             </thead>
@@ -82,14 +83,21 @@
                                 <c:forEach items="${mapOfEvents}" var="i">
                                     <tr>
                                         <td data-event-id="${i.value.getEvent_Id()}">${count}</td>
-                                        <td class="setWidth concat"><div>${i.value.getTitle()}</div></td>
+                                        <td class="setWidth concat"><div>${i.value.getTitle()}<br/>${i.value.getCategory().getCategoryName()}</div></td>
                                         <td>${i.value.getAddress()}</td>
                                         <td>
                                             Start Date: <joda:format value="${i.value.getStartDate()}" pattern="dd MMM yyyy - HH:mm"/><br/><br/>
                                             End Date: <joda:format value="${i.value.getEndDate()}" pattern="dd MMM yyyy - HH:mm"/></td>
-                                        <td>${i.value.getCategory().getCategoryName()}</td>
+                                        
                                         <td class="col-sm-1">${i.value.getAmountPaticipants()}</td>
                                         <td class="col-sm1">${i.value.getSumPrice()}</td>
+                                        <td>${i.value.getTimeStatus()}</td>
+                                        <c:if test="${i.value.getStatus() == true}">
+                                            <td style="text-align: center;"><i class="el-ok-circled" style="color: #68b828;"></i></td>
+                                        </c:if>
+                                        <c:if test="${i.value.getStatus() == false}">
+                                            <td style="text-align: center;"><i class="el-cancel-circled" style="color: red;"></i></td>
+                                        </c:if>
                                         <td>
                                             <a href="#" class="btn btn-secondary btn-sm btn-icon icon-left btn-edit">Edit</a>
                                             <a href="#" class="btn btn-danger btn-sm btn-icon icon-left btn-delete">Delete</a>
@@ -114,6 +122,8 @@
         <link rel="stylesheet" href="xenon/assets/js/select2/select2-bootstrap.css">
         <link rel="stylesheet" href="xenon/assets/js/multiselect/css/multi-select.css">
 	<link rel="stylesheet" href="xenon/assets/js/datatables/dataTables.bootstrap.css">
+        
+	<link rel="stylesheet" href="xenon/assets/css/fonts/elusive/css/elusive.css">
 
 	<!-- Bottom Scripts -->
 	<script src="xenon/assets/js/bootstrap.min.js"></script>

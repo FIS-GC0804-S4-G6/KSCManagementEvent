@@ -70,7 +70,8 @@ public class Event_StorkTeam {
                 int amountPaticipants = rs.getInt("AmountPaticipants");
                 float sumPrice = rs.getFloat("SumPrice");
                 boolean status = rs.getBoolean("Status");
-                Event entity = new Event(event_Id, title, address, startDate, endDate, cate_Id, categoryName, amountPaticipants, sumPrice, status);
+                String timeStatus = rs.getString("TimeStatus");
+                Event entity = new Event(event_Id, title, address, startDate, endDate, cate_Id, categoryName, amountPaticipants, sumPrice, status, timeStatus);
                 mapOfEvents.put(event_Id, entity);
             }
             return mapOfEvents;
@@ -212,7 +213,8 @@ public class Event_StorkTeam {
                 int amountPaticipants = rs.getInt("AmountPaticipants");
                 float sumPrice = rs.getFloat("SumPrice");
                 boolean status = rs.getBoolean("Status");
-                Event entity = new Event(event_Id, ttitle, taddress, tstartDate, tendDate, cate_Id, categoryName, amountPaticipants, sumPrice, status);
+                String timeStatus = rs.getString("TimeStatus");
+                Event entity = new Event(event_Id, ttitle, taddress, tstartDate, tendDate, cate_Id, categoryName, amountPaticipants, sumPrice, status, timeStatus);
                 mapOfEvents.put(event_Id, entity);
             }
             return mapOfEvents;

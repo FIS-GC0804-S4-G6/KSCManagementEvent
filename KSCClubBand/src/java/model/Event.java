@@ -19,6 +19,7 @@ public class Event {
     private int amountPaticipants;
     private float sumPrice;
     private String type;
+    private String timeStatus;
     
     public Event(){}
     
@@ -61,7 +62,7 @@ public class Event {
     
     public Event(int event_Id, String title, String address, DateTime startDate,
             DateTime endDate, int cate_Id, String categoryName, int amountPaticipants,
-            float sumPrice, boolean status) {
+            float sumPrice, boolean status, String timeStatus) {
         this.event_Id = event_Id;
         this.title = title;
         this.address = address;
@@ -71,6 +72,7 @@ public class Event {
         this.amountPaticipants = amountPaticipants;
         this.sumPrice = sumPrice;
         this.status = status;
+        this.timeStatus = timeStatus;
     }
     
     public Event(int event_Id, String title, String address, DateTime startDate, DateTime endDate, int cate_Id, String categoryName, String type) {
@@ -205,6 +207,13 @@ public class Event {
     }
     public void setType(String val) {
         type = val;
+    }
+    
+    public String getTimeStatus() {
+        return timeStatus;
+    }
+    public void setTimeStatus(String val) {
+        timeStatus = val;
     }
     
     @Override
