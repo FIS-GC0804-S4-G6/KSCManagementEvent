@@ -55,7 +55,7 @@
                         <p>
                             ${e.getDescription()}
                         </p>
-                        <a href="${pageContext.request.contextPath}/showEventDetail"><i class="fa fa-angle-right fa-4x" id="${e.getEvent_Id()}"></i></a>
+                        <a href="${pageContext.request.contextPath}/showEventDetail?event_Id=${e.getEvent_Id()}"><i class="fa fa-angle-right fa-4x"></i></a>
                     </li>
                 </c:forEach>
                 <!--                <li>

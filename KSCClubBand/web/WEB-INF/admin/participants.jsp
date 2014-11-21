@@ -15,6 +15,7 @@
             <div class="panel-body panel-border">
                 <div class="row">
                     <div class="col-sm-12">
+                        <a href="JSPEventInfo?event_Id=${event_Id}" style="color: blue; text-decoration: underline;">Back</a><br/>
                         <strong>Membership</strong>
 
                         <table class="table table-model-2 table-hover">

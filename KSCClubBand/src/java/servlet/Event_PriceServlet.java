@@ -24,6 +24,7 @@ public class Event_PriceServlet extends HttpServlet {
             if(entity != null) {
                 String title = entity.getTitle();
                 request.setAttribute("titleOfEvent", title);
+                request.setAttribute("event_Id", event_Id);
                 moveJSPEvent_Creating(event_Id, request, response);
             }
             response.getWriter().write("Cannot get Title");

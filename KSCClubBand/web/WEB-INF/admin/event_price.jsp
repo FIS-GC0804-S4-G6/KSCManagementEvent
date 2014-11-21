@@ -11,6 +11,7 @@
                 <div class="col-md-6">
                     <div class="panel panel-default">
                         <div class="panel-heading">
+                            <a href="JSPEventInfo?event_Id=${event_Id}" style="color: blue; text-decoration: underline;">Back</a><br/>
                             <h3 class="panel-title">Table Event Price</h3>
                         </div>
 

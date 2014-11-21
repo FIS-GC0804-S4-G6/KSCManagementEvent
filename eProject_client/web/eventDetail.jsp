@@ -121,6 +121,7 @@
                         <!--<p id="pId" name="priceId"></p>-->
                         <!--<p class="setPrice" name="price">0</p>-->
 
+                        <input type="hidden" name="event_Id" value="${event_Id}"/>
                         <input id="pId" name="priceId" type="hidden"/>
                         <label for="price"></label>
                         <input id="price" class="setPrice" name="price" type="hidden"/>

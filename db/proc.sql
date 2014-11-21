@@ -286,7 +286,7 @@ go
 	create proc showEvent
 	as
 	begin
-		select Event_Id, Title, Logo, Description from Event 
+		select Event_Id, Title, Logo, Description from Event where Status = 1
 		order by Event_Id DESC
 	end
 	go

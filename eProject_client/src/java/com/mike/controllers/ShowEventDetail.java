@@ -57,13 +57,15 @@ public class ShowEventDetail extends HttpServlet {
         Payment_OptionDb db2 = new Payment_OptionDb(driver, server, port, database, username, password);
         Cust_EventDb db3 = new Cust_EventDb(driver, server, port, database, username, password);
 
-        Event evt = db.showEventDetail(1);
-        List<Event> listEvt = db.showEventPrice(1);
-        List<Event> listEvtPic = db.showEventPicture(1);
-        List<Event> listCusEvt = db.showCustEvent(1);
+        int event_Id = Integer.parseInt(request.getParameter("event_Id"));
+        Event evt = db.showEventDetail(event_Id);
+        List<Event> listEvt = db.showEventPrice(event_Id);
+        List<Event> listEvtPic = db.showEventPicture(event_Id);
+        List<Event> listCusEvt = db.showCustEvent(event_Id);
 
         List<Payment_Option> listPaymentType = db2.showPaymentType();
 
+        request.setAttribute("event_Id", event_Id);
         session.setAttribute("title", evt.getTitle());
         session.setAttribute("logo", evt.getLogo());
         session.setAttribute("description", evt.getDescription());
@@ -146,11 +148,11 @@ public class ShowEventDetail extends HttpServlet {
         String gmailPassword = getServletContext().getInitParameter("GmailPassword");
         
         //Cust_Id, Price_Id, Payment_Id, Event_Id, TicketCode, Price
-        int cust_Id = 1;
+        int cust_Id = (Integer)session.getAttribute("cust_Id");;
         int price_Id = Integer.parseInt(request.getParameter("priceId"));
         int payment_Id = Integer.parseInt(request.getParameter("paymentId"));
         String codeBank = request.getParameter("codeBank");
-        int event_Id = 1;
+        int event_Id = Integer.parseInt(request.getParameter("event_Id"));
         String ticketCode = request.getParameter("ticketcode");
         float price = Float.parseFloat(request.getParameter("price"));
         if (payment_Id == 1) {

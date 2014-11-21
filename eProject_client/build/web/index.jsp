@@ -67,7 +67,7 @@
                         <div class="contrast">
                             <p>
                                 ${e.getDescription()}
-                                <a href="${pageContext.request.contextPath}/showEventDetail"><i class="fa fa-chevron-right fa-1x" id="${e.getEvent_Id()}"></i></a>
+                                <a href="${pageContext.request.contextPath}/showEventDetail?event_Id=${e.getEvent_Id()}"><i class="fa fa-chevron-right fa-1x" id="${e.getEvent_Id()}"></i></a>
                             </p>
                         </div>
                     </li>

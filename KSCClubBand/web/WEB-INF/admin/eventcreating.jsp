@@ -124,14 +124,6 @@
                 </div>
             </div>
         </div>
-            
-        <form role="form" method="post">
-			
-                <div class="form-group">
-                        <textarea class="form-control wysihtml5" data-stylesheet-url="xenon/assets/js/wysihtml5/lib/css/wysiwyg-color.css" name="sample_wysiwyg" id="sample_wysiwyg"></textarea>
-                </div>
-
-        </form>
 
         <jsp:include page="../template/Footer.jsp"/>
         

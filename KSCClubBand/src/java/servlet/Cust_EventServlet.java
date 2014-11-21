@@ -31,6 +31,7 @@ public class Cust_EventServlet extends HttpServlet {
                     totalPrice += entry.getValue().getRealPrice();
                 }
             }
+            request.setAttribute("event_Id", event_Id);
             request.setAttribute("registrationAmount", registrationAmount);
             request.setAttribute("paidAmount", paidAmount);
             request.setAttribute("totalPrice", totalPrice);
