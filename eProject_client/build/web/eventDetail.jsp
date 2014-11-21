@@ -26,11 +26,26 @@
                 </li>
             </ul>
             <ul class="menu multicolore">
+                <%
+                    String username = (String) session.getAttribute("username");
+                    if (username != null) {
+                %>
+                <li><a href="${pageContext.request.contextPath}/showEvent"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
+                <li><a href="#"><i class="fa fa-university"></i>&nbsp;About</a></li>
+                <li><a href="#"><i class="fa fa-search"></i>&nbsp;Search</a></li>
+                <li><a href="login.jsp" id="login"><i class="fa fa-gittip"></i>&nbsp;<%= username%></a></li>
+                    <%
+                    } else {
+                    %>
                 <li><a href="${pageContext.request.contextPath}/showEvent"><i class="fa fa-calendar"></i>&nbsp;Event</a></li>
                 <li><a href="#"><i class="fa fa-university"></i>&nbsp;About</a></li>
                 <li><a href="#"><i class="fa fa-search"></i>&nbsp;Search</a></li>
                 <li><a href="login.jsp" id="login"><i class="fa fa-gittip"></i>&nbsp;Log In</a></li>
                 <li><a href="signup.jsp"><i class="fa fa-user"></i>&nbsp;Sign Up</a></li>
+
+                <%
+                    }
+                %>
             </ul>
         </div>
         <div class="clearfix"></div>
@@ -121,11 +136,14 @@
                     </label>
                     <label class="paymentType">
                         <span>Payment Type:</span>
-                        <select name="paymentId">
+                        <select name="paymentId" id="selected">
                             <c:forEach items="${listPaymentType}" var="p">
                                 <option value="${p.getPayment_Id()}">${p.getPaymentType()}</option>
                             </c:forEach>
                         </select>
+                    </label>
+                    <label>
+                        <input type="text" name="codeBank" id="codeBank" placeholder="Code Bank" class="codeBankshow"/>
                     </label>
                     <label>
                         <!--<button class="button submit-button" type="button" value="">Pay & Join</button>-->      

@@ -5,11 +5,11 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="utf-8" contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Welcome to KSCEvent School</title>
         <link rel="stylesheet" type="text/css" href="lib/css/superslides.css" />
@@ -36,7 +36,7 @@
             <li><a href="#"><i class="fa fa-search"></i>&nbsp;Search</a></li> 
             <li class="dropdown">
                 <a href="#"><i class="fa fa-user"></i>&nbsp;<%= username%></a>
-                <a href="index.jsp" id="login">
+                <a href="${pageContext.request.contextPath}/showEvent" id="login">
                     <i class="fa fa-times-circle"></i>&nbsp;Logout
                 </a>
             </li>

@@ -16,7 +16,7 @@ begin
 	where @Email = Customer.Email and @Password = Customer.Password and Role.Role_Id = 1 and Customer.Active = 1
 end
 go
-exec spLoginMember 'duc@gmail.com', 12345;
+exec spLoginMember 'giapnhgc00561@fpt.edu.vn', 12345;
 go
 select * from Customer
 select * from University
@@ -54,3 +54,29 @@ begin
 end
 go
 select * from Session
+select * from Customer
+go
+
+drop proc spSignout
+go
+create proc spSignout
+	@email int,
+	@Device nvarchar(max),
+	@SID_Device nvarchar(max)
+as
+begin
+	declare @custID int
+	select @custID = cust_Id from Customer where Email = @email
+
+	delete from Session where Cust_Id = @custID and Device = @Device and SID_Device = @SID_Device 
+end
+go
+drop proc spSession
+go
+create proc spSession
+	@cust_Id int,
+	@SID_Device nvarchar(max)
+as
+begin
+	select Cust_Id, Device, SID_Device from Session where Cust_Id = @cust_Id and SID_Device = @SID_Device
+end

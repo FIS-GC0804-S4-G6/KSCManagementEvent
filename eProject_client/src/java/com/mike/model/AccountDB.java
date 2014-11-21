@@ -215,13 +215,18 @@ public class AccountDB {
                 + linkActive;
         mail.emailSender(emailUsername, emailPassword, auth, tls, host, port, emailUsername, toEmail, "Admin KSCSchool - Register Complete", content);
     }
+    
+    public void senderAPITicket(final String emailUsername, final String emailPassword, boolean auth, boolean tls, String host, String port, String fullName, String toEmail, String ticketCode, float price) {
+        EmailDeploy mail = new EmailDeploy();
+        String content = "Chúc mừng " + fullName + " đã thanh toán event của KSCEvent \n\n"
+                + "Thông tin vé của bạn: \n\n"
+                + "Ticket code: " + ticketCode + "\n\n"
+                + "Price: " +price+ "\n\n"
+                + "username " + toEmail + "\n\n"
+                + "Enjoy your choice!";
+        mail.emailSender(emailUsername, emailPassword, auth, tls, host, port, emailUsername, toEmail, "Admin KSCSchool - Register Complete", content);
+    }
 
-//    public static void main(String[] arg){
-////        String driver, String servername, String port, String databsae, String username, String password
-//        AccountDB db = new AccountDB("com.microsoft.sqlserver.jdbc.SQLServerDriver", "localhost", "1433", "KSCManagementEvent", "sa", "sa");
-//        db.custActiveLink("ducndgc00467@fpt.edu.vn", true);
-//        
-//    }
     public boolean custActiveLink(String email, boolean active) {
         Connection conn = null;
         CallableStatement cstm = null;

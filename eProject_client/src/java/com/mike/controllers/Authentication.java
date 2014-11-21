@@ -47,8 +47,9 @@ public class Authentication extends HttpServlet {
     private void checkAction(HttpServletRequest request, HttpServletResponse response, AccountDB db) throws ServletException, IOException {
         HttpSession session = request.getSession();
         String action = request.getParameter("act");
+//        String email = (String) session.getAttribute("email");
         if ("logout".equals(action)) {
-            db.logOut((String) session.getAttribute("email"), (String) session.getAttribute("itemSID"), (String) session.getAttribute("browserType"));
+//            db.logOut(email, (String) session.getAttribute("itemSID"), (String) session.getAttribute("browserType"));
             session.invalidate();
             response.sendRedirect("index.jsp");
         } else if ("signup".equals(action)) {
@@ -71,6 +72,7 @@ public class Authentication extends HttpServlet {
             Cookie[] cookie = request.getCookies();
             for (Cookie itemSID : cookie) {
                 if (itemSID.equals(account.getSid_Device())) {
+                    session.setAttribute("cust_Id", account.getCustID());
                     session.setAttribute("username", account.getFullname());
                     session.setAttribute("email", email);
                     session.setAttribute("itemSID", itemSID);
@@ -79,12 +81,14 @@ public class Authentication extends HttpServlet {
                 } else {
                     if (rm.equals("Remember me")) {
                         if (db.rememberMe(account.getCustID(), itemSID.getValue(), browserType)) {
+                            session.setAttribute("cust_Id", account.getCustID());
                             session.setAttribute("username", account.getFullname());
                             session.setAttribute("email", email);
                             session.setAttribute("itemSID", itemSID);
                             session.setAttribute("browserType", browserType);
                             response.sendRedirect("homeEvent");
                         } else {
+                            session.setAttribute("cust_Id", account.getCustID());
                             session.setAttribute("username", account.getFullname());
                             session.setAttribute("email", email);
                             session.setAttribute("itemSID", itemSID);
@@ -93,6 +97,7 @@ public class Authentication extends HttpServlet {
                             response.sendRedirect("homeEvent");
                         }
                     } else {
+                        session.setAttribute("cust_Id", account.getCustID());
                         session.setAttribute("username", account.getFullname());
                         session.setAttribute("email", email);
                         session.setAttribute("itemSID", itemSID);
